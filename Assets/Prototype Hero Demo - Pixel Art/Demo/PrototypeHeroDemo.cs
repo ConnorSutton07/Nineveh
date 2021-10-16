@@ -90,6 +90,7 @@ public class PrototypeHeroDemo : MonoBehaviour {
 
         // Set Animation layer for hiding sword
         int boolInt = m_hideSword ? 1 : 0;
+   
         m_animator.SetLayerWeight(1, boolInt);
 
         // -- Handle Animations --
