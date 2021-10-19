@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: m_jumpForce
-      value: 3.25
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61346583712760016, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
@@ -521,11 +521,20 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1000000
       objectReference: {fileID: 0}
+    - target: {fileID: 61368513597639598, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.029999971
+      objectReference: {fileID: 0}
+    - target: {fileID: 61368513597639598, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.055056453
+      objectReference: {fileID: 0}
     - target: {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 61252362154681264, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
 --- !u!1 &967730311 stripped
 GameObject:
@@ -545,6 +554,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!61 &967730313
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967730311}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.021175563, y: 0.64412224}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.5, y: 1.5}
+    newSize: {x: 1.28, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.50898373, y: 1.1696613}
+  m_EdgeRadius: 0
 --- !u!1 &1150320417
 GameObject:
   m_ObjectHideFlags: 0
