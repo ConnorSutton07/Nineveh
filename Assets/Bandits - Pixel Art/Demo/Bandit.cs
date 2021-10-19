@@ -9,15 +9,20 @@ public class Bandit : MonoBehaviour {
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private Sensor_Bandit       m_groundSensor;
+    private PlayerCombat        Combat;
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
+
+    public float attackRate = 0.9f;
+    float attackCooldown = 0f;
 
     // Use this for initialization
     void Start () {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        Combat = this.GetComponent<PlayerCombat>();
     }
 	
 	// Update is called once per frame
@@ -65,8 +70,10 @@ public class Bandit : MonoBehaviour {
             m_animator.SetTrigger("Hurt");
 
         //Attack
-        else if(Input.GetMouseButtonDown(0)) {
+        else if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) {
             m_animator.SetTrigger("Attack");
+            //Combat.Attack();
+            attackCooldown = Time.time + attackRate;
         }
 
         //Change between idle and combat idle
