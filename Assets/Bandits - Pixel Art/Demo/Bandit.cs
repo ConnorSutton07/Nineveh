@@ -15,6 +15,8 @@ public class Bandit : MonoBehaviour {
     private bool                m_isDead = false;
 
     public float attackRate = 0.9f;
+    public int maxHealth = 100;
+    int currentHealth;
     float attackCooldown = 0f;
 
     // Use this for initialization
@@ -23,6 +25,7 @@ public class Bandit : MonoBehaviour {
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         Combat = this.GetComponent<PlayerCombat>();
+        currentHealth = maxHealth;
     }
 	
 	// Update is called once per frame
@@ -100,5 +103,19 @@ public class Bandit : MonoBehaviour {
         //Idle
         else
             m_animator.SetInteger("AnimState", 0);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        m_animator.SetTrigger("Hurt");
+        if (currentHealth <= 0)
+            Die();
+    }
+
+    void Die()
+    {
+        m_animator.SetTrigger("Death");
+        gameObject.layer = 0;
     }
 }
