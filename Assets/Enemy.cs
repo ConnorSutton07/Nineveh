@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Transform raycast;
+    public Transform player;
     public LayerMask enemyLayers;
-    public float raycastLength;
+    public float awareDistance;
     public float attackDistance;
     public float moveSpeed;
-    public float timer;
     public int maxHealth = 100;
     public float attackRate;
     public Transform attackPoint;
@@ -17,81 +17,65 @@ public class Enemy : MonoBehaviour
     public int attackDamage = 20;
 
     private RaycastHit2D hit;
-    private GameObject target;
     private Animator animator;
-    private Vector2 direction;
     private float distance = 0f;
     private float attackCooldown;
     private bool inRange;
-    
+
+    Bandit playerScript;
     int currentHealth;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerScript = player.gameObject.GetComponent<Bandit>();
     }
 
     void Start()
     {
         currentHealth = maxHealth;
-        direction = Vector2.right;
         attackCooldown = 0f;
     }
 
     private void Update()
     {
+        LookForPlayer();
         if (inRange)
         {
-            hit = Physics2D.Raycast(raycast.position, direction, raycastLength, enemyLayers);
-            RaycastDebugger();
-        }
-        if (hit.collider != null)
-        {
-            Debug.Log(hit.collider.name);
             EnemyLogic();
         }
     }
 
     void EnemyLogic()
     {
-        distance = Vector2.Distance(transform.position, target.transform.position);
+        distance = Vector2.Distance(transform.position, player.position);
         if (distance > attackDistance)
         {
             Move();
         }
         else if (Time.time > attackCooldown)
         {
+            animator.SetInteger("AnimState", 1);
             StartAttack();
             attackCooldown = Time.time + attackRate;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void LookForPlayer()
     {
-        if (collision.gameObject.tag == "Player")
+        if (Mathf.Abs(player.position.x - transform.position.x) <= awareDistance)
         {
-            Debug.Log("Player detected");
-            target = collision.gameObject;
-            inRange = true;
-            if (transform.position.x > collision.transform.position.x)
-            {
+            inRange = !playerScript.isDead(); // do not attack if player is dead
+
+            if (transform.position.x > player.position.x)
                 transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                direction = Vector2.left;
-            }
             else
-            {
                 transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-                direction = Vector2.right;
-            }
         }
+        else
+            inRange = false;
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        animator.SetInteger("AnimState", 0);
-        inRange = false;
-    }
-
 
     public void TakeDamage(int damage)
     {
@@ -114,14 +98,14 @@ public class Enemy : MonoBehaviour
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             animator.SetInteger("AnimState", 2);
-            Vector2 targetPosition = new Vector2(target.transform.position.x, transform.position.y);
+            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
 
     void StartAttack()
     {
-        animator.SetInteger("AnimState", 0);
+        //animator.SetInteger("AnimState", 0);
         animator.SetTrigger("Attack");
     }
 
@@ -132,17 +116,25 @@ public class Enemy : MonoBehaviour
         // Damage them
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Bandit>().TakeDamage(attackDamage);
-        }
-    }
+            if (playerScript.isBlocking())
+            {
+                if (playerScript.isParry())
+                {
+                    //animator.StopPlayback();
+                    animator.SetTrigger("Hurt");
+                    print("parry");
+                }
+                else
+                {
+                    int direction = (transform.position.x > player.position.x) ? -1 : 1;
+                    playerScript.Shift(direction);
+                    // player takes posture damage
+                }
 
-    void RaycastDebugger()
-    {
-        if (distance > attackDistance)
-            Debug.DrawRay(raycast.position, direction * raycastLength, Color.red);
-        else if (attackDistance > distance)
-            Debug.DrawRay(raycast.position, direction * raycastLength, Color.green);
-        
+            }
+            else
+                enemy.GetComponent<Bandit>().TakeDamage(attackDamage);
+        }
     }
 
     private void OnDrawGizmosSelected()
