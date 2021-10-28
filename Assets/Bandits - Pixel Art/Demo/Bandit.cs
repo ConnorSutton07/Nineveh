@@ -13,6 +13,7 @@ public class Bandit : MonoBehaviour {
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
+    public GameObject healthSlider;
 
     public float attackRate = 0.9f;
     public int maxHealth = 100;
@@ -109,6 +110,7 @@ public class Bandit : MonoBehaviour {
     {
         currentHealth -= damage;
         m_animator.SetTrigger("Hurt");
+        updateHealthbar();
         if (currentHealth <= 0)
             Die();
     }
@@ -117,5 +119,9 @@ public class Bandit : MonoBehaviour {
     {
         m_animator.SetTrigger("Death");
         gameObject.layer = 0;
+    }
+    private void updateHealthbar()
+    {
+        healthSlider.transform.localScale = new Vector3(((float)currentHealth / maxHealth), 1,1);
     }
 }
