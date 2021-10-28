@@ -14,11 +14,13 @@ public class Bandit : MonoBehaviour {
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
     public GameObject healthSlider;
+    public GameObject healthYellow;
 
     public float attackRate = 0.9f;
     public int maxHealth = 100;
     int currentHealth;
     float attackCooldown = 0f;
+    private float healthpercentage = 1f;
 
     // Use this for initialization
     void Start () {
@@ -114,7 +116,13 @@ public class Bandit : MonoBehaviour {
         if (currentHealth <= 0)
             Die();
     }
-
+    private void FixedUpdate()
+    {
+        if(healthYellow.transform.localScale.x > healthSlider.transform.localScale.x)
+        {
+            healthYellow.transform.localScale = new Vector3((healthYellow.transform.localScale.x)-.01f, 1f, 1f);
+        }
+    }
     void Die()
     {
         m_animator.SetTrigger("Death");
@@ -122,6 +130,8 @@ public class Bandit : MonoBehaviour {
     }
     private void updateHealthbar()
     {
-        healthSlider.transform.localScale = new Vector3(((float)currentHealth / maxHealth), 1,1);
+        healthYellow.transform.localScale = new Vector3(healthpercentage, 1f, 1f);
+        healthpercentage = (float)currentHealth / maxHealth;
+        healthSlider.transform.localScale = new Vector3(healthpercentage, 1f,1f);
     }
 }
