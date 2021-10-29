@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Bandit : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Bandit : MonoBehaviour
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
+    //private AudioSource m_audioSource;
+    //private AudioManager_Bandit m_audioManager;
     private Sensor_Bandit m_groundSensor;
     private PlayerCombat Combat;
     private bool m_grounded = false;
@@ -36,6 +39,8 @@ public class Bandit : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
+        //m_audioSource = GetComponent<AudioSource>();
+        //m_audioManager = AudioManager_Bandit.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         Combat = this.GetComponent<PlayerCombat>();
         currentHealth = maxHealth;
@@ -163,6 +168,12 @@ public class Bandit : MonoBehaviour
     public void Shift(int direction)
     {
         transform.position = new Vector3(transform.position.x + (direction * shiftDistance), transform.position.y, transform.position.z);
+    }
+
+    void AE_footstep()
+    {
+        Debug.Log("Should be executing running animation");
+        AudioManagerBanditScript.PlaySound("Running");
     }
 
     #endregion
