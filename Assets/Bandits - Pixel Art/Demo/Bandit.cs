@@ -157,15 +157,15 @@ public class Bandit : MonoBehaviour
 
     #region Public Methods
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool breakStance = false)
     {
         currentHealth -= damage;
-        m_animator.SetTrigger("Hurt");
         updateHealthbar();
+        if (breakStance)
+            m_animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
             Die();
     }
-
 
     public bool isDead()
     {
