@@ -63,6 +63,7 @@ public class Bandit : MonoBehaviour
         if (!m_grounded && m_groundSensor.State())
         {
             m_grounded = true;
+            AE_land();
             m_animator.SetBool("Grounded", m_grounded);
         }
 
@@ -179,6 +180,11 @@ public class Bandit : MonoBehaviour
     {
         Debug.Log(this);
         m_audioManager.PlaySound("jump");
+    }
+
+    void AE_land()
+    {
+        m_audioManager.PlaySound("land");
     }
 
     #endregion
