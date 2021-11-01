@@ -466,6 +466,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb7b63a4ec35604b9c1cce655d808b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_sounds:
+  - m_name: footstep
+    m_clips:
+    - {fileID: 8300000, guid: 1a631ada4ecd9cf49a88b135aa70c396, type: 3}
+    - {fileID: 8300000, guid: ee00faf8b8432ff40a6e008c84d5ae59, type: 3}
+    - {fileID: 8300000, guid: 9b0833c02b71a294faba6438278d937a, type: 3}
+    volume: 0
+    pitch: 0
+    m_randomVolumeRange: {x: 0, y: 0}
+    m_randomPitchRange: {x: 0, y: 0}
 --- !u!82 &787625840
 AudioSource:
   m_ObjectHideFlags: 0

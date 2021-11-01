@@ -13,8 +13,8 @@ public class Bandit : MonoBehaviour
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
-    //private AudioSource m_audioSource;
-    //private AudioManager_Bandit m_audioManager;
+    private AudioSource m_audioSource;
+    private AudioManagerBanditScript m_audioManager;
     private Sensor_Bandit m_groundSensor;
     private PlayerCombat Combat;
     private bool m_grounded = false;
@@ -39,8 +39,8 @@ public class Bandit : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
-        //m_audioSource = GetComponent<AudioSource>();
-        //m_audioManager = AudioManager_Bandit.instance;
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioManager = AudioManagerBanditScript.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         Combat = this.GetComponent<PlayerCombat>();
         currentHealth = maxHealth;
@@ -172,8 +172,13 @@ public class Bandit : MonoBehaviour
 
     void AE_footstep()
     {
-        Debug.Log("Should be executing running animation");
-        AudioManagerBanditScript.PlaySound("Running");
+        Debug.Log(this);
+        m_audioManager.PlaySound("footstep");
+    }
+    void AE_jump()
+    {
+        Debug.Log(this);
+        m_audioManager.PlaySound("jump");
     }
 
     #endregion
