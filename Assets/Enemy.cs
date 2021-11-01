@@ -137,10 +137,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //void AE_footstep()
+    //{ //how to manage other player sounds? Add all of same infrastructure or somehow try to share them
+       // m_audioManager.PlaySound("footstep");
+    //}
+
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+
 
 }
