@@ -173,12 +173,10 @@ public class Bandit : MonoBehaviour
 
     void AE_footstep()
     {
-        Debug.Log(this);
         m_audioManager.PlaySound("footstep");
     }
     void AE_jump()
     {
-        Debug.Log(this);
         m_audioManager.PlaySound("jump");
     }
 

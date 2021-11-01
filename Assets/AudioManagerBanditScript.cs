@@ -8,13 +8,6 @@ public class Sound2
     public string m_name;
     public AudioClip[] m_clips;
 
-    [Range(0f, 1f)]
-    public float volume = 1.0f;
-    [Range(0f, 1.5f)]
-    public float pitch = 1.0f;
-    public Vector2 m_VolumeRange = new Vector2(1.0f, 1.0f);
-    public Vector2 m_PitchRange = new Vector2(1.0f, 1.0f);
-
     private AudioSource m_source;
 
     public void SetSource(AudioSource source)
@@ -31,8 +24,9 @@ public class Sound2
             int randomClip = Random.Range(0, m_clips.Length);
             m_source.clip = m_clips[randomClip];
         }
-        //m_source.volume = volume * Random.Range(m_VolumeRange.x, m_VolumeRange.y);
-        //m_source.pitch = pitch * Random.Range(m_PitchRange.x, m_PitchRange.y);
+        //add some noise to volume and pitch of sounds
+        m_source.volume = 1.0f * Random.Range(0.6f, 1.0f);
+        m_source.pitch = 1.0f * Random.Range(0.6f, 1.0f);
         m_source.Play();
     }
 }
