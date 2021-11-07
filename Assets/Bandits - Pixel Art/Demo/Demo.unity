@@ -255,6 +255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1772878485, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1463392086428580, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -304,10 +308,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
-      propertyPath: attackRate
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1635510570}
@@ -315,6 +315,10 @@ PrefabInstance:
       propertyPath: healthYellow
       value: 
       objectReference: {fileID: 864047218}
+    - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+      propertyPath: enemyLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
 --- !u!1 &864047218
@@ -443,6 +447,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 967730312, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+      propertyPath: blockChance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 967730312, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+      propertyPath: maxBlockTime
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 967730312, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+      propertyPath: minBlockTime
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1689866831511430, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
       propertyPath: m_Name
       value: LightBandit

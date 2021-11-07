@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class Bandit : MonoBehaviour
 {
     #region Attributes
@@ -22,11 +21,14 @@ public class Bandit : MonoBehaviour
     public GameObject healthSlider;
     public GameObject healthYellow;
 
+    public LayerMask enemyLayer;
     public float attackRate = 0.9f;
     public int maxHealth = 100;
+    float raycastLength = 2f;
+
     int currentHealth;
     float attackCooldown = 0f;
-
+    Transform raycastOrigin;
     bool dead;
     bool blocking;
     float blockStart;
@@ -47,6 +49,7 @@ public class Bandit : MonoBehaviour
         dead = false;
         blocking = false;
         blockStart = 0f;
+        raycastOrigin = transform.Find("RaycastOrigin").transform;
     }
 
     #endregion
@@ -156,6 +159,25 @@ public class Bandit : MonoBehaviour
     #endregion
 
     #region Public Methods
+
+    public void AlertEnemiesOfAttack()
+    {
+        print("Alerting");
+        Vector3 direction = (transform.localScale.x == -1f) ? Vector3.right : Vector3.left;
+        Ray ray = new Ray(raycastOrigin.position, direction);
+        RaycastDebugger(direction);
+        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin.position, direction, raycastLength, enemyLayer);
+        if (hit.collider != null)
+        {
+            Enemy enemyScript = hit.collider.GetComponent<Enemy>();
+            enemyScript.AttemptBlock();
+        }
+    }
+
+    void RaycastDebugger(Vector3 dir)
+    {
+        Debug.DrawRay(raycastOrigin.position, dir * raycastLength, Color.white, 5f);
+    }
 
     public void TakeDamage(int damage, bool breakStance = false)
     {

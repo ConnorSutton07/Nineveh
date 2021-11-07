@@ -9,12 +9,15 @@ public class Enemy : MonoBehaviour
     public float awareDistance;
     public float attackDistance;
     public float moveSpeed;
+    public float shiftDistance = 0.1f;
     public int maxHealth = 100;
     public float attackRate;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public int attackDamage = 20;
     public float blockChance;
+    public float minBlockTime;
+    public float maxBlockTime;
 
     private RaycastHit2D hit;
     private Animator animator;
@@ -22,6 +25,9 @@ public class Enemy : MonoBehaviour
     private float attackCooldown;
     private bool inRange;
 
+    
+
+    bool blocking;
     Bandit playerScript;
     int currentHealth;
 
@@ -36,10 +42,13 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         attackCooldown = 0f;
+        blocking = false;
     }
 
     private void Update()
     {
+        if (blocking) return;
+
         LookForPlayer();
         if (inRange)
         {
@@ -77,11 +86,11 @@ public class Enemy : MonoBehaviour
             inRange = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool breakStance = false)
     {
         currentHealth -= damage;
-        animator.SetTrigger("Hurt");
-        Debug.Log(currentHealth);
+        if (breakStance)
+            animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
             Die();
     }
@@ -140,7 +149,33 @@ public class Enemy : MonoBehaviour
 
     public void AttemptBlock()
     {
+        print("Here1");
+        if (Random.Range(0f, 1f) < blockChance)
+        {
+            print("Here2");
+            blocking = true;
+            float duration = Random.Range(minBlockTime, maxBlockTime);
+            animator.SetInteger("AnimState", 1);
+            StartCoroutine(EnterBlockingState(Time.time, duration));
+        }
+    }
 
+    public bool isBlocking()
+    {
+        return blocking;
+    }
+
+    public void Shift(int direction)
+    {
+        transform.position = new Vector3(transform.position.x + (direction * shiftDistance), transform.position.y, transform.position.z);
+    }
+
+    IEnumerator EnterBlockingState(float startTime, float duration)
+    {
+        while (Time.time - startTime < duration)
+            yield return null;
+        blocking = false;
+        animator.SetInteger("AnimState", 0);
     }
 
     private void OnDrawGizmosSelected()

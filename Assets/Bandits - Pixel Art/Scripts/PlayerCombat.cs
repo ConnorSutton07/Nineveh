@@ -20,7 +20,17 @@ public class PlayerCombat : MonoBehaviour
         // Damage them
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            //enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            if (enemyScript.isBlocking())
+            {
+                int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
+                enemyScript.Shift(direction);
+                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f));
+                // enemy takes posture damage
+            }
+            else
+                enemyScript.TakeDamage(attackDamage, true);
         }
     }
 
