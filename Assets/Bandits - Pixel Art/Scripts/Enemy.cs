@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    #region Attributes
+
     public Transform player;
     public LayerMask enemyLayers;
     public float awareDistance;
@@ -25,11 +27,13 @@ public class Enemy : MonoBehaviour
     private float attackCooldown;
     private bool inRange;
 
-    
-
     bool blocking;
     Bandit playerScript;
     int currentHealth;
+
+    #endregion
+
+    #region Initialization
 
     private void Awake()
     {
@@ -44,6 +48,10 @@ public class Enemy : MonoBehaviour
         attackCooldown = 0f;
         blocking = false;
     }
+
+    #endregion
+
+    #region Update Functions
 
     private void Update()
     {
@@ -86,6 +94,10 @@ public class Enemy : MonoBehaviour
             inRange = false;
     }
 
+    #endregion
+
+    #region Public Methods
+
     public void TakeDamage(int damage, bool breakStance = false)
     {
         currentHealth -= damage;
@@ -93,29 +105,6 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
             Die();
-    }
-
-    void Die()
-    {
-        animator.SetTrigger("Death");
-        this.GetComponent<BoxCollider2D>().enabled = false;
-        this.enabled = false;
-    }
-
-    void Move()
-    {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            animator.SetInteger("AnimState", 2);
-            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        }
-    }
-
-    void StartAttack()
-    {
-        //animator.SetInteger("AnimState", 0);
-        animator.SetTrigger("Attack");
     }
 
     public void Attack()
@@ -170,6 +159,33 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3(transform.position.x + (direction * shiftDistance), transform.position.y, transform.position.z);
     }
 
+    #endregion
+
+    #region Private Methods
+
+    void Die()
+    {
+        animator.SetTrigger("Death");
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.enabled = false;
+    }
+
+    void Move()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            animator.SetInteger("AnimState", 2);
+            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
+    }
+
+    void StartAttack()
+    {
+        //animator.SetInteger("AnimState", 0);
+        animator.SetTrigger("Attack");
+    }
+
     IEnumerator EnterBlockingState(float startTime, float duration)
     {
         while (Time.time - startTime < duration)
@@ -184,4 +200,5 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
+    #endregion
 }

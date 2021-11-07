@@ -165,7 +165,7 @@ public class Bandit : MonoBehaviour
         print("Alerting");
         Vector3 direction = (transform.localScale.x == -1f) ? Vector3.right : Vector3.left;
         Ray ray = new Ray(raycastOrigin.position, direction);
-        RaycastDebugger(direction);
+        //RaycastDebugger(direction);
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin.position, direction, raycastLength, enemyLayer);
         if (hit.collider != null)
         {
