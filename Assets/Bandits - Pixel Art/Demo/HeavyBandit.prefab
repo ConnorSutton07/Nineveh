@@ -150,14 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8b435a8dc3f604e9a13c4acd7081c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 4
-  m_jumpForce: 5
-  parryWindow: 0.18
-  shiftDistance: 0.1
-  healthSlider: {fileID: 0}
-  healthYellow: {fileID: 0}
-  attackRate: 0.5
-  maxHealth: 100
 --- !u!95 &95734438044755836
 Animator:
   serializedVersion: 3

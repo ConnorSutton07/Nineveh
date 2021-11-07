@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform raycast;
     public Transform player;
     public LayerMask enemyLayers;
     public float awareDistance;
@@ -15,6 +14,7 @@ public class Enemy : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public int attackDamage = 20;
+    public float blockChance;
 
     private RaycastHit2D hit;
     private Animator animator;
@@ -136,6 +136,11 @@ public class Enemy : MonoBehaviour
             else
                 enemy.GetComponent<Bandit>().TakeDamage(attackDamage, true);
         }
+    }
+
+    public void AttemptBlock()
+    {
+
     }
 
     private void OnDrawGizmosSelected()
