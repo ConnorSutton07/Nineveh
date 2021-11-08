@@ -9,6 +9,9 @@ public class Bandit : MonoBehaviour
     [SerializeField] float m_jumpForce = 7.5f;
     [SerializeField] float parryWindow = 0.25f;
     [SerializeField] float shiftDistance = 0.1f;
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRange = 0.5f;
+    [SerializeField] int attackDamage = 20;
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
@@ -33,6 +36,7 @@ public class Bandit : MonoBehaviour
     bool blocking;
     float blockStart;
     private float healthpercentage = 1f;
+
     #endregion
 
     #region Initialization
@@ -156,13 +160,53 @@ public class Bandit : MonoBehaviour
         gameObject.layer = 0;
     }
 
+    void RaycastDebugger(Vector3 dir)
+    {
+        Debug.DrawRay(raycastOrigin.position, dir * raycastLength, Color.white, 5f);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
     #endregion
 
     #region Public Methods
 
+    public void Attack()
+    {
+        // Play attack animation -> Handled elsewhere 
+
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+
+        // Damage them
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            //enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            if (enemyScript.isBlocking())
+            {
+                int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
+                enemyScript.Shift(direction);
+                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f));
+                // enemy takes posture damage
+                // play block sound
+                EmitBlockParticles();
+            }
+            else
+            {
+                enemyScript.TakeDamage(attackDamage, true);
+                // play hit sound
+            }
+
+        }
+    }
+
     public void AlertEnemiesOfAttack()
     {
-        print("Alerting");
         Vector3 direction = (transform.localScale.x == -1f) ? Vector3.right : Vector3.left;
         Ray ray = new Ray(raycastOrigin.position, direction);
         //RaycastDebugger(direction);
@@ -172,11 +216,6 @@ public class Bandit : MonoBehaviour
             Enemy enemyScript = hit.collider.GetComponent<Enemy>();
             enemyScript.AttemptBlock();
         }
-    }
-
-    void RaycastDebugger(Vector3 dir)
-    {
-        Debug.DrawRay(raycastOrigin.position, dir * raycastLength, Color.white, 5f);
     }
 
     public void TakeDamage(int damage, bool breakStance = false)
@@ -207,6 +246,21 @@ public class Bandit : MonoBehaviour
     public void Shift(int direction)
     {
         transform.position = new Vector3(transform.position.x + (direction * shiftDistance), transform.position.y, transform.position.z);
+    }
+
+    public void EmitBlockParticles()
+    {
+        return;
+    }
+
+    public void EmitParryParticles()
+    {
+        return; // i think this could just be a more intense version of the block particles
+    }
+
+    public void EmitAttackParticles()
+    {
+        return; 
     }
 
     #endregion

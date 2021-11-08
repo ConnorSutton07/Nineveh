@@ -308,6 +308,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+      propertyPath: attackRange
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1635510570}
@@ -319,7 +323,8 @@ PrefabInstance:
       propertyPath: enemyLayer.m_Bits
       value: 1024
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1874642724, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
 --- !u!1 &864047218
 GameObject:

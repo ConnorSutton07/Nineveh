@@ -121,6 +121,7 @@ public class Enemy : MonoBehaviour
                     //animator.StopPlayback();
                     animator.SetTrigger("Hurt");
                     print("parry");
+                    playerScript.EmitParryParticles();
                 }
                 else
                 {
@@ -128,6 +129,7 @@ public class Enemy : MonoBehaviour
                     playerScript.Shift(direction);
                     playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f));
                     // player takes posture damage
+                    playerScript.EmitParryParticles();
                 }
 
             }
@@ -138,10 +140,8 @@ public class Enemy : MonoBehaviour
 
     public void AttemptBlock()
     {
-        print("Here1");
         if (Random.Range(0f, 1f) < blockChance)
         {
-            print("Here2");
             blocking = true;
             float duration = Random.Range(minBlockTime, maxBlockTime);
             animator.SetInteger("AnimState", 1);
