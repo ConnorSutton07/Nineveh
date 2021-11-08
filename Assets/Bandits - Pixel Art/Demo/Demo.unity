@@ -308,6 +308,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 1521256644}
+    - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: attackRange
       value: 0.51
       objectReference: {fileID: 0}
@@ -321,6 +325,10 @@ PrefabInstance:
       objectReference: {fileID: 864047218}
     - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: enemyLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+      propertyPath: enemyLayers.m_Bits
       value: 1024
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -1128,6 +1136,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1521256644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1419069627, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+  m_PrefabInstance: {fileID: 612252429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1635510570
 GameObject:
   m_ObjectHideFlags: 0
