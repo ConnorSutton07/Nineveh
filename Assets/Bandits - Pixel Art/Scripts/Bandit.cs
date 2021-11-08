@@ -17,6 +17,7 @@ public class Bandit : MonoBehaviour
     private Rigidbody2D m_body2d;
     private Sensor_Bandit m_groundSensor;
     private PlayerCombat Combat;
+    private SparkEffect sparkEffect;
     private bool m_grounded = false;
     private bool m_combatIdle = false;
     private bool m_isDead = false;
@@ -41,13 +42,13 @@ public class Bandit : MonoBehaviour
 
     #region Initialization
 
-
     // Use this for initialization
     void Start()
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         Combat = this.GetComponent<PlayerCombat>();
         currentHealth = maxHealth;
         dead = false;
@@ -250,17 +251,17 @@ public class Bandit : MonoBehaviour
 
     public void EmitBlockParticles()
     {
-        return;
+        sparkEffect.EmitBlockSparks();
     }
 
     public void EmitParryParticles()
     {
-        return; // i think this could just be a more intense version of the block particles
+        sparkEffect.EmitParrySparks(); // i think this could just be a more intense version of the block particles
     }
 
     public void EmitAttackParticles()
     {
-        return; 
+        sparkEffect.EmitAttackSparks(); 
     }
 
     #endregion
