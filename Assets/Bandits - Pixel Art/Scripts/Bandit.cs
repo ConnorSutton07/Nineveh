@@ -96,7 +96,7 @@ public class Bandit : MonoBehaviour
         if (!m_grounded && m_groundSensor.State()) // Check if character just landed on the ground
         { 
             m_grounded = true;
-            AE_land();
+            PlaySound("land");
             m_animator.SetBool("Grounded", m_grounded);
         }
         
@@ -120,6 +120,7 @@ public class Bandit : MonoBehaviour
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) //--- Attack
         {
             m_animator.SetTrigger("Attack");
+            PlaySound("sword_miss");
             attackCooldown = Time.time + attackRate;
         }
         else if (Input.GetKeyDown("space") && m_grounded) //-------------------------------------------- Jump
@@ -213,13 +214,15 @@ public class Bandit : MonoBehaviour
                 enemyScript.Shift(direction);
                 enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f));
                 // enemy takes posture damage
-                // play block sound
+                //play block noise
+                PlaySound("block");
                 EmitBlockParticles();
             }
             else
             {
                 enemyScript.TakeDamage(attackDamage, true);
                 // play hit sound
+                PlaySound("sword_hit");
             }
 
         }
@@ -304,19 +307,9 @@ public class Bandit : MonoBehaviour
         sparkEffect.EmitAttackSparks();
     }
 
-    void AE_footstep()
+    void PlaySound(string text)
     {
-        m_audioManager.PlaySound("footstep");
-    }
-    void AE_jump()
-    {
-        m_audioManager.PlaySound("jump");
-    }
-
-    void AE_land()
-    {
-        m_audioManager.PlaySound("land");
-
+        m_audioManager.PlaySound(text);
     }
 
     #endregion

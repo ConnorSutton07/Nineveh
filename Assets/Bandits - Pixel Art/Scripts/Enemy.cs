@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private float distance = 0f;
     private float attackCooldown;
+    private AudioSource m_audioSource;
+    private AudioManagerBanditScript m_audioManager; //use for now at least
     private bool inRange;
 
     bool blocking;
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioManager = AudioManagerBanditScript.instance; //might not work?
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.gameObject.GetComponent<Bandit>();
     }
@@ -204,6 +208,11 @@ public class Enemy : MonoBehaviour
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    void PlaySound(string text)
+    {
+        m_audioManager.PlaySound(text);
     }
 
     #endregion
