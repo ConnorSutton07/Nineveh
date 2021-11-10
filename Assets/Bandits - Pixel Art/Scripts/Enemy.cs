@@ -127,14 +127,14 @@ public class Enemy : MonoBehaviour
                 {
                     int direction = (transform.position.x > player.position.x) ? -1 : 1;
                     playerScript.Shift(direction);
-                    playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f));
+                    playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
                     // player takes posture damage
                     playerScript.EmitParryParticles();
                 }
 
             }
             else
-                enemy.GetComponent<Bandit>().TakeDamage(attackDamage, true);
+                enemy.GetComponent<Bandit>().TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
         }
     }
 

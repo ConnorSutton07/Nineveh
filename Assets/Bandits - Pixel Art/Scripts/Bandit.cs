@@ -2,6 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+enum State
+{
+    DEAD,
+    DEFAULT,
+    BLOCKING,
+    STUNNED
+};
+
 public class Bandit : MonoBehaviour
 {
     #region Attributes
@@ -31,15 +39,19 @@ public class Bandit : MonoBehaviour
     public LayerMask enemyLayer;
     public float attackRate = 0.9f;
     public int maxHealth = 100;
+    public int postureThreshold = 100;
     float raycastLength = 2f;
 
     int currentHealth;
+    int currentPosture;
     float attackCooldown = 0f;
     Transform raycastOrigin;
-    bool dead;
-    bool blocking;
     float blockStart;
     private float healthpercentage = 1f;
+
+    // states
+
+    State state;
 
     #endregion
 
@@ -54,12 +66,12 @@ public class Bandit : MonoBehaviour
         m_audioManager = AudioManagerBanditScript.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
-        Combat = this.GetComponent<PlayerCombat>();
-        currentHealth = maxHealth;
-        dead = false;
-        blocking = false;
-        blockStart = 0f;
         raycastOrigin = transform.Find("RaycastOrigin").transform;
+
+        currentHealth = maxHealth;
+        state = State.DEFAULT;
+        blockStart = 0f;
+
     }
 
     #endregion
@@ -69,46 +81,41 @@ public class Bandit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentHealth < 0) state = State.DEAD;
+        if (state == State.DEAD || state == State.STUNNED) return;
+        state = State.DEFAULT;
+
         float currentBlockFrames = blockStart;
         blockStart = 0;
-
-        //Check if character just landed on the ground
-        if (!m_grounded && m_groundSensor.State())
-        {
+        
+        if (!m_grounded && m_groundSensor.State()) // Check if character just landed on the ground
+        { 
             m_grounded = true;
             AE_land();
             m_animator.SetBool("Grounded", m_grounded);
         }
-
-        //Check if character just started falling
-        if (m_grounded && !m_groundSensor.State())
+        
+        if (m_grounded && !m_groundSensor.State()) // Check if character just started falling
         {
             m_grounded = false;
             m_animator.SetBool("Grounded", m_grounded);
         }
 
-        // -- Handle input and movement --
-        float inputX = Input.GetAxis("Horizontal");
-
-        // Swap direction of sprite depending on walk direction
-        if (inputX > 0)
+        
+        float inputX = Input.GetAxis("Horizontal"); // -- Handle input and movement --
+        if (inputX > 0) // Swap direction of sprite depending on walk direction
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         else if (inputX < 0)
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        // Move
-        m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
-
-        //Set AirSpeed in animator
-        m_animator.SetFloat("AirSpeed", m_body2d.velocity.y);
+        
+        m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y); // Move
+        m_animator.SetFloat("AirSpeed", m_body2d.velocity.y); // Set AirSpeed in animator
 
         // -- Handle Animations --
-        blocking = false;
-        //Attack
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown)
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) // Attack
         {
             m_animator.SetTrigger("Attack");
-            //Combat.Attack();
             attackCooldown = Time.time + attackRate;
         }
 
@@ -129,7 +136,7 @@ public class Bandit : MonoBehaviour
         //Combat Idle
         else if (Input.GetKey("b"))
         {
-            blocking = true;
+            state = State.BLOCKING;
             //blockFrames = currentBlockFrames + 1;
             blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
             m_animator.SetInteger("AnimState", 1);
@@ -163,7 +170,7 @@ public class Bandit : MonoBehaviour
     void Die()
     {
         m_animator.SetTrigger("Death");
-        dead = true;
+        state = State.DEAD;
         gameObject.layer = 0;
     }
 
@@ -225,24 +232,44 @@ public class Bandit : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, bool breakStance = false)
+    public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
     {
-        currentHealth -= damage;
+        currentHealth  -= healthDamage;
+        currentPosture += postureDamage;
+        print(currentPosture);
+
         updateHealthbar();
+        //updatePostureBar();
+
         if (breakStance)
             m_animator.SetTrigger("Hurt");
         if (currentHealth <= 0)
             Die();
+        else if (currentPosture >= postureThreshold)
+        {
+            m_animator.SetTrigger("Recover");
+            currentPosture = 0;
+        }
     }
 
     public bool isDead()
     {
-        return dead;
+        return state == State.DEAD;
     }
 
     public bool isBlocking()
     {
-        return blocking;
+        return state == State.BLOCKING;
+    }
+
+    public void EnterStun()
+    {
+        state = State.STUNNED;
+    }
+
+    public void ExitStun()
+    {
+        state = State.DEFAULT;
     }
 
     public bool isParry()
