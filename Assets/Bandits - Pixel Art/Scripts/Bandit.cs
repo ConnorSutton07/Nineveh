@@ -21,6 +21,7 @@ public class Bandit : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] int attackDamage = 20;
+    [SerializeField] float stunnedAmplifier = 1.2f;
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
@@ -35,6 +36,7 @@ public class Bandit : MonoBehaviour
 
     public GameObject healthSlider;
     public GameObject healthYellow;
+    public GameObject postureSlider;
 
     public LayerMask enemyLayer;
     public float attackRate = 0.9f;
@@ -47,7 +49,8 @@ public class Bandit : MonoBehaviour
     float attackCooldown = 0f;
     Transform raycastOrigin;
     float blockStart;
-    private float healthpercentage = 1f;
+    private float healthPercentage = 1f;
+    private float posturePercentage = 0f;
 
     // states
 
@@ -68,9 +71,11 @@ public class Bandit : MonoBehaviour
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         raycastOrigin = transform.Find("RaycastOrigin").transform;
 
+        currentPosture = 0;
         currentHealth = maxHealth;
         state = State.DEFAULT;
         blockStart = 0f;
+        updatePostureBar();
 
     }
 
@@ -101,7 +106,6 @@ public class Bandit : MonoBehaviour
             m_animator.SetBool("Grounded", m_grounded);
         }
 
-        
         float inputX = Input.GetAxis("Horizontal"); // -- Handle input and movement --
         if (inputX > 0) // Swap direction of sprite depending on walk direction
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
@@ -113,14 +117,12 @@ public class Bandit : MonoBehaviour
         m_animator.SetFloat("AirSpeed", m_body2d.velocity.y); // Set AirSpeed in animator
 
         // -- Handle Animations --
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) // Attack
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) //--- Attack
         {
             m_animator.SetTrigger("Attack");
             attackCooldown = Time.time + attackRate;
         }
-
-        //Jump
-        else if (Input.GetKeyDown("space") && m_grounded)
+        else if (Input.GetKeyDown("space") && m_grounded) //-------------------------------------------- Jump
         {
             m_animator.SetTrigger("Jump");
             m_grounded = false;
@@ -128,21 +130,18 @@ public class Bandit : MonoBehaviour
             m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
             m_groundSensor.Disable(0.2f);
         }
-
-        //Run
-        else if (Mathf.Abs(inputX) > Mathf.Epsilon)
+        else if (Mathf.Abs(inputX) > Mathf.Epsilon) //-------------------------------------------------- Run
+        {
             m_animator.SetInteger("AnimState", 2);
-
-        //Combat Idle
-        else if (Input.GetKey("b"))
+        }
+        else if (Input.GetKey("b")) //------------------------------------------------------------------ Combat Idle (used for block)
         {
             state = State.BLOCKING;
             //blockFrames = currentBlockFrames + 1;
             blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
             m_animator.SetInteger("AnimState", 1);
         }
-        //Idle
-        else
+        else //----------------------------------------------------------------------------------------- Idle
         {
             m_animator.SetInteger("AnimState", 0);
         }
@@ -156,11 +155,18 @@ public class Bandit : MonoBehaviour
         }
     }
 
-    private void updateHealthbar()
+    private void updateHealthBar()
     {
-        healthYellow.transform.localScale = new Vector3(healthpercentage, 1f, 1f);
-        healthpercentage = (float)currentHealth / maxHealth;
-        healthSlider.transform.localScale = new Vector3(healthpercentage, 1f, 1f);
+        healthYellow.transform.localScale = new Vector3(healthPercentage, 1f, 1f);
+        healthPercentage = (float)currentHealth / maxHealth;
+        healthSlider.transform.localScale = new Vector3(healthPercentage, 1f, 1f);
+    }
+
+    private void updatePostureBar()
+    {
+        posturePercentage = (float)currentPosture / postureThreshold;
+        postureSlider.transform.localScale = new Vector3(posturePercentage, 1f, 1f);
+        
     }
 
     #endregion
@@ -234,12 +240,13 @@ public class Bandit : MonoBehaviour
 
     public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
     {
+        if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
         currentHealth  -= healthDamage;
         currentPosture += postureDamage;
         print(currentPosture);
 
-        updateHealthbar();
-        //updatePostureBar();
+        updateHealthBar();
+        updatePostureBar();
 
         if (breakStance)
             m_animator.SetTrigger("Hurt");
