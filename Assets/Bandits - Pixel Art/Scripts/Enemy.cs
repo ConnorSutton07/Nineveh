@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         m_audioSource = GetComponent<AudioSource>();
-        m_audioManager = AudioManagerBanditScript.instance; //might not work?
+        m_audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.gameObject.GetComponent<Bandit>();
     }
@@ -125,6 +125,7 @@ public class Enemy : MonoBehaviour
                     //animator.StopPlayback();
                     animator.SetTrigger("Hurt");
                     print("parry");
+                    PlaySound("sword_hit"); //change sound of parry effect
                     playerScript.EmitParryParticles();
                 }
                 else
@@ -133,11 +134,13 @@ public class Enemy : MonoBehaviour
                     playerScript.Shift(direction);
                     playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
                     // player takes posture damage
+                    PlaySound("sword_miss");
                     playerScript.EmitParryParticles();
                 }
 
             }
             else
+                PlaySound("sword_hit");
                 enemy.GetComponent<Bandit>().TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
         }
     }
@@ -197,11 +200,6 @@ public class Enemy : MonoBehaviour
         blocking = false;
         animator.SetInteger("AnimState", 0);
     }
-
-    //void AE_footstep()
-    //{ //how to manage other player sounds? Add all of same infrastructure or somehow try to share them
-       // m_audioManager.PlaySound("footstep");
-    //}
 
 
     private void OnDrawGizmosSelected()

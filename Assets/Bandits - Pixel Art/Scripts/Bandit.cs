@@ -66,7 +66,9 @@ public class Bandit : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_audioSource = GetComponent<AudioSource>();
-        m_audioManager = AudioManagerBanditScript.instance;
+        //m_audioManager = AudioManagerBanditScript.instance;
+        m_audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
+        //m_audioManager = transform.Find("AudioManager").transform;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         raycastOrigin = transform.Find("RaycastOrigin").transform;

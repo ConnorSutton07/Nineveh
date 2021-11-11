@@ -34,21 +34,21 @@ public class Sound2
 public class AudioManagerBanditScript : MonoBehaviour
 {
     // Make it a singleton class that can be accessible everywhere
-    public static AudioManagerBanditScript instance;
+    //public static AudioManagerBanditScript instance;
 
     [SerializeField]
     Sound2[] m_sounds;
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogError("More than one AudioManger in scene");
-        }
-        else
-        {
-            instance = this;
-        }
+      //  if (instance != null)
+       // {
+       //     Debug.LogError("More than one AudioManger in scene");
+        //}
+       // else
+      //  {
+      //      instance = this;
+      //  }
     }
 
     private void Start()
