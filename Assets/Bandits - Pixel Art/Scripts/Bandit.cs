@@ -140,7 +140,6 @@ public class Bandit : MonoBehaviour
         else if (Input.GetKey("b")) //------------------------------------------------------------------ Combat Idle (used for block)
         {
             state = State.BLOCKING;
-            //blockFrames = currentBlockFrames + 1;
             blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
             m_animator.SetInteger("AnimState", 1);
         }
@@ -148,6 +147,7 @@ public class Bandit : MonoBehaviour
         {
             m_animator.SetInteger("AnimState", 0);
         }
+        print(state);
     }
 
     private void FixedUpdate()

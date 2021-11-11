@@ -122,11 +122,11 @@ public class Enemy : MonoBehaviour
             {
                 if (playerScript.isParry())
                 {
-                    //animator.StopPlayback();
                     animator.SetTrigger("Hurt");
                     print("parry");
                     PlaySound("sword_hit"); //change sound of parry effect
                     playerScript.EmitParryParticles();
+                    print("here");
                 }
                 else
                 {
@@ -140,8 +140,10 @@ public class Enemy : MonoBehaviour
 
             }
             else
+            {
                 PlaySound("sword_hit");
-                enemy.GetComponent<Bandit>().TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
+                playerScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
+            }
         }
     }
 
