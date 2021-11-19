@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     public float blockChance;
     public float minBlockTime;
     public float maxBlockTime;
+    public int postureThreshold;
+    public int parryDamagePercentage;
 
     private RaycastHit2D hit;
     private Animator animator;
@@ -29,9 +31,11 @@ public class Enemy : MonoBehaviour
     private AudioManagerBanditScript m_audioManager; //use for now at least
     private bool inRange;
 
+    State state;
     bool blocking;
     Bandit playerScript;
     int currentHealth;
+    int currentPosture;
 
     #endregion
 
@@ -49,8 +53,10 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        currentPosture = 0;
         attackCooldown = 0f;
         blocking = false;
+        state = State.DEFAULT;
     }
 
     #endregion
@@ -59,7 +65,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (blocking) return;
+        if (state != State.DEFAULT) return;
 
         LookForPlayer();
         if (inRange)
@@ -102,13 +108,23 @@ public class Enemy : MonoBehaviour
 
     #region Public Methods
 
-    public void TakeDamage(int damage, bool breakStance = false)
+    public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
     {
-        currentHealth -= damage;
-        if (breakStance)
-            animator.SetTrigger("Hurt");
+        currentHealth -= healthDamage;
+        currentPosture += postureDamage;
+
         if (currentHealth <= 0)
+        {
             Die();
+        }
+        else if (currentPosture >= postureThreshold)
+        {
+            animator.SetTrigger("Recover");
+            currentPosture = 0;
+        }
+        else if (breakStance)
+            animator.SetTrigger("Hurt");
+
     }
 
     public void Attack()
@@ -122,22 +138,19 @@ public class Enemy : MonoBehaviour
             {
                 if (playerScript.isParry())
                 {
-                    animator.SetTrigger("Hurt");
-                    print("parry");
+                    //animator.SetTrigger("Hurt");
                     PlaySound("sword_hit"); //change sound of parry effect
                     playerScript.EmitParryParticles();
-                    print("here");
+                    TakeDamage(0, parryDamagePercentage);
                 }
                 else
                 {
                     int direction = (transform.position.x > player.position.x) ? -1 : 1;
                     playerScript.Shift(direction);
                     playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
-                    // player takes posture damage
                     PlaySound("sword_miss");
                     playerScript.EmitParryParticles();
                 }
-
             }
             else
             {
@@ -149,23 +162,46 @@ public class Enemy : MonoBehaviour
 
     public void AttemptBlock()
     {
-        if (Random.Range(0f, 1f) < blockChance)
+        if (state == State.DEFAULT && Random.Range(0f, 1f) < blockChance)
         {
-            blocking = true;
+            state = State.BLOCKING;
             float duration = Random.Range(minBlockTime, maxBlockTime);
             animator.SetInteger("AnimState", 1);
             StartCoroutine(EnterBlockingState(Time.time, duration));
         }
     }
 
+    IEnumerator EnterBlockingState(float startTime, float duration)
+    {
+        while (Time.time - startTime < duration)
+            yield return null;
+        if (state == State.BLOCKING)
+        {
+            state = State.DEFAULT;
+            animator.SetInteger("AnimState", 0);
+        }
+    }
+
     public bool isBlocking()
     {
-        return blocking;
+        print(state);
+        return state == State.BLOCKING;
     }
 
     public void Shift(int direction)
     {
         transform.position = new Vector3(transform.position.x + (direction * shiftDistance), transform.position.y, transform.position.z);
+    }
+
+    public void EnterStun()
+    {
+        state = State.STUNNED;
+    }
+
+    public void ExitStun()
+    {
+        state = State.DEFAULT;
+        animator.SetInteger("AnimState", 1);
     }
 
     #endregion
@@ -174,9 +210,10 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        state = State.DEAD;
         animator.SetTrigger("Death");
         this.GetComponent<BoxCollider2D>().enabled = false;
-        this.enabled = false;
+        // this.enabled = false;
     }
 
     void Move()
@@ -194,15 +231,6 @@ public class Enemy : MonoBehaviour
         //animator.SetInteger("AnimState", 0);
         animator.SetTrigger("Attack");
     }
-
-    IEnumerator EnterBlockingState(float startTime, float duration)
-    {
-        while (Time.time - startTime < duration)
-            yield return null;
-        blocking = false;
-        animator.SetInteger("AnimState", 0);
-    }
-
 
     private void OnDrawGizmosSelected()
     {

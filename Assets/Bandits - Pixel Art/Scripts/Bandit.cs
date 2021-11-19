@@ -28,7 +28,6 @@ public class Bandit : MonoBehaviour
     private AudioSource m_audioSource;
     private AudioManagerBanditScript m_audioManager;
     private Sensor_Bandit m_groundSensor;
-    private PlayerCombat Combat;
     private SparkEffect sparkEffect;
     private bool m_grounded = false;
     private bool m_combatIdle = false;
@@ -147,7 +146,6 @@ public class Bandit : MonoBehaviour
         {
             m_animator.SetInteger("AnimState", 0);
         }
-        print(state);
     }
 
     private void FixedUpdate()
@@ -214,7 +212,7 @@ public class Bandit : MonoBehaviour
             {
                 int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
                 enemyScript.Shift(direction);
-                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f));
+                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
                 // enemy takes posture damage
                 //play block noise
                 PlaySound("block");
@@ -222,7 +220,7 @@ public class Bandit : MonoBehaviour
             }
             else
             {
-                enemyScript.TakeDamage(attackDamage, true);
+                enemyScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
                 // play hit sound
                 PlaySound("sword_hit");
             }

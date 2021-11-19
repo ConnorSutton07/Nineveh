@@ -19,7 +19,10 @@ public class Recover : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.gameObject.GetComponent<Bandit>().ExitStun();
+        if (animator.gameObject.name == "Player")
+            animator.gameObject.GetComponent<Bandit>().ExitStun();
+        else
+            animator.gameObject.GetComponent<Enemy>().ExitStun();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
