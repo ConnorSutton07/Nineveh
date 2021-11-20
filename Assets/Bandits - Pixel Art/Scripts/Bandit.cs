@@ -121,7 +121,6 @@ public class Bandit : MonoBehaviour
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) //--- Attack
         {
             m_animator.SetTrigger("Attack");
-            PlaySound("sword_miss");
             attackCooldown = Time.time + attackRate;
         }
         else if (Input.GetKeyDown("space") && m_grounded) //-------------------------------------------- Jump
@@ -202,6 +201,8 @@ public class Bandit : MonoBehaviour
 
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+
+        if (hitEnemies.Length == 0) PlaySound("sword_miss");
 
         // Damage them
         foreach (Collider2D enemy in hitEnemies)

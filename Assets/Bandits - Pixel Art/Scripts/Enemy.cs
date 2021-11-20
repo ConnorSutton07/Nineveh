@@ -15,13 +15,14 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     public float attackRate;
     public Transform attackPoint;
-    public float attackRange = 0.5f;
+    
     public int attackDamage = 20;
     public float blockChance;
     public float minBlockTime;
     public float maxBlockTime;
     public int postureThreshold;
     public int parryDamagePercentage;
+    public bool canBlock;
 
     private RaycastHit2D hit;
     private Animator animator;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
     private AudioSource m_audioSource;
     private AudioManagerBanditScript m_audioManager; //use for now at least
     private bool inRange;
+    private MeleeCombat combatScript;
 
     State state;
     bool blocking;
@@ -48,6 +50,7 @@ public class Enemy : MonoBehaviour
         m_audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.gameObject.GetComponent<Bandit>();
+        combatScript = GetComponent<MeleeCombat>();
     }
 
     void Start()
@@ -129,40 +132,16 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        // Damage them
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            if (playerScript.isBlocking())
-            {
-                if (playerScript.isParry())
-                {
-                    //animator.SetTrigger("Hurt");
-                    PlaySound("sword_hit"); //change sound of parry effect
-                    playerScript.EmitParryParticles();
-                    TakeDamage(0, parryDamagePercentage);
-                }
-                else
-                {
-                    int direction = (transform.position.x > player.position.x) ? -1 : 1;
-                    playerScript.Shift(direction);
-                    playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
-                    PlaySound("sword_miss");
-                    playerScript.EmitParryParticles();
-                }
-            }
-            else
-            {
-                PlaySound("sword_hit");
-                playerScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
-            }
-        }
+        string attackSound = "";
+        int postureDamage = 0;
+        combatScript.AttackPlayer(ref playerScript, ref player, ref attackSound, ref postureDamage);
+        PlaySound(attackSound);
+        TakeDamage(0, postureDamage);
     }
 
     public void AttemptBlock()
     {
-        if (state == State.DEFAULT && Random.Range(0f, 1f) < blockChance)
+        if (canBlock && state == State.DEFAULT && Random.Range(0f, 1f) < blockChance)
         {
             state = State.BLOCKING;
             float duration = Random.Range(minBlockTime, maxBlockTime);
@@ -184,7 +163,6 @@ public class Enemy : MonoBehaviour
 
     public bool isBlocking()
     {
-        print(state);
         return state == State.BLOCKING;
     }
 
@@ -210,8 +188,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        state = State.DEAD;
         animator.SetTrigger("Death");
+        state = State.DEAD;
         this.GetComponent<BoxCollider2D>().enabled = false;
         // this.enabled = false;
     }
@@ -232,11 +210,6 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null) return;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
 
     void PlaySound(string text)
     {

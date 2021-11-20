@@ -794,6 +794,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 967730312, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+      propertyPath: canBlock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 967730312, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
       propertyPath: blockChance
       value: 1
       objectReference: {fileID: 0}
@@ -1487,6 +1491,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1325233085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1689866831511430, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+  m_PrefabInstance: {fileID: 967730310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1325233091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325233085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40e2d73608779347a1580594a540476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 0.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  attackPoint: {fileID: 1498503512}
+  attackDamage: 20
+  parryDamagePercentage: 20
 --- !u!1 &1445176559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,6 +1554,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1498503512 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5690403810310247026, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+  m_PrefabInstance: {fileID: 967730310}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1521256644 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1419069627, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
