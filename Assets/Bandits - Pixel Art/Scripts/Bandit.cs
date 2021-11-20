@@ -247,7 +247,6 @@ public class Bandit : MonoBehaviour
         if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
         currentHealth  -= healthDamage;
         currentPosture += postureDamage;
-        print(currentPosture);
 
         updateHealthBar();
         updatePostureBar();

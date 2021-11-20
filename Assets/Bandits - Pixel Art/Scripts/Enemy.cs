@@ -6,35 +6,29 @@ public class Enemy : MonoBehaviour
 {
     #region Attributes
 
-    public Transform player;
-    public LayerMask enemyLayers;
-    public float awareDistance;
+
     public float attackDistance;
-    public float moveSpeed;
     public float shiftDistance = 0.1f;
     public int maxHealth = 100;
     public float attackRate;
-    public Transform attackPoint;
     
-    public int attackDamage = 20;
     public float blockChance;
     public float minBlockTime;
     public float maxBlockTime;
     public int postureThreshold;
-    public int parryDamagePercentage;
     public bool canBlock;
 
+    private Transform player;
     private RaycastHit2D hit;
     private Animator animator;
     private float distance = 0f;
     private float attackCooldown;
     private AudioSource m_audioSource;
     private AudioManagerBanditScript m_audioManager; //use for now at least
-    private bool inRange;
     private MeleeCombat combatScript;
+    private MeleeMovement movementScript;
 
     State state;
-    bool blocking;
     Bandit playerScript;
     int currentHealth;
     int currentPosture;
@@ -51,6 +45,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.gameObject.GetComponent<Bandit>();
         combatScript = GetComponent<MeleeCombat>();
+        movementScript = GetComponent<MeleeMovement>();
     }
 
     void Start()
@@ -58,7 +53,6 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         currentPosture = 0;
         attackCooldown = 0f;
-        blocking = false;
         state = State.DEFAULT;
     }
 
@@ -69,12 +63,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         if (state != State.DEFAULT) return;
-
-        LookForPlayer();
-        if (inRange)
-        {
-            EnemyLogic();
-        }
+        if (InRange()) EnemyLogic();   
     }
 
     void EnemyLogic()
@@ -92,19 +81,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void LookForPlayer()
+    bool InRange()
     {
-        if (Mathf.Abs(player.position.x - transform.position.x) <= awareDistance)
-        {
-            inRange = !playerScript.isDead(); // do not attack if player is dead
-
-            if (transform.position.x > player.position.x)
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            else
-                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        }
-        else
-            inRange = false;
+        return movementScript.FindPlayer(ref playerScript, ref player);
     }
 
     #endregion
@@ -186,7 +165,7 @@ public class Enemy : MonoBehaviour
 
     #region Private Methods
 
-    void Die()
+    private void Die()
     {
         animator.SetTrigger("Death");
         state = State.DEAD;
@@ -194,24 +173,18 @@ public class Enemy : MonoBehaviour
         // this.enabled = false;
     }
 
-    void Move()
+    private void Move()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            animator.SetInteger("AnimState", 2);
-            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        }
+        movementScript.MoveTowardsPlayer(ref animator, ref player);
     }
 
-    void StartAttack()
+    private void StartAttack()
     {
-        //animator.SetInteger("AnimState", 0);
         animator.SetTrigger("Attack");
     }
 
 
-    void PlaySound(string text)
+    private void PlaySound(string text)
     {
         m_audioManager.PlaySound(text);
     }
