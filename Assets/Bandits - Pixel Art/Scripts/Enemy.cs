@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         {
             Move();
         }
-        else if (Time.time > attackCooldown)
+        else if (Time.time > attackCooldown && CanAttack())
         {
             animator.SetInteger("AnimState", 1);
             StartAttack();
@@ -101,11 +101,15 @@ public class Enemy : MonoBehaviour
         }
         else if (currentPosture >= postureThreshold)
         {
+            Debug.Log("RECOVER");
             animator.SetTrigger("Recover");
             currentPosture = 0;
         }
-        else if (breakStance)
+        else if (breakStance || animator.GetCurrentAnimatorStateInfo(0).IsName("Recover"))
+        {
+            Debug.Log("HURT");
             animator.SetTrigger("Hurt");
+        }
 
     }
 
@@ -158,7 +162,7 @@ public class Enemy : MonoBehaviour
     public void ExitStun()
     {
         state = State.DEFAULT;
-        animator.SetInteger("AnimState", 1);
+        //animator.SetInteger("AnimState", 1);
     }
 
     #endregion
@@ -171,6 +175,11 @@ public class Enemy : MonoBehaviour
         state = State.DEAD;
         this.GetComponent<BoxCollider2D>().enabled = false;
         // this.enabled = false;
+    }
+
+    private bool CanAttack()
+    {
+        return !animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
     }
 
     private void Move()
