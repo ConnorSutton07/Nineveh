@@ -101,13 +101,11 @@ public class Enemy : MonoBehaviour
         }
         else if (currentPosture >= postureThreshold)
         {
-            Debug.Log("RECOVER");
             animator.SetTrigger("Recover");
             currentPosture = 0;
         }
         else if (breakStance || animator.GetCurrentAnimatorStateInfo(0).IsName("Recover"))
         {
-            Debug.Log("HURT");
             animator.SetTrigger("Hurt");
         }
 
@@ -173,7 +171,8 @@ public class Enemy : MonoBehaviour
     {
         animator.SetTrigger("Death");
         state = State.DEAD;
-        this.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.layer = Constants.DEAD_LAYER;
+        //this.GetComponent<BoxCollider2D>().enabled = false;
         // this.enabled = false;
     }
 
