@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         {
             Move();
         }
-        else if (Time.time > attackCooldown && CanAttack())
+        else if (CanAttack())
         {
             animator.SetInteger("AnimState", 1);
             StartAttack();
@@ -94,6 +94,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= healthDamage;
         currentPosture += postureDamage;
+        print(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -107,6 +108,7 @@ public class Enemy : MonoBehaviour
         else if (breakStance || animator.GetCurrentAnimatorStateInfo(0).IsName("Recover"))
         {
             animator.SetTrigger("Hurt");
+            attackCooldown = 0;
         }
 
     }
@@ -120,13 +122,13 @@ public class Enemy : MonoBehaviour
         TakeDamage(0, postureDamage);
     }
 
-    public void AttemptBlock()
+    public void AttemptBlock(bool forceSucess = false)
     {
-        if (canBlock && state == State.DEFAULT && Random.Range(0f, 1f) < blockChance)
+        if (forceSucess || (canBlock && state == State.DEFAULT && Random.Range(0f, 1f) < blockChance))
         {
+            animator.SetInteger("AnimState", 1);
             state = State.BLOCKING;
             float duration = Random.Range(minBlockTime, maxBlockTime);
-            animator.SetInteger("AnimState", 1);
             StartCoroutine(EnterBlockingState(Time.time, duration));
         }
     }
@@ -159,7 +161,8 @@ public class Enemy : MonoBehaviour
 
     public void ExitStun()
     {
-        state = State.DEFAULT;
+        attackCooldown = Time.time + attackRate;
+        AttemptBlock(true);
     }
 
     #endregion
@@ -175,7 +178,8 @@ public class Enemy : MonoBehaviour
 
     private bool CanAttack()
     {
-        return !animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
+        return (!animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt") 
+             && Time.time > attackCooldown);
     }
 
     private void Move()
