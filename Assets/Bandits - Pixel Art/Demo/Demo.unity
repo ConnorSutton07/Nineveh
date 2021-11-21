@@ -382,13 +382,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5a18f2ef7db9f1943bedda13ff85ee89, type: 3}
   - m_name: block
     m_clips:
-    - {fileID: 8300000, guid: aebe34c0c7c7c304783f2c385f47ab0a, type: 3}
+    - {fileID: 8300000, guid: eb35ba3b828f89045b5bb73c413c88b5, type: 3}
+    - {fileID: 8300000, guid: 31fb04611ce453e478ddfd908c65d03e, type: 3}
+    - {fileID: 8300000, guid: 8ba997d7870a20f45a2f3b8b33da5c58, type: 3}
   - m_name: sword_miss
     m_clips:
     - {fileID: 8300000, guid: 67de8ba5594cadd4f94f6e17a7bf8e45, type: 3}
   - m_name: sword_hit
     m_clips:
-    - {fileID: 8300000, guid: 8b4b9435f79fec84b969d864cadf28c6, type: 3}
+    - {fileID: 8300000, guid: 975ad589dfd586f41b79d0403003504f, type: 3}
+    - {fileID: 8300000, guid: 055e6c049b2249b44b75d9f15c5619aa, type: 3}
+    - {fileID: 8300000, guid: 1c1419684c4f5734e8afdd85ab686e8a, type: 3}
+  - m_name: parry
+    m_clips:
+    - {fileID: 8300000, guid: aebe34c0c7c7c304783f2c385f47ab0a, type: 3}
 --- !u!82 &466732440
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1866,13 +1873,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5a18f2ef7db9f1943bedda13ff85ee89, type: 3}
   - m_name: block
     m_clips:
-    - {fileID: 8300000, guid: aebe34c0c7c7c304783f2c385f47ab0a, type: 3}
+    - {fileID: 8300000, guid: eb35ba3b828f89045b5bb73c413c88b5, type: 3}
+    - {fileID: 8300000, guid: 31fb04611ce453e478ddfd908c65d03e, type: 3}
+    - {fileID: 8300000, guid: 8ba997d7870a20f45a2f3b8b33da5c58, type: 3}
   - m_name: sword_miss
     m_clips:
     - {fileID: 8300000, guid: 67de8ba5594cadd4f94f6e17a7bf8e45, type: 3}
   - m_name: sword_hit
     m_clips:
-    - {fileID: 8300000, guid: 8b4b9435f79fec84b969d864cadf28c6, type: 3}
+    - {fileID: 8300000, guid: 975ad589dfd586f41b79d0403003504f, type: 3}
+    - {fileID: 8300000, guid: 055e6c049b2249b44b75d9f15c5619aa, type: 3}
+    - {fileID: 8300000, guid: 1c1419684c4f5734e8afdd85ab686e8a, type: 3}
+  - m_name: parry
+    m_clips:
+    - {fileID: 8300000, guid: aebe34c0c7c7c304783f2c385f47ab0a, type: 3}
 --- !u!82 &1802784237
 AudioSource:
   m_ObjectHideFlags: 0
