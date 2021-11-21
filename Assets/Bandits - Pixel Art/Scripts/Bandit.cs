@@ -41,6 +41,7 @@ public class Bandit : MonoBehaviour
     public float attackRate = 0.9f;
     public int maxHealth = 100;
     public int postureThreshold = 100;
+    public float postureChipPercentage;
     float raycastLength = 2f;
 
     int currentHealth;
@@ -213,9 +214,7 @@ public class Bandit : MonoBehaviour
             {
                 int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
                 enemyScript.Shift(direction);
-                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
-                // enemy takes posture damage
-                //play block noise
+                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), Mathf.FloorToInt(attackDamage * postureChipPercentage));
                 PlaySound("block");
                 EmitBlockParticles();
             }
