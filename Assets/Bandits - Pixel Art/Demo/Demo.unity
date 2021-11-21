@@ -581,6 +581,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 50959880312528810, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 0db15e53c27eab8459ee0967ebc417d3, type: 2}
     - target: {fileID: 114999745408315450, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: attackPoint
       value: 
@@ -627,6 +631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748894400}
   - component: {fileID: 748894401}
+  - component: {fileID: 748894402}
   m_Layer: 0
   m_Name: PlatformCollider
   m_TagString: Untagged
@@ -674,6 +679,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.9871237, y: 0.22913289}
   m_EdgeRadius: 0
+--- !u!251 &748894402
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748894399}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 1
+  m_SideArc: 1
 --- !u!1 &864047218
 GameObject:
   m_ObjectHideFlags: 0

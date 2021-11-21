@@ -160,7 +160,6 @@ public class Enemy : MonoBehaviour
     public void ExitStun()
     {
         state = State.DEFAULT;
-        //animator.SetInteger("AnimState", 1);
     }
 
     #endregion
@@ -172,8 +171,6 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = Constants.DEAD_LAYER;
-        //this.GetComponent<BoxCollider2D>().enabled = false;
-        // this.enabled = false;
     }
 
     private bool CanAttack()
