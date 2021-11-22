@@ -251,7 +251,11 @@ public class Bandit : MonoBehaviour
         updatePostureBar();
 
         if (breakStance)
+        {
             m_animator.SetTrigger("Hurt");
+            EmitAttackParticles();
+        }
+            
         if (currentHealth <= 0)
             Die();
         else if (currentPosture >= postureThreshold)
