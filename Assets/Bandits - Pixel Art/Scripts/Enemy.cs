@@ -174,6 +174,7 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = Constants.DEAD_LAYER;
+        this.enabled = false;
     }
 
     private bool CanAttack()
