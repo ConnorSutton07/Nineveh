@@ -34,7 +34,7 @@ public class MeleeCombat : MonoBehaviour
                     playerScript.Shift(direction);
                     playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
                     attackSound = "block"; // should play block noise
-                    playerScript.EmitParryParticles();
+                    playerScript.EmitBlockParticles();
                 }
             }
             else

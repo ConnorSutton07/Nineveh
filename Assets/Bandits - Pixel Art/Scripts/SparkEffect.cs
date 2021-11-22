@@ -7,47 +7,33 @@ public class SparkEffect : MonoBehaviour
     Transform block;
     Transform attack;
 
+    ParticleSystem blockParticles;
+    ParticleSystem attackParticles;
+
+    public int particleCount;
+
     // Start is called before the first frame update
     void Start()
     {
         block  = transform.Find("Block");
-        attack = transform.Find("Attack");
-        var emitblock = block.GetComponent<ParticleSystem>().emission;
-        emitblock.enabled = false;
-        var emitattack = attack.GetComponent<ParticleSystem>().emission;
-        emitattack.enabled = false;
+        attack = transform.Find("Attack"); 
+        blockParticles = block.GetComponent<ParticleSystem>();
+        attackParticles = attack.GetComponent<ParticleSystem>();
     }
 
     public void EmitBlockSparks()
-    {
-        var emitblock = block.GetComponent<ParticleSystem>().emission;
-        emitblock.enabled = true;
-        StartCoroutine(stopBlockSparks());
-        return;
-    }
-    IEnumerator stopBlockSparks()
-    {
-        yield return new WaitForSeconds(.4f);
-        var emitblock = block.GetComponent<ParticleSystem>().emission;
-        emitblock.enabled = false;
+    { 
+        blockParticles.Emit(particleCount);
     }
 
     public void EmitParrySparks()
     {
-        return;
+        blockParticles.Emit(particleCount * 2);
     }
 
     public void EmitAttackSparks()
     {
-        var emitattack = attack.GetComponent<ParticleSystem>().emission;
-        emitattack.enabled = true;
-        StartCoroutine(stopAttackSparks());
-        return;
+        attackParticles.Emit(particleCount);
     }
-    IEnumerator stopAttackSparks()
-    {
-        yield return new WaitForSeconds(.4f);
-        var emitattack = attack.GetComponent<ParticleSystem>().emission;
-        emitattack.enabled = false;
-    }
+
 }

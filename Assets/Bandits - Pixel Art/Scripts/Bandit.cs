@@ -209,19 +209,18 @@ public class Bandit : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
-            //enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            
             if (enemyScript.isBlocking())
             {
                 int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
                 enemyScript.Shift(direction);
-                enemyScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), Mathf.FloorToInt(attackDamage * postureChipPercentage));
+                enemyScript.TakeDamage(0, Mathf.FloorToInt(attackDamage * postureChipPercentage));
                 PlaySound("block");
-                EmitBlockParticles();
+                EmitAttackParticles();
             }
             else
             {
                 enemyScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
-                // play hit sound
                 PlaySound("sword_hit");
             }
 
@@ -253,7 +252,6 @@ public class Bandit : MonoBehaviour
         if (breakStance)
         {
             m_animator.SetTrigger("Hurt");
-            EmitAttackParticles();
         }
             
         if (currentHealth <= 0)
