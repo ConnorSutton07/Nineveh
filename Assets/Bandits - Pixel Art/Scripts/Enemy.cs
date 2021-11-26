@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     private AudioManagerBanditScript m_audioManager; //use for now at least
     private MeleeCombat combatScript;
     private MeleeMovement movementScript;
+    private bool successfulDeflect = false;
 
     State state;
     Bandit playerScript;
@@ -135,13 +136,24 @@ public class Enemy : MonoBehaviour
 
     IEnumerator EnterBlockingState(float startTime, float duration)
     {
-        while (Time.time - startTime < duration)
+        while (Time.time - startTime < duration && !successfulDeflect)
+        {
             yield return null;
+        }
+
+        successfulDeflect = false;
+
         if (state == State.BLOCKING)
         {
+            print("Here");
             state = State.DEFAULT;
             animator.SetInteger("AnimState", 0);
         }
+    }
+
+    public void SuccesfulDeflect()
+    {
+        successfulDeflect = true;
     }
 
     public bool isBlocking()

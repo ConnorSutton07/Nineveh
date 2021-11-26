@@ -16,7 +16,7 @@ public class Bandit : MonoBehaviour
 
     [SerializeField] float m_speed = 4.0f;
     [SerializeField] float m_jumpForce = 7.5f;
-    [SerializeField] float parryWindow = 0.25f;
+    [SerializeField] float deflectWindow = 0.25f;
     [SerializeField] float shiftDistance = 0.1f;
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackRange = 0.5f;
@@ -122,7 +122,7 @@ public class Bandit : MonoBehaviour
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) //--- Attack
         {
             m_animator.SetTrigger("Attack");
-            attackCooldown = Time.time + attackRate;
+            startAttackCooldown();
         }
         else if (Input.GetKeyDown("space") && m_grounded) //-------------------------------------------- Jump
         {
@@ -198,8 +198,6 @@ public class Bandit : MonoBehaviour
 
     public void Attack()
     {
-        // Play attack animation -> Handled elsewhere 
-
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
@@ -212,6 +210,12 @@ public class Bandit : MonoBehaviour
             
             if (enemyScript.isBlocking())
             {
+                if (Random.Range(0f, 1f) < 0.33f)
+                {
+                    startAttackCooldown();
+                    EmitDeflectedParticles();
+                    enemyScript.SuccesfulDeflect();
+                }
                 int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
                 enemyScript.Shift(direction);
                 enemyScript.TakeDamage(0, Mathf.FloorToInt(attackDamage * postureChipPercentage));
@@ -223,7 +227,6 @@ public class Bandit : MonoBehaviour
                 enemyScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
                 PlaySound("sword_hit");
             }
-
         }
     }
 
@@ -283,9 +286,14 @@ public class Bandit : MonoBehaviour
         state = State.DEFAULT;
     }
 
-    public bool isParry()
+    public void startAttackCooldown()
     {
-        return (blockStart != 0 && Time.time - blockStart < parryWindow);
+        attackCooldown = Time.time + attackRate;
+    }
+
+    public bool isDeflect()
+    {
+        return (blockStart != 0 && Time.time - blockStart < deflectWindow);
     }
 
     public void Shift(int direction)
@@ -298,14 +306,19 @@ public class Bandit : MonoBehaviour
         sparkEffect.EmitBlockSparks();
     }
 
-    public void EmitParryParticles()
+    public void EmitDeflectParticles()
     {
-        sparkEffect.EmitParrySparks(); // i think this could just be a more intense version of the block particles
+        sparkEffect.EmitDeflectSparks(); // i think this could just be a more intense version of the block particles
     }
 
     public void EmitAttackParticles()
     {
         sparkEffect.EmitAttackSparks();
+    }
+
+    public void EmitDeflectedParticles()
+    {
+        sparkEffect.EmitDeflectedSparks();
     }
 
     void PlaySound(string text)

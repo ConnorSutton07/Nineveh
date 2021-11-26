@@ -11,6 +11,7 @@ public class SparkEffect : MonoBehaviour
     ParticleSystem attackParticles;
 
     public int particleCount;
+    public int deflectAmplifier;
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +27,9 @@ public class SparkEffect : MonoBehaviour
         blockParticles.Emit(particleCount);
     }
 
-    public void EmitParrySparks()
+    public void EmitDeflectSparks()
     {
-        blockParticles.Emit(particleCount * 2);
+        blockParticles.Emit(particleCount * deflectAmplifier);
     }
 
     public void EmitAttackSparks()
@@ -36,4 +37,8 @@ public class SparkEffect : MonoBehaviour
         attackParticles.Emit(particleCount);
     }
 
+    public void EmitDeflectedSparks()
+    {
+        attackParticles.Emit(particleCount * deflectAmplifier);
+    }
 }

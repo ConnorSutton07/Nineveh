@@ -22,10 +22,10 @@ public class MeleeCombat : MonoBehaviour
         {
             if (playerScript.isBlocking())
             {
-                if (playerScript.isParry())
+                if (playerScript.isDeflect())
                 {
                     attackSound = "block"; // should play parry noise
-                    playerScript.EmitParryParticles();
+                    playerScript.EmitDeflectParticles();
                     postureDamage = parryDamagePercentage;
                 }
                 else
