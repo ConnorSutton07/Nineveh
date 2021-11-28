@@ -215,6 +215,7 @@ public class Bandit : MonoBehaviour
                     startAttackCooldown();
                     EmitDeflectedParticles();
                     enemyScript.SuccesfulDeflect();
+                    PlaySound("deflect");
                 }
                 int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
                 enemyScript.Shift(direction);
@@ -321,7 +322,7 @@ public class Bandit : MonoBehaviour
         sparkEffect.EmitDeflectedSparks();
     }
 
-    void PlaySound(string text)
+    public void PlaySound(string text)
     {
         m_audioManager.PlaySound(text);
     }

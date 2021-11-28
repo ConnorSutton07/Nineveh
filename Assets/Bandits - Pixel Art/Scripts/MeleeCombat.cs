@@ -24,7 +24,7 @@ public class MeleeCombat : MonoBehaviour
             {
                 if (playerScript.isDeflect())
                 {
-                    attackSound = "block"; // should play parry noise
+                    attackSound = "deflect"; // should play deflect noise
                     playerScript.EmitDeflectParticles();
                     postureDamage = parryDamagePercentage;
                 }
