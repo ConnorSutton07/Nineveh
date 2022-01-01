@@ -130,6 +130,9 @@ MonoBehaviour:
   attackRange: 0.51
   attackDamage: 20
   stunnedAmplifier: 1.2
+  dashTime: 0
+  dashSpeed: 0
+  dashCooldownLength: 0
   healthSlider: {fileID: 0}
   healthYellow: {fileID: 0}
   postureSlider: {fileID: 0}
@@ -245,7 +248,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.023714721, y: 0.6235215}
+  m_Offset: {x: 0.023714721, y: 0.58}
   m_Size: {x: 0.40912306, y: 1.0573255}
   m_Direction: 0
 --- !u!1 &1183356046770183142
