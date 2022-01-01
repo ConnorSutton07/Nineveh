@@ -56,6 +56,7 @@ public class Bandit : MonoBehaviour
     private float dashCooldown;
     private float healthPercentage = 1f;
     private float posturePercentage = 0f;
+    private bool canDoubleJump;
 
     // states
 
@@ -82,6 +83,7 @@ public class Bandit : MonoBehaviour
         currentHealth = maxHealth;
         state = State.DEFAULT;
         blockStart = 0f;
+        canDoubleJump = true;
         updatePostureBar();
     }
 
@@ -102,6 +104,7 @@ public class Bandit : MonoBehaviour
         if (!m_grounded && m_groundSensor.State()) // Check if character just landed on the ground
         { 
             m_grounded = true;
+            canDoubleJump = true;
             PlaySound("land");
             m_animator.SetBool("Grounded", m_grounded);
         }
@@ -109,6 +112,7 @@ public class Bandit : MonoBehaviour
         if (m_grounded && !m_groundSensor.State()) // Check if character just started falling
         {
             m_grounded = false;
+            canDoubleJump = false;
             m_animator.SetBool("Grounded", m_grounded);
         }
 
@@ -128,13 +132,24 @@ public class Bandit : MonoBehaviour
             m_animator.SetTrigger("Attack");
             startAttackCooldown();
         }
-        else if (Input.GetKeyDown("space") && m_grounded) //-------------------------------------------- Jump
+        else if (Input.GetKeyDown("space")) // && m_grounded) //-------------------------------------------- Jump
         {
-            m_animator.SetTrigger("Jump");
-            m_grounded = false;
-            m_animator.SetBool("Grounded", m_grounded);
-            m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-            m_groundSensor.Disable(0.2f);
+            if (m_grounded)
+            {
+                m_animator.SetTrigger("Jump");
+                m_grounded = false;
+                m_animator.SetBool("Grounded", m_grounded);
+                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+                m_groundSensor.Disable(0.2f);
+            }
+            else if (canDoubleJump)
+            {
+                canDoubleJump = false;
+                m_animator.SetTrigger("Jump");
+                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+                m_groundSensor.Disable(0.2f);
+            }
+
         }
         else if (Input.GetKeyDown("x") && CanDash())
         {
