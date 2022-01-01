@@ -18,12 +18,12 @@ public class LevelGen : MonoBehaviour
     private GameObject hill;
 
     private List<Section> sections;
-    private const int sectionWidth = 10;
+    private const float sectionWidth = 17.5f;
     private const int sectionHeight = 10;
 
     void Generate()
     {
-        float ground_x_transform = sectionWidth / 2;
+        float ground_x_transform = 0;
         float ground_y_transform = ground.GetComponent<BoxCollider2D>().bounds.size.y / 2;
         //Debug.Log("Ground x tranform: " + ground_x_transform);
         // Debug.Log("Ground y transform: " + ground_y_transform);
@@ -64,7 +64,7 @@ public class LevelGen : MonoBehaviour
 public abstract class Section : MonoBehaviour
 {
     public string sectionType;
-    public abstract void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight);
+    public abstract void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight);
 }
 
 public class SimpleSection : Section
@@ -73,7 +73,7 @@ public class SimpleSection : Section
     {
         sectionType = "Simple";
     }
-    public override void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight)
+    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         return;
     }
@@ -92,7 +92,7 @@ public class SinglePlatformSection : Section
         sectionType = "SinglePlatform";
         platform = plat;
     }
-    public override void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight)
+    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         x_transform = sectionWidth / 2;
         y_transform = platform.GetComponent<BoxCollider2D>().bounds.size.y / 2;
@@ -119,7 +119,7 @@ public class DoublePlatformSection : Section
         sectionType = "DoublePlatform";
         platform = plat;
     }
-    public override void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight)
+    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         x_transform = sectionWidth / 2;
         y_transform = platform.GetComponent<BoxCollider2D>().bounds.size.y / 2;
@@ -153,7 +153,7 @@ public class BarricadeSection : Section
         sectionType = "Barricade";
         barricade = bar;
     }
-    public override void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight)
+    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         x_transform = sectionWidth / 2;
         y_transform = barricade.GetComponent<SpriteRenderer>().bounds.size.y / 2;
@@ -177,7 +177,7 @@ public class WatchTowerSection : Section
         sectionType = "WatchTower";
         watchtower = bar;
     }
-    public override void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight)
+    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         x_transform = sectionWidth / 2;
         y_transform = watchtower.GetComponent<SpriteRenderer>().bounds.size.y / 2;
@@ -201,7 +201,7 @@ public class HeightStruggleSection : Section
         sectionType = "HeightStruggle";
         hill = hill_;
     }
-    public override void GenerateRoomObjects(int sectionIndex, int sectionWidth, int sectionHeight)
+    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         x_transform = sectionWidth / 2;
         y_transform = hill.GetComponent<SpriteRenderer>().bounds.size.y / 2;

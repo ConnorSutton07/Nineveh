@@ -28,12 +28,12 @@ public class CameraMovement : MonoBehaviour
 
     IEnumerator PanRight(Vector3 initialPosition)
     {
-        while (transform.position.x >= initialPosition.x + panUnits)
+        while (transform.position.x <= initialPosition.x + panUnits)
         {
             transform.position = new Vector3(transform.position.x + panSpeed, initialPosition.y, initialPosition.z);
             yield return null;
         }
-        transform.position = new Vector3(transform.position.x - panUnits, initialPosition.y, initialPosition.z);
+        transform.position = new Vector3(initialPosition.x + panUnits, initialPosition.y, initialPosition.z);
     }
 
     IEnumerator PanLeft(Vector3 initialPosition)
@@ -43,6 +43,6 @@ public class CameraMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x - panSpeed, initialPosition.y, initialPosition.z);
             yield return null;
         }
-        transform.position = new Vector3(transform.position.x - panUnits, initialPosition.y, initialPosition.z);
+        transform.position = new Vector3(initialPosition.x - panUnits, initialPosition.y, initialPosition.z);
     }
 }
