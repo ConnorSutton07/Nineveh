@@ -95,9 +95,8 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= healthDamage;
         currentPosture += postureDamage;
-        print(currentHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 || state == State.STUNNED)
         {
             Die();
         }
@@ -145,7 +144,6 @@ public class Enemy : MonoBehaviour
 
         if (state == State.BLOCKING)
         {
-            print("Here");
             state = State.DEFAULT;
             animator.SetInteger("AnimState", 0);
         }

@@ -7,7 +7,8 @@ enum State
     DEAD,
     DEFAULT,
     BLOCKING,
-    STUNNED
+    STUNNED,
+    DASHING
 };
 
 public class Bandit : MonoBehaviour
@@ -22,6 +23,9 @@ public class Bandit : MonoBehaviour
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] int attackDamage = 20;
     [SerializeField] float stunnedAmplifier = 1.2f;
+    [SerializeField] float dashTime;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashCooldownLength;
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
@@ -32,7 +36,7 @@ public class Bandit : MonoBehaviour
     private bool m_grounded = false;
     private bool m_combatIdle = false;
     private bool m_isDead = false;
-
+    
     public GameObject healthSlider;
     public GameObject healthYellow;
     public GameObject postureSlider;
@@ -48,7 +52,8 @@ public class Bandit : MonoBehaviour
     int currentPosture;
     float attackCooldown = 0f;
     Transform raycastOrigin;
-    float blockStart;
+    private float blockStart;
+    private float dashCooldown;
     private float healthPercentage = 1f;
     private float posturePercentage = 0f;
 
@@ -78,7 +83,6 @@ public class Bandit : MonoBehaviour
         state = State.DEFAULT;
         blockStart = 0f;
         updatePostureBar();
-
     }
 
     #endregion
@@ -89,7 +93,7 @@ public class Bandit : MonoBehaviour
     void Update()
     {
         if (currentHealth < 0) state = State.DEAD;
-        if (state == State.DEAD || state == State.STUNNED) return;
+        if (state == State.DEAD || state == State.STUNNED || state == State.DASHING) return;
         state = State.DEFAULT;
 
         float currentBlockFrames = blockStart;
@@ -119,7 +123,7 @@ public class Bandit : MonoBehaviour
         m_animator.SetFloat("AirSpeed", m_body2d.velocity.y); // Set AirSpeed in animator
 
         // -- Handle Animations --
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && Time.time >= attackCooldown) //--- Attack
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && CanAttack()) //--- Attack
         {
             m_animator.SetTrigger("Attack");
             startAttackCooldown();
@@ -131,6 +135,10 @@ public class Bandit : MonoBehaviour
             m_animator.SetBool("Grounded", m_grounded);
             m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
             m_groundSensor.Disable(0.2f);
+        }
+        else if (Input.GetKeyDown("x") && CanDash())
+        {
+            Dash();
         }
         else if (Mathf.Abs(inputX) > Mathf.Epsilon) //-------------------------------------------------- Run
         {
@@ -190,6 +198,29 @@ public class Bandit : MonoBehaviour
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    void Dash()
+    {
+        int direction = -1 * (int)transform.localScale.x;
+        float initialY = transform.position.y;
+        state = State.DASHING;
+        dashCooldown = Time.time + dashCooldownLength;
+        gameObject.layer = Constants.GHOST_LAYER;
+
+        StartCoroutine(EnterDash(Time.time, direction, initialY));
+    }
+
+    IEnumerator EnterDash(float startTime, int direction, float initialY)
+    {
+        while (Time.time - startTime < dashTime)
+        {
+            transform.position = new Vector3(transform.position.x + dashSpeed * direction, initialY);
+            yield return null;
+        }
+        // m_body2d.isKinematic = false;
+        gameObject.layer = Constants.PLAYER_LAYER;
+        state = State.DEFAULT;
     }
 
     #endregion
@@ -285,6 +316,16 @@ public class Bandit : MonoBehaviour
     public void ExitStun()
     {
         state = State.DEFAULT;
+    }
+
+    public bool CanAttack()
+    {
+        return Time.time >= attackCooldown;
+    }
+
+    public bool CanDash()
+    {
+        return Time.time >= dashCooldown;
     }
 
     public void startAttackCooldown()
