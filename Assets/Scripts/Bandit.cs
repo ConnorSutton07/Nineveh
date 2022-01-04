@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,8 +16,8 @@ public class Bandit : MonoBehaviour
 {
     #region Attributes
 
-    [SerializeField] float m_speed = 4.0f;
-    [SerializeField] float m_jumpForce = 7.5f;
+    [SerializeField] float moveSpeed = 4.0f;
+    [SerializeField] float jumpForce = 7.5f;
     [SerializeField] float deflectWindow = 0.25f;
     [SerializeField] float shiftDistance = 0.1f;
     [SerializeField] Transform attackPoint;
@@ -27,15 +28,14 @@ public class Bandit : MonoBehaviour
     [SerializeField] float dashSpeed;
     [SerializeField] float dashCooldownLength;
 
-    private Animator m_animator;
-    private Rigidbody2D m_body2d;
-    private AudioSource m_audioSource;
-    private AudioManagerBanditScript m_audioManager;
-    private Sensor_Bandit m_groundSensor;
+    private Animator animator;
+    private Rigidbody2D body;
+    private AudioSource audioSource;
+    private AudioManagerBanditScript audioManager;
+    private Sensor_Bandit groundSensor;
     private SparkEffect sparkEffect;
-    private bool m_grounded = false;
-    private bool m_combatIdle = false;
-    private bool m_isDead = false;
+    private bool grounded = false;
+    private PlayerControls controls;
     
     public GameObject healthSlider;
     public GameObject healthYellow;
@@ -66,16 +66,18 @@ public class Bandit : MonoBehaviour
 
     #region Initialization
 
-    // Use this for initialization
+    private void Awake()
+    {
+        controls = new PlayerControls();
+    }
+
     void Start()
     {
-        m_animator = GetComponent<Animator>();
-        m_body2d = GetComponent<Rigidbody2D>();
-        m_audioSource = GetComponent<AudioSource>();
-        //m_audioManager = AudioManagerBanditScript.instance;
-        m_audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
-        //m_audioManager = transform.Find("AudioManager").transform;
-        m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        animator = GetComponent<Animator>();
+        body = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
+        audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
+        groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         raycastOrigin = transform.Find("RaycastOrigin").transform;
 
@@ -101,19 +103,19 @@ public class Bandit : MonoBehaviour
         float currentBlockFrames = blockStart;
         blockStart = 0;
         
-        if (!m_grounded && m_groundSensor.State()) // Check if character just landed on the ground
+        if (!grounded && groundSensor.State()) // Check if character just landed on the ground
         { 
-            m_grounded = true;
+            grounded = true;
             canDoubleJump = true;
             PlaySound("land");
-            m_animator.SetBool("Grounded", m_grounded);
+            animator.SetBool("Grounded", grounded);
         }
         
-        if (m_grounded && !m_groundSensor.State()) // Check if character just started falling
+        if (grounded && !groundSensor.State()) // Check if character just started falling
         {
-            m_grounded = false;
+            grounded = false;
             canDoubleJump = false;
-            m_animator.SetBool("Grounded", m_grounded);
+            animator.SetBool("Grounded", grounded);
         }
 
         float inputX = Input.GetAxis("Horizontal"); // -- Handle input and movement --
@@ -123,31 +125,31 @@ public class Bandit : MonoBehaviour
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         
-        m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y); // Move
-        m_animator.SetFloat("AirSpeed", m_body2d.velocity.y); // Set AirSpeed in animator
+        body.velocity = new Vector2(inputX * moveSpeed, body.velocity.y); // Move
+        animator.SetFloat("AirSpeed", body.velocity.y); // Set AirSpeed in animator
 
         // -- Handle Animations --
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && CanAttack()) //--- Attack
         {
-            m_animator.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
             startAttackCooldown();
         }
-        else if (Input.GetKeyDown("space")) // && m_grounded) //-------------------------------------------- Jump
+        else if (Input.GetKeyDown("space")) // && grounded) //-------------------------------------------- Jump
         {
-            if (m_grounded)
+            if (grounded)
             {
-                m_animator.SetTrigger("Jump");
-                m_grounded = false;
-                m_animator.SetBool("Grounded", m_grounded);
-                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-                m_groundSensor.Disable(0.2f);
+                animator.SetTrigger("Jump");
+                grounded = false;
+                animator.SetBool("Grounded", grounded);
+                body.velocity = new Vector2(body.velocity.x, jumpForce);
+                groundSensor.Disable(0.2f);
             }
             else if (canDoubleJump)
             {
                 canDoubleJump = false;
-                m_animator.SetTrigger("Jump");
-                m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-                m_groundSensor.Disable(0.2f);
+                animator.SetTrigger("Jump");
+                body.velocity = new Vector2(body.velocity.x, jumpForce);
+                groundSensor.Disable(0.2f);
             }
 
         }
@@ -157,17 +159,17 @@ public class Bandit : MonoBehaviour
         }
         else if (Mathf.Abs(inputX) > Mathf.Epsilon) //-------------------------------------------------- Run
         {
-            m_animator.SetInteger("AnimState", 2);
+            animator.SetInteger("AnimState", 2);
         }
         else if (Input.GetKey("b")) //------------------------------------------------------------------ Combat Idle (used for block)
         {
             state = State.BLOCKING;
             blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
-            m_animator.SetInteger("AnimState", 1);
+            animator.SetInteger("AnimState", 1);
         }
         else //----------------------------------------------------------------------------------------- Idle
         {
-            m_animator.SetInteger("AnimState", 0);
+            animator.SetInteger("AnimState", 0);
         }
     }
 
@@ -199,7 +201,7 @@ public class Bandit : MonoBehaviour
 
     void Die()
     {
-        m_animator.SetTrigger("Death");
+        animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = 0;
     }
@@ -233,7 +235,7 @@ public class Bandit : MonoBehaviour
             transform.position = new Vector3(transform.position.x + dashSpeed * direction, initialY);
             yield return null;
         }
-        // m_body2d.isKinematic = false;
+        // body.isKinematic = false;
         gameObject.layer = Constants.PLAYER_LAYER;
         state = State.DEFAULT;
     }
@@ -301,14 +303,14 @@ public class Bandit : MonoBehaviour
 
         if (breakStance)
         {
-            m_animator.SetTrigger("Hurt");
+            animator.SetTrigger("Hurt");
         }
             
         if (currentHealth <= 0)
             Die();
         else if (currentPosture >= postureThreshold)
         {
-            m_animator.SetTrigger("Recover");
+            animator.SetTrigger("Recover");
             currentPosture = 0;
         }
     }
@@ -380,7 +382,7 @@ public class Bandit : MonoBehaviour
 
     public void PlaySound(string text)
     {
-        m_audioManager.PlaySound(text);
+        audioManager.PlaySound(text);
     }
 
     #endregion
