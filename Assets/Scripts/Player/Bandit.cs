@@ -9,7 +9,8 @@ enum State
     DEFAULT,
     BLOCKING,
     STUNNED,
-    DASHING
+    DASHING,
+    ATTACKING
 };
 
 public class Bandit : MonoBehaviour
@@ -56,7 +57,9 @@ public class Bandit : MonoBehaviour
     private float dashCooldown;
     private float healthPercentage = 1f;
     private float posturePercentage = 0f;
+    private float currentBlockFrames = 0f;
     private bool canDoubleJump;
+    private bool blockInput = false;
 
     // states
 
@@ -69,6 +72,13 @@ public class Bandit : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerControls();
+        controls.Gameplay.Move.performed   += ctx => Move(ctx.ReadValue<int>());
+        controls.Gameplay.Move.canceled    += ctx => Move(0);
+        controls.Gameplay.Attack.performed += ctx => BeginAttack();
+        controls.Gameplay.Jump.performed   += ctx => Jump();
+        controls.Gameplay.Dash.performed   += ctx => Dash();
+        controls.Gameplay.Block.performed  += ctx => blockInput = true;
+        controls.Gameplay.Block.canceled   += ctx => blockInput = false;
     }
 
     void Start()
@@ -118,6 +128,9 @@ public class Bandit : MonoBehaviour
             animator.SetBool("Grounded", grounded);
         }
 
+        if (blockInput) Block(currentBlockFrames);
+
+        /*
         float inputX = Input.GetAxis("Horizontal"); // -- Handle input and movement --
         if (inputX > 0) // Swap direction of sprite depending on walk direction
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
@@ -127,12 +140,12 @@ public class Bandit : MonoBehaviour
         
         body.velocity = new Vector2(inputX * moveSpeed, body.velocity.y); // Move
         animator.SetFloat("AirSpeed", body.velocity.y); // Set AirSpeed in animator
-
+        
         // -- Handle Animations --
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && CanAttack()) //--- Attack
         {
             animator.SetTrigger("Attack");
-            startAttackCooldown();
+            //startAttackCooldown();
         }
         else if (Input.GetKeyDown("space")) // && grounded) //-------------------------------------------- Jump
         {
@@ -157,6 +170,7 @@ public class Bandit : MonoBehaviour
         {
             Dash();
         }
+        /*
         else if (Mathf.Abs(inputX) > Mathf.Epsilon) //-------------------------------------------------- Run
         {
             animator.SetInteger("AnimState", 2);
@@ -171,6 +185,7 @@ public class Bandit : MonoBehaviour
         {
             animator.SetInteger("AnimState", 0);
         }
+        */
     }
 
     private void FixedUpdate()
@@ -197,7 +212,34 @@ public class Bandit : MonoBehaviour
 
     #endregion
 
-    #region Private Methods
+    #region Movement and Actions
+
+    void Move(int direction)
+    {
+        if (direction != 0) transform.localScale = new Vector3((float)direction, 1.0f, 1.0f);
+        body.velocity = new Vector2(direction * moveSpeed, body.velocity.y); 
+        if (state == State.DEFAULT) animator.SetInteger("AnimState", 2);
+    }
+
+    void Jump()
+    {
+        print("Here");
+        if (grounded)
+        {
+            animator.SetTrigger("Jump");
+            grounded = false;
+            animator.SetBool("Grounded", grounded);
+            body.velocity = new Vector2(body.velocity.x, jumpForce);
+            groundSensor.Disable(0.2f);
+        }
+        else if (canDoubleJump)
+        {
+            canDoubleJump = false;
+            animator.SetTrigger("Jump");
+            body.velocity = new Vector2(body.velocity.x, jumpForce);
+            groundSensor.Disable(0.2f);
+        }
+    }
 
     void Die()
     {
@@ -205,6 +247,54 @@ public class Bandit : MonoBehaviour
         state = State.DEAD;
         gameObject.layer = 0;
     }
+
+    void Dash()
+    {
+        if (CanDash())
+        {
+            int direction = -1 * (int)transform.localScale.x;
+            float initialY = transform.position.y;
+            state = State.DASHING;
+            dashCooldown = Time.time + dashCooldownLength;
+            gameObject.layer = Constants.GHOST_LAYER;
+            StartCoroutine(EnterDash(Time.time, direction, initialY));
+        }
+    }
+
+    void BeginAttack()
+    {
+        if (CanAttack())
+        {
+            animator.SetTrigger("Attack");
+            StartAttackCooldown();
+        }
+    }
+
+    void Block(float currentBlockFrames)
+    {
+        state = State.BLOCKING;
+        blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
+        animator.SetInteger("AnimState", 1);
+    }
+
+    #endregion
+
+    #region Coroutines
+
+    IEnumerator EnterDash(float startTime, int direction, float initialY)
+    {
+        while (Time.time - startTime < dashTime)
+        {
+            transform.position = new Vector3(transform.position.x + dashSpeed * direction, initialY);
+            yield return null;
+        }
+        gameObject.layer = Constants.PLAYER_LAYER;
+        state = State.DEFAULT;
+    }
+
+    #endregion
+
+    #region Private Methods
 
     void RaycastDebugger(Vector3 dir)
     {
@@ -217,29 +307,6 @@ public class Bandit : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    void Dash()
-    {
-        int direction = -1 * (int)transform.localScale.x;
-        float initialY = transform.position.y;
-        state = State.DASHING;
-        dashCooldown = Time.time + dashCooldownLength;
-        gameObject.layer = Constants.GHOST_LAYER;
-
-        StartCoroutine(EnterDash(Time.time, direction, initialY));
-    }
-
-    IEnumerator EnterDash(float startTime, int direction, float initialY)
-    {
-        while (Time.time - startTime < dashTime)
-        {
-            transform.position = new Vector3(transform.position.x + dashSpeed * direction, initialY);
-            yield return null;
-        }
-        // body.isKinematic = false;
-        gameObject.layer = Constants.PLAYER_LAYER;
-        state = State.DEFAULT;
-    }
-
     #endregion
 
     #region Public Methods
@@ -248,6 +315,7 @@ public class Bandit : MonoBehaviour
     {
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        state = State.ATTACKING;
 
         if (hitEnemies.Length == 0) PlaySound("sword_miss");
 
@@ -255,12 +323,12 @@ public class Bandit : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
-            
+
             if (enemyScript.isBlocking())
             {
                 if (Random.Range(0f, 1f) < 0.33f)
                 {
-                    startAttackCooldown();
+                    StartAttackCooldown();
                     EmitDeflectedParticles();
                     enemyScript.SuccesfulDeflect();
                     PlaySound("deflect");
@@ -301,18 +369,22 @@ public class Bandit : MonoBehaviour
         updateHealthBar();
         updatePostureBar();
 
-        if (breakStance)
-        {
-            animator.SetTrigger("Hurt");
-        }
-            
+        if (breakStance) animator.SetTrigger("Hurt");
+
         if (currentHealth <= 0)
+        {
             Die();
+        }
         else if (currentPosture >= postureThreshold)
         {
             animator.SetTrigger("Recover");
             currentPosture = 0;
         }
+    }
+
+    public void StartAttackCooldown()
+    {
+        attackCooldown = Time.time + attackRate;
     }
 
     public bool isDead()
@@ -325,16 +397,6 @@ public class Bandit : MonoBehaviour
         return state == State.BLOCKING;
     }
 
-    public void EnterStun()
-    {
-        state = State.STUNNED;
-    }
-
-    public void ExitStun()
-    {
-        state = State.DEFAULT;
-    }
-
     public bool CanAttack()
     {
         return Time.time >= attackCooldown;
@@ -343,11 +405,6 @@ public class Bandit : MonoBehaviour
     public bool CanDash()
     {
         return Time.time >= dashCooldown;
-    }
-
-    public void startAttackCooldown()
-    {
-        attackCooldown = Time.time + attackRate;
     }
 
     public bool isDeflect()
@@ -367,7 +424,7 @@ public class Bandit : MonoBehaviour
 
     public void EmitDeflectParticles()
     {
-        sparkEffect.EmitDeflectSparks(); // i think this could just be a more intense version of the block particles
+        sparkEffect.EmitDeflectSparks(); 
     }
 
     public void EmitAttackParticles()
@@ -383,6 +440,20 @@ public class Bandit : MonoBehaviour
     public void PlaySound(string text)
     {
         audioManager.PlaySound(text);
+    }
+
+    #endregion
+
+    #region Trigger State
+
+    public void EnterStun()
+    {
+        state = State.STUNNED;
+    }
+
+    public void ExitState()
+    {
+        state = State.DEFAULT;
     }
 
     #endregion

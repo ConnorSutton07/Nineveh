@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recover : StateMachineBehaviour
+public class Attack : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,9 +20,7 @@ public class Recover : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (animator.gameObject.name == "Player")
-            animator.gameObject.GetComponent<Bandit>().ExitStun();
-        else
-            animator.gameObject.GetComponent<Enemy>().ExitStun();
+            animator.gameObject.GetComponent<Bandit>().ExitState();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
