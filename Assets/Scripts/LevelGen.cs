@@ -53,12 +53,6 @@ public class LevelGen : MonoBehaviour
         };
         Generate();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
 
 public abstract class Section : MonoBehaviour

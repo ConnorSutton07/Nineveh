@@ -360,6 +360,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1440631793206868783, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
   m_PrefabInstance: {fileID: 1658477381}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &525880081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1182497253661175514, guid: acea72d430d65314b9c510667a653e44, type: 3}
+  m_PrefabInstance: {fileID: 1183356046884593267}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &525880087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525880081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3f6fcd6757941584c9444b387c9fa714, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cfd1f4bd-62f3-409c-9cef-88ff7e2e1425
+    m_ActionName: Gameplay/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ed85cd6-3e4c-41ef-a9b0-d4ea378d6ee3
+    m_ActionName: Gameplay/Move[/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c89f65eb-d481-479f-bd5b-444a8a9d13a5
+    m_ActionName: Gameplay/Attack[/Keyboard/g,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cb6eac0-69f3-466e-8f02-f5477b116163
+    m_ActionName: Gameplay/Dash[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26d3fc14-d575-43da-8e4b-55138b870dd4
+    m_ActionName: Gameplay/Block[/Keyboard/b]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Gamepad
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &864047218
 GameObject:
   m_ObjectHideFlags: 0

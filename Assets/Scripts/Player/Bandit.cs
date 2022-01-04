@@ -36,7 +36,7 @@ public class Bandit : MonoBehaviour
     private Sensor_Bandit groundSensor;
     private SparkEffect sparkEffect;
     private bool grounded = false;
-    private PlayerControls controls;
+    private PlayerInput controls;
     
     public GameObject healthSlider;
     public GameObject healthYellow;
@@ -53,6 +53,7 @@ public class Bandit : MonoBehaviour
     int currentPosture;
     float attackCooldown = 0f;
     Transform raycastOrigin;
+    private float moveDirection;
     private float blockStart;
     private float dashCooldown;
     private float healthPercentage = 1f;
@@ -60,26 +61,13 @@ public class Bandit : MonoBehaviour
     private float currentBlockFrames = 0f;
     private bool canDoubleJump;
     private bool blockInput = false;
-
-    // states
+    private bool moveInput = false;
 
     State state;
 
     #endregion
 
     #region Initialization
-
-    private void Awake()
-    {
-        controls = new PlayerControls();
-        controls.Gameplay.Move.performed   += ctx => Move(ctx.ReadValue<int>());
-        controls.Gameplay.Move.canceled    += ctx => Move(0);
-        controls.Gameplay.Attack.performed += ctx => BeginAttack();
-        controls.Gameplay.Jump.performed   += ctx => Jump();
-        controls.Gameplay.Dash.performed   += ctx => Dash();
-        controls.Gameplay.Block.performed  += ctx => blockInput = true;
-        controls.Gameplay.Block.canceled   += ctx => blockInput = false;
-    }
 
     void Start()
     {
@@ -108,7 +96,7 @@ public class Bandit : MonoBehaviour
     {
         if (currentHealth < 0) state = State.DEAD;
         if (state == State.DEAD || state == State.STUNNED || state == State.DASHING) return;
-        state = State.DEFAULT;
+        //state = State.DEFAULT;
 
         float currentBlockFrames = blockStart;
         blockStart = 0;
@@ -128,7 +116,24 @@ public class Bandit : MonoBehaviour
             animator.SetBool("Grounded", grounded);
         }
 
-        if (blockInput) Block(currentBlockFrames);
+        if (blockInput)
+        {
+            if (grounded) StopMovement();
+            Block(currentBlockFrames);
+        }
+        else if (moveInput && state == State.DEFAULT)
+        {
+            transform.localScale = new Vector3(-moveDirection, 1.0f, 1.0f);
+            body.velocity = new Vector2(moveDirection * moveSpeed, body.velocity.y);
+            animator.SetInteger("AnimState", 2);
+        }
+        else
+        {
+            animator.SetInteger("AnimState", 0);
+            StopMovement();
+        }
+        //if (state == State.DEFAULT) animator.SetInteger("AnimState", 0);
+
 
         /*
         float inputX = Input.GetAxis("Horizontal"); // -- Handle input and movement --
@@ -207,23 +212,25 @@ public class Bandit : MonoBehaviour
     {
         posturePercentage = (float)currentPosture / postureThreshold;
         postureSlider.transform.localScale = new Vector3(posturePercentage, 1f, 1f);
-        
     }
 
     #endregion
 
     #region Movement and Actions
 
-    void Move(int direction)
+    void OnMove(InputValue value)
     {
-        if (direction != 0) transform.localScale = new Vector3((float)direction, 1.0f, 1.0f);
-        body.velocity = new Vector2(direction * moveSpeed, body.velocity.y); 
-        if (state == State.DEFAULT) animator.SetInteger("AnimState", 2);
+        moveDirection = value.Get<float>();
+        moveInput = true;
     }
 
-    void Jump()
+    void OnStopMoving()
     {
-        print("Here");
+        moveInput = false;
+    }
+
+    void OnJump()
+    {
         if (grounded)
         {
             animator.SetTrigger("Jump");
@@ -248,7 +255,7 @@ public class Bandit : MonoBehaviour
         gameObject.layer = 0;
     }
 
-    void Dash()
+    void OnDash()
     {
         if (CanDash())
         {
@@ -261,20 +268,37 @@ public class Bandit : MonoBehaviour
         }
     }
 
-    void BeginAttack()
+    void OnAttack()
     {
         if (CanAttack())
         {
+            state = State.ATTACKING;
             animator.SetTrigger("Attack");
             StartAttackCooldown();
         }
     }
+
+    void OnBlock()
+    {
+        blockInput = true;
+    }
+
+    void OnExitBlock()
+    {
+        blockInput = false;
+        ExitConditionally();
+    }    
 
     void Block(float currentBlockFrames)
     {
         state = State.BLOCKING;
         blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
         animator.SetInteger("AnimState", 1);
+    }
+
+    void StopMovement()
+    {
+        body.velocity = new Vector2(0f, body.velocity.y);
     }
 
     #endregion
@@ -315,7 +339,6 @@ public class Bandit : MonoBehaviour
     {
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        state = State.ATTACKING;
 
         if (hitEnemies.Length == 0) PlaySound("sword_miss");
 
@@ -399,12 +422,17 @@ public class Bandit : MonoBehaviour
 
     public bool CanAttack()
     {
-        return Time.time >= attackCooldown;
+        return Time.time >= attackCooldown && !Suspended();
     }
 
     public bool CanDash()
     {
-        return Time.time >= dashCooldown;
+        return Time.time >= dashCooldown && !Suspended();
+    }
+
+    public bool Suspended()
+    {
+        return state == State.DEAD || state == State.STUNNED || state == State.DASHING;
     }
 
     public bool isDeflect()
@@ -451,7 +479,12 @@ public class Bandit : MonoBehaviour
         state = State.STUNNED;
     }
 
-    public void ExitState()
+    public void ExitConditionally()
+    {
+        if (!Suspended()) state = State.DEFAULT;
+    }
+
+    public void ExitStun()
     {
         state = State.DEFAULT;
     }
