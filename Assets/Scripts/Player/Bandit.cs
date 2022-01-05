@@ -59,9 +59,10 @@ public class Bandit : MonoBehaviour
     private float healthPercentage = 1f;
     private float posturePercentage = 0f;
     private float currentBlockFrames = 0f;
-    private bool canDoubleJump;
+    private bool canDoubleJump = true;
     private bool blockInput = false;
     private bool moveInput = false;
+    private bool canAirDash = true;
 
     State state;
 
@@ -83,7 +84,6 @@ public class Bandit : MonoBehaviour
         currentHealth = maxHealth;
         state = State.DEFAULT;
         blockStart = 0f;
-        canDoubleJump = true;
         updatePostureBar();
     }
 
@@ -94,9 +94,8 @@ public class Bandit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth < 0) state = State.DEAD;
-        if (state == State.DEAD || state == State.STUNNED || state == State.DASHING) return;
-        //state = State.DEFAULT;
+        if (currentHealth < 0) Die();
+        if (Suspended()) return;
 
         float currentBlockFrames = blockStart;
         blockStart = 0;
@@ -104,6 +103,7 @@ public class Bandit : MonoBehaviour
         if (!grounded && groundSensor.State()) // Check if character just landed on the ground
         { 
             grounded = true;
+            canAirDash = true;
             canDoubleJump = true;
             PlaySound("land");
             animator.SetBool("Grounded", grounded);
@@ -123,8 +123,9 @@ public class Bandit : MonoBehaviour
         }
         else if (moveInput && state == State.DEFAULT)
         {
-            transform.localScale = new Vector3(-moveDirection, 1.0f, 1.0f);
-            body.velocity = new Vector2(moveDirection * moveSpeed, body.velocity.y);
+            float unitDirection = (moveDirection / Mathf.Abs(moveDirection));
+            transform.localScale = new Vector3(-unitDirection, 1.0f, 1.0f);
+            body.velocity = new Vector2(unitDirection * moveSpeed, body.velocity.y);
             animator.SetInteger("AnimState", 2);
         }
         else
@@ -132,65 +133,6 @@ public class Bandit : MonoBehaviour
             animator.SetInteger("AnimState", 0);
             StopMovement();
         }
-        //if (state == State.DEFAULT) animator.SetInteger("AnimState", 0);
-
-
-        /*
-        float inputX = Input.GetAxis("Horizontal"); // -- Handle input and movement --
-        if (inputX > 0) // Swap direction of sprite depending on walk direction
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (inputX < 0)
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-        
-        body.velocity = new Vector2(inputX * moveSpeed, body.velocity.y); // Move
-        animator.SetFloat("AirSpeed", body.velocity.y); // Set AirSpeed in animator
-        
-        // -- Handle Animations --
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown("g")) && CanAttack()) //--- Attack
-        {
-            animator.SetTrigger("Attack");
-            //startAttackCooldown();
-        }
-        else if (Input.GetKeyDown("space")) // && grounded) //-------------------------------------------- Jump
-        {
-            if (grounded)
-            {
-                animator.SetTrigger("Jump");
-                grounded = false;
-                animator.SetBool("Grounded", grounded);
-                body.velocity = new Vector2(body.velocity.x, jumpForce);
-                groundSensor.Disable(0.2f);
-            }
-            else if (canDoubleJump)
-            {
-                canDoubleJump = false;
-                animator.SetTrigger("Jump");
-                body.velocity = new Vector2(body.velocity.x, jumpForce);
-                groundSensor.Disable(0.2f);
-            }
-
-        }
-        else if (Input.GetKeyDown("x") && CanDash())
-        {
-            Dash();
-        }
-        /*
-        else if (Mathf.Abs(inputX) > Mathf.Epsilon) //-------------------------------------------------- Run
-        {
-            animator.SetInteger("AnimState", 2);
-        }
-        else if (Input.GetKey("b")) //------------------------------------------------------------------ Combat Idle (used for block)
-        {
-            state = State.BLOCKING;
-            blockStart = (currentBlockFrames > 0) ? currentBlockFrames : Time.time;
-            animator.SetInteger("AnimState", 1);
-        }
-        else //----------------------------------------------------------------------------------------- Idle
-        {
-            animator.SetInteger("AnimState", 0);
-        }
-        */
     }
 
     private void FixedUpdate()
@@ -243,6 +185,7 @@ public class Bandit : MonoBehaviour
         else if (canDoubleJump)
         {
             canDoubleJump = false;
+            canAirDash = true;
             animator.SetTrigger("Jump");
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             groundSensor.Disable(0.2f);
@@ -265,6 +208,7 @@ public class Bandit : MonoBehaviour
             state = State.DASHING;
             dashCooldown = Time.time + dashCooldownLength;
             gameObject.layer = Constants.GHOST_LAYER;
+            if (!grounded) canAirDash = false;
             StartCoroutine(EnterDash(Time.time, direction, initialY));
         }
     }
@@ -348,7 +292,7 @@ public class Bandit : MonoBehaviour
         {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
 
-            if (enemyScript.isBlocking())
+            if (enemyScript.isBlocking() && transform.localScale.x != enemyScript.gameObject.transform.localScale.x)
             {
                 if (Random.Range(0f, 1f) < 0.33f)
                 {
@@ -428,7 +372,7 @@ public class Bandit : MonoBehaviour
 
     public bool CanDash()
     {
-        return Time.time >= dashCooldown && !Suspended();
+        return Time.time >= dashCooldown && !Suspended() && (grounded || canAirDash);
     }
 
     public bool Suspended()
@@ -478,6 +422,11 @@ public class Bandit : MonoBehaviour
     public void EnterStun()
     {
         state = State.STUNNED;
+    }
+
+    public void EnterAttack()
+    {
+        state = State.ATTACKING;
     }
 
     public void ExitConditionally()

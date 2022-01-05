@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
 
     bool InRange()
     {
-        return movementScript.FindPlayer(ref playerScript, ref player);
+        return movementScript.FindPlayer(ref playerScript, ref player, ref animator);
     }
 
     #endregion

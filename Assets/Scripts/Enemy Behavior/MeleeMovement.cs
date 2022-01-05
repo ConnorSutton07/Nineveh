@@ -7,14 +7,14 @@ public class MeleeMovement : MonoBehaviour
     public float awareDistance;
     public float moveSpeed;
 
-    public bool FindPlayer(ref Bandit playerScript, ref Transform player)
+    public bool FindPlayer(ref Bandit playerScript, ref Transform player, ref Animator animator)
     {
         bool inRange = false;
         if (Mathf.Abs(player.position.x - transform.position.x) <= awareDistance)
         {
             inRange = !playerScript.isDead(); // do not attack if player is dead
 
-            if (transform.position.x > player.position.x)
+            if (transform.position.x > player.position.x && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             else
                 transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
