@@ -20,7 +20,7 @@ public class MeleeCombat : MonoBehaviour
         // Damage them
         if (hitEnemies.Length > 0)
         {
-            if (playerScript.isBlocking())
+            if (playerScript.isBlocking() && playerScript.transform.localScale.x != transform.localScale.x)
             {
                 if (playerScript.isDeflect())
                 {
