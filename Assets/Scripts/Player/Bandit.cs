@@ -28,6 +28,7 @@ public class Bandit : MonoBehaviour
     [SerializeField] float dashTime;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashCooldownLength;
+    [SerializeField] float blockCooldownLength;
 
     private Animator animator;
     private Rigidbody2D body;
@@ -56,6 +57,7 @@ public class Bandit : MonoBehaviour
     private float moveDirection;
     private float blockStart;
     private float dashCooldown;
+    private float blockEnd;
     private float healthPercentage = 1f;
     private float posturePercentage = 0f;
     private float currentBlockFrames = 0f;
@@ -63,6 +65,7 @@ public class Bandit : MonoBehaviour
     private bool blockInput = false;
     private bool moveInput = false;
     private bool canAirDash = true;
+
 
     State state;
 
@@ -84,6 +87,7 @@ public class Bandit : MonoBehaviour
         currentHealth = maxHealth;
         state = State.DEFAULT;
         blockStart = 0f;
+        blockEnd = -blockCooldownLength;
         updatePostureBar();
     }
 
@@ -116,7 +120,7 @@ public class Bandit : MonoBehaviour
             animator.SetBool("Grounded", grounded);
         }
 
-        if (blockInput)
+        if (blockInput && CanBlock())
         {
             if (grounded) StopMovement();
             Block(currentBlockFrames);
@@ -131,7 +135,7 @@ public class Bandit : MonoBehaviour
         else
         {
             animator.SetInteger("AnimState", 0);
-            StopMovement();
+            if (grounded) StopMovement();
         }
     }
 
@@ -231,7 +235,12 @@ public class Bandit : MonoBehaviour
     void OnExitBlock()
     {
         blockInput = false;
-        ExitConditionally();
+        if (state == State.BLOCKING)
+        {
+            StartBlockCooldown();
+            ExitConditionally();
+        }
+
     }    
 
     void Block(float currentBlockFrames)
@@ -355,6 +364,11 @@ public class Bandit : MonoBehaviour
         attackCooldown = Time.time + attackRate;
     }
 
+    public void StartBlockCooldown()
+    {
+        blockEnd = Time.time;
+    }
+
     public bool isDead()
     {
         return state == State.DEAD;
@@ -368,6 +382,11 @@ public class Bandit : MonoBehaviour
     public bool CanAttack()
     {
         return Time.time >= attackCooldown && !Suspended();
+    }
+
+    public bool CanBlock()
+    {
+        return Time.time >= blockCooldownLength + blockEnd;
     }
 
     public bool CanDash()

@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     private MeleeCombat combatScript;
     private MeleeMovement movementScript;
     private bool successfulDeflect = false;
+    private float prevDirection;
 
     State state;
     Bandit playerScript;
@@ -55,6 +56,7 @@ public class Enemy : MonoBehaviour
         currentPosture = 0;
         attackCooldown = 0f;
         state = State.DEFAULT;
+        prevDirection = transform.localScale.x;
     }
 
     #endregion
@@ -84,7 +86,9 @@ public class Enemy : MonoBehaviour
 
     bool InRange()
     {
-        return movementScript.FindPlayer(ref playerScript, ref player, ref animator);
+        bool inRange = false;
+        (inRange, prevDirection) = movementScript.FindPlayer(ref playerScript, ref player, ref animator, prevDirection);
+        return inRange;
     }
 
     #endregion

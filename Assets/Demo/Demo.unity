@@ -1102,6 +1102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1183356048232590789, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.38
+      objectReference: {fileID: 0}
     - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1159,6 +1163,10 @@ PrefabInstance:
       value: 0.018
       objectReference: {fileID: 0}
     - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: attackRange
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_jumpForce
       value: 7
       objectReference: {fileID: 0}
@@ -1178,6 +1186,14 @@ PrefabInstance:
       propertyPath: postureSlider
       value: 
       objectReference: {fileID: 76510573}
+    - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: dashCooldownLength
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: blockCooldownLength
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acea72d430d65314b9c510667a653e44, type: 3}
 --- !u!4 &1183356046884593268 stripped
@@ -1199,6 +1215,10 @@ PrefabInstance:
     - target: {fileID: 1434735538674771885, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436424746575073134, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
+      propertyPath: attackRange
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 1440631793206868783, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
       propertyPath: m_RootOrder
@@ -1243,6 +1263,10 @@ PrefabInstance:
     - target: {fileID: 1440631793206868783, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6707923284739050073, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dafea051a91c2342ad02dcf87273013, type: 3}
