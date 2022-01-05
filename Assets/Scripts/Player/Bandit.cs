@@ -231,6 +231,7 @@ public class Bandit : MonoBehaviour
 
     void OnJump()
     {
+        if (Suspended()) return;
         if (grounded)
         {
             animator.SetTrigger("Jump");
