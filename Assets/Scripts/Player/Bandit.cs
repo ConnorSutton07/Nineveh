@@ -221,7 +221,6 @@ public class Bandit : MonoBehaviour
     {
         if (CanAttack())
         {
-            state = State.ATTACKING;
             animator.SetTrigger("Attack");
             StartAttackCooldown();
         }
