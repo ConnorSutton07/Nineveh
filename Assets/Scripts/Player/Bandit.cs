@@ -262,7 +262,7 @@ public class Bandit : MonoBehaviour
     {
         while (Time.time - startTime < dashTime)
         {
-            transform.position = new Vector3(transform.position.x + dashSpeed * direction, initialY);
+            transform.position = new Vector3(transform.position.x + dashSpeed * direction * Time.deltaTime, initialY);
             yield return null;
         }
         gameObject.layer = Constants.PLAYER_LAYER;
