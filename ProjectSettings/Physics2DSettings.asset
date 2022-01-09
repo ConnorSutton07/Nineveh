@@ -40,8 +40,8 @@ Physics2DSettings:
     m_IslandSolverContactsPerJob: 50
   m_SimulationMode: 0
   m_QueriesHitTriggers: 1
-  m_QueriesStartInColliders: 1
-  m_CallbacksOnDisable: 1
+  m_QueriesStartInColliders: 0
+  m_CallbacksOnDisable: 0
   m_ReuseCollisionCallbacks: 1
   m_AutoSyncTransforms: 0
   m_AlwaysShowColliders: 0
