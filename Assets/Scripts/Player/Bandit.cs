@@ -96,8 +96,14 @@ public class Bandit : MonoBehaviour
     #region Update
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (healthYellow.transform.localScale.x > healthSlider.transform.localScale.x)
+        {
+            healthYellow.transform.localScale = new Vector3((healthYellow.transform.localScale.x) - .01f, 1f, 1f);
+        }
+
+
         if (currentHealth < 0) Die();
         if (Suspended()) return;
 
@@ -139,13 +145,7 @@ public class Bandit : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (healthYellow.transform.localScale.x > healthSlider.transform.localScale.x)
-        {
-            healthYellow.transform.localScale = new Vector3((healthYellow.transform.localScale.x) - .01f, 1f, 1f);
-        }
-    }
+
 
     private void updateHealthBar()
     {

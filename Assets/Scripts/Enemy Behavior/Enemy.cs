@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     private bool successfulDeflect = false;
     private float prevDirection;
 
+
     State state;
     Bandit playerScript;
     int currentHealth;
@@ -72,7 +73,11 @@ public class Enemy : MonoBehaviour
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, player.position);
-        if (distance > attackDistance)
+        if (movementScript.EnemyInBetween())
+        {
+            AttemptBlock(true, 0.25f);
+        }
+        else if (distance > attackDistance)
         {
             Move();
         }
@@ -126,13 +131,13 @@ public class Enemy : MonoBehaviour
         TakeDamage(0, postureDamage);
     }
 
-    public void AttemptBlock(bool forceSucess = false)
+    public void AttemptBlock(bool forceSucess = false, float duration = -1f)
     {
         if (forceSucess || (canBlock && state == State.DEFAULT && Random.Range(0f, 1f) < blockChance))
         {
             animator.SetInteger("AnimState", 1);
             state = State.BLOCKING;
-            float duration = Random.Range(minBlockTime, maxBlockTime);
+            if (duration == -1) duration = Random.Range(minBlockTime, maxBlockTime);
             StartCoroutine(EnterBlockingState(Time.time, duration));
         }
     }
@@ -149,7 +154,7 @@ public class Enemy : MonoBehaviour
         if (state == State.BLOCKING)
         {
             state = State.DEFAULT;
-            animator.SetInteger("AnimState", 0);
+            //animator.SetInteger("AnimState", 0);
         }
     }
 
