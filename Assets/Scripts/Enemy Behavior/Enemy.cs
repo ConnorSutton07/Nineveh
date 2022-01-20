@@ -67,7 +67,8 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         if (state != State.DEFAULT) return;
-        if (InRange()) EnemyLogic();   
+        if (InRange()) EnemyLogic();
+        else animator.SetInteger("AnimState", 1);
     }
 
     void EnemyLogic()
