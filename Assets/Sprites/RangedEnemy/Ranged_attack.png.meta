@@ -1,31 +1,49 @@
 fileFormatVersion: 2
-guid: 9eefcd5baee2b3241a405c74de63e533
+guid: 71d9d2fd3fc579040ba4b60c5c6fe36f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2094173765588758402
-    second: spr_ArcherIdle_strip_NoBkg_0
+      213: -5674585499602805736
+    second: Ranged_attack_0
   - first:
-      213: 6186148728254529291
-    second: spr_ArcherIdle_strip_NoBkg_1
+      213: -389631085165172976
+    second: Ranged_attack_1
   - first:
-      213: -8566011410936821065
-    second: spr_ArcherIdle_strip_NoBkg_2
+      213: 2265325437658893910
+    second: Ranged_attack_2
   - first:
-      213: 6682560192602085873
-    second: spr_ArcherIdle_strip_NoBkg_3
+      213: 9091534030219967970
+    second: Ranged_attack_3
   - first:
-      213: 8958829500029004487
-    second: spr_ArcherIdle_strip_NoBkg_4
+      213: 869442179965273414
+    second: Ranged_attack_4
   - first:
-      213: -7083488126287164150
-    second: spr_ArcherIdle_strip_NoBkg_5
+      213: -1266213029735196347
+    second: Ranged_attack_5
   - first:
-      213: 491904992813365871
-    second: spr_ArcherIdle_strip_NoBkg_6
+      213: 2166023091510524562
+    second: Ranged_attack_6
   - first:
-      213: -806107622674688865
-    second: spr_ArcherIdle_strip_NoBkg_7
+      213: 7738360787422467468
+    second: Ranged_attack_7
+  - first:
+      213: 8415971048296244127
+    second: Ranged_attack_8
+  - first:
+      213: -7025582073166671962
+    second: Ranged_attack_9
+  - first:
+      213: -8195977205116380039
+    second: Ranged_attack_10
+  - first:
+      213: 3757266242469098984
+    second: Ranged_attack_11
+  - first:
+      213: -1670305961961687399
+    second: Ranged_attack_12
+  - first:
+      213: 8294885273627559261
+    second: Ranged_attack_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,18 +130,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,12 +145,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_0
+      name: Ranged_attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -153,19 +159,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28f2cd3c1ffff0d10800000000000000
-      internalID: 2094173765588758402
+      spriteID: 81c9798ad82df31b0800000000000000
+      internalID: -5674585499602805736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_1
+      name: Ranged_attack_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 180
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -174,19 +180,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0f78532e7d99d550800000000000000
-      internalID: 6186148728254529291
+      spriteID: 017a747a790c79af0800000000000000
+      internalID: -389631085165172976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_2
+      name: Ranged_attack_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 360
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -195,19 +201,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ba0b25a10a6f1980800000000000000
-      internalID: -8566011410936821065
+      spriteID: 65e805cbb7d007f10800000000000000
+      internalID: 2265325437658893910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_3
+      name: Ranged_attack_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 540
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -216,19 +222,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f99636e6193dbc50800000000000000
-      internalID: 6682560192602085873
+      spriteID: 2edf2ae080e9b2e70800000000000000
+      internalID: 9091534030219967970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_4
+      name: Ranged_attack_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 720
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -237,19 +243,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cae480e6f7245c70800000000000000
-      internalID: 8958829500029004487
+      spriteID: 64542916e01e01c00800000000000000
+      internalID: 869442179965273414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_5
+      name: Ranged_attack_5
       rect:
         serializedVersion: 2
-        x: 640
+        x: 900
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -258,19 +264,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0dc4fd341562bd90800000000000000
-      internalID: -7083488126287164150
+      spriteID: 54999a845f18d6ee0800000000000000
+      internalID: -1266213029735196347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_6
+      name: Ranged_attack_6
       rect:
         serializedVersion: 2
-        x: 768
+        x: 1080
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -279,19 +285,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6ab1e71cf893d600800000000000000
-      internalID: 491904992813365871
+      spriteID: 29a37c096824f0e10800000000000000
+      internalID: 2166023091510524562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_ArcherIdle_strip_NoBkg_7
+      name: Ranged_attack_7
       rect:
         serializedVersion: 2
-        x: 896
+        x: 1260
         y: 0
-        width: 128
+        width: 180
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -300,8 +306,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f949dbb536120d4f0800000000000000
-      internalID: -806107622674688865
+      spriteID: c85d026f22e246b60800000000000000
+      internalID: 7738360787422467468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ranged_attack_8
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 180
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f936ba524198bc470800000000000000
+      internalID: 8415971048296244127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ranged_attack_9
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 0
+        width: 180
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6af4c8cd35e108e90800000000000000
+      internalID: -7025582073166671962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ranged_attack_10
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 180
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97cd6d5f72a024e80800000000000000
+      internalID: -8195977205116380039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ranged_attack_11
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 0
+        width: 180
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e5ffec9dbd742430800000000000000
+      internalID: 3757266242469098984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ranged_attack_12
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 0
+        width: 180
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9967e07c391e1d8e0800000000000000
+      internalID: -1670305961961687399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ranged_attack_13
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 0
+        width: 180
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d55803b453a5d1370800000000000000
+      internalID: 8294885273627559261
       vertices: []
       indices: 
       edges: []
