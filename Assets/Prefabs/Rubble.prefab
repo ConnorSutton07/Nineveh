@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6747011463042785828}
   - component: {fileID: 1970213733990168676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}

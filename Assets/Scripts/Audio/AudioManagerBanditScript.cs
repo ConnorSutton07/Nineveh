@@ -27,9 +27,12 @@ public class Sound2
             m_source.clip = m_clips[randomClip];
         }
         //add some noise to volume and pitch of sounds
-        m_source.volume = 1.0f + Random.Range(-volumeNoise, volumeNoise); // Random.Range(1 - noiseMagnitude, 1 + noiseMagnitude);
+        //m_source.volume = 1.0f + Random.Range(-volumeNoise, volumeNoise); // Random.Range(1 - noiseMagnitude, 1 + noiseMagnitude);
         m_source.pitch = 1.0f + Random.Range(-pitchNoise, pitchNoise); //* Random.Range(1 - noiseMagnitude, 1 + noiseMagnitude);
-        m_source.Play();
+
+        //allows for playing of multiple sounds at once from a single source. 
+        //passed in ratio (0-1) as multiplier of source's volume
+        m_source.PlayOneShot(m_source.clip, 1.0f - Random.Range(0, volumeNoise)); 
     }
 }
 

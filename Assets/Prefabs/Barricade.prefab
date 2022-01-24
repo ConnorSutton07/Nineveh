@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3083541053584049721}
   - component: {fileID: 6079390943005350303}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2190584672018342933}
   - component: {fileID: 5624576685400295193}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5073397291483596399}
   - component: {fileID: 4858631837322056111}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4842481791243117352}
   - component: {fileID: 6884188841317656639}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: -6577465933819755312}
   - component: {fileID: -7399803622788626281}
   - component: {fileID: 1910894484106968553}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Barricade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
