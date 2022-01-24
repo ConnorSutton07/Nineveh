@@ -1040,13 +1040,14 @@ GameObject:
   - component: {fileID: 1879723128}
   - component: {fileID: 1879723127}
   - component: {fileID: 1879723130}
+  - component: {fileID: 1879723131}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1879723127
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1158,6 +1159,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1879723131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879723126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b6306609e8e36468987fed62ca5958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
+  startTimeBtwShots: 1
 --- !u!1001 &1183356046884593267
 PrefabInstance:
   m_ObjectHideFlags: 0
