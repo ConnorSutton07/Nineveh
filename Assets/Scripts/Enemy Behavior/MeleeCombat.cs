@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeCombat : MonoBehaviour
+public class MeleeCombat : Combat
 {
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
@@ -10,7 +10,7 @@ public class MeleeCombat : MonoBehaviour
     public int attackDamage = 20;
     public int parryDamagePercentage;
 
-    public void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
+    public override void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
     {
         //float postureDamage = 0;
         //string attackSound = "";

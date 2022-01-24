@@ -25,8 +25,8 @@ public class Enemy : MonoBehaviour
     private float attackCooldown;
     private AudioSource m_audioSource;
     private AudioManagerBanditScript m_audioManager; //use for now at least
-    private MeleeCombat combatScript;
-    private MeleeMovement movementScript;
+    private Combat combatScript;
+    private Movement movementScript;
     private bool successfulDeflect = false;
     private float prevDirection;
 
@@ -47,8 +47,8 @@ public class Enemy : MonoBehaviour
         m_audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.gameObject.GetComponent<Bandit>();
-        combatScript = GetComponent<MeleeCombat>();
-        movementScript = GetComponent<MeleeMovement>();
+        combatScript = GetComponent<Combat>();
+        movementScript = GetComponent<Movement>();
     }
 
     void Start()

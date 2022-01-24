@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeMovement : MonoBehaviour
+public class MeleeMovement : Movement
 {
     public float awareDistance;
     public float moveSpeed;
@@ -16,7 +16,7 @@ public class MeleeMovement : MonoBehaviour
         
     }
 
-    public (bool, float) FindPlayer(ref Bandit playerScript, ref Transform player, ref Animator animator, float prevDirection)
+    public override (bool, float) FindPlayer(ref Bandit playerScript, ref Transform player, ref Animator animator, float prevDirection)
     {
         bool inRange = false;
         float direction = transform.localScale.x;
@@ -35,7 +35,7 @@ public class MeleeMovement : MonoBehaviour
         return (inRange, direction);
     }
 
-    public bool EnemyInBetween()
+    public override bool EnemyInBetween()
     {
         gameObject.layer = Constants.IGNORE_RAYCAST_LAYER;
         Vector2 direction = new Vector2(-transform.localScale.x, 0f);
@@ -54,7 +54,7 @@ public class MeleeMovement : MonoBehaviour
         return false;
     }
 
-    public void MoveTowardsPlayer(ref Animator animator, ref Transform player)
+    public override void MoveTowardsPlayer(ref Animator animator, ref Transform player)
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
