@@ -19,29 +19,14 @@ public class Arrow : MonoBehaviour
         gameObject.layer = Constants.PROJECTILE_LAYER;
     }
 
-    public void SetAttributes(Vector2 lineToPlayer)
-    {
-        
-
-    }
-
     private void Update()
     {
-        //want to change it such that it goes straight where aimed using transform.up 
-        //for raycast and translate
-        /*
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, -transform.right, distance, collisionLayer);
-        if (hitInfo.collider != null)
-        {
-            if (hitInfo.collider.CompareTag("Player"))
-            {
-                Debug.Log("PLAYER MUST TAKE DAMAGE!");
-                hitInfo.collider.GetComponent<Bandit>().TakeDamage(damage, 0, false);
-            }
-            DestroyArrow();
-        }
-        */
-        transform.Translate(-transform.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.up * speed * Time.deltaTime);
+    }
+
+    public void SetTrajectory(Vector2 newDirection)
+    {
+        direction = newDirection;
     }
 
     private void DestroyArrow()
@@ -54,7 +39,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.layer == Constants.PLAYER_LAYER)
         {
-            collision.GetComponent<Bandit>().TakeDamage(damage, 0, false);
+            collision.GetComponent<Bandit>().TakeDamage(damage, 0, true);
         }
         DestroyArrow();
     }

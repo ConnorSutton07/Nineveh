@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float minGap;
     [SerializeField] protected float maxGap;
     [SerializeField] protected LayerMask raycastDetectionLayers;
+    [SerializeField] protected int flip;
     protected Transform raycastPoint;
 
     protected Transform player;
@@ -59,7 +60,7 @@ public class Enemy : MonoBehaviour
         currentPosture = 0;
         attackCooldown = 0f;
         state = State.DEFAULT;
-        prevDirection = transform.localScale.x;
+        prevDirection = transform.localScale.x * flip;
         Debug.Log(state);
     }
 
@@ -103,6 +104,7 @@ public class Enemy : MonoBehaviour
         }
         else if (breakStance || animator.GetCurrentAnimatorStateInfo(0).IsName("Recover"))
         {
+            Debug.Log("break stance");
             animator.SetTrigger("Hurt");
             attackCooldown = 0;
         }
@@ -139,12 +141,11 @@ public class Enemy : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 direction = prevDirection;
             else
-                direction = (transform.position.x > player.position.x) ? 1 : -1;
+                direction = flip * ((transform.position.x > player.position.x) ? 1 : -1);
 
             transform.localScale = new Vector3(direction, 1.0f, 1.0f);
         }
         prevDirection = direction;
-        Debug.Log(inRange);
         return inRange;
     }
 

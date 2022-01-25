@@ -18,19 +18,19 @@ public class RangedEnemy : Enemy
     public override void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
     {
         Vector2 targetVector = target.position - projectileOrigin.position;
-        Quaternion arrowRotation = Quaternion.Euler(0f, 0f, Vector2.Angle(targetVector, Vector2.up));
+        int direction = player.position.x > projectileOrigin.position.x ? -1 : 1;
+        Quaternion arrowRotation = Quaternion.Euler(0f, 0f, direction * Vector2.Angle(targetVector, Vector2.up));
+        Debug.Log(Vector2.Angle(targetVector, Vector2.up));
         GameObject arrow = Instantiate(projectile, projectileOrigin.position, arrowRotation);
     }
 
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        Debug.Log(distance);
         if (distance <= attackDistance && CanAttack())
         {
             animator.SetInteger("AnimState", 1);
             StartAttack();
-            Debug.Log("Ranged enemy attack");
             attackCooldown = Time.time + attackRate;
         }
     }
