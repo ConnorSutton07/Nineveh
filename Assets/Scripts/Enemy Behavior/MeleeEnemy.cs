@@ -46,13 +46,6 @@ public class MeleeEnemy : Enemy
         else attackSound = "sword_miss";
     }
 
-    void Update()
-    {
-        if (state != State.DEFAULT) return;
-        if (InRange()) EnemyLogic();
-        else animator.SetInteger("AnimState", 1);
-    }
-
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, player.position);

@@ -8,6 +8,7 @@ public class Arrow : MonoBehaviour
     public float lifetime;
     public float distance;
     public int damage;
+    Vector2 direction;
     public LayerMask collisionLayer;
 
     //public GameObject destroyEffect
@@ -15,10 +16,12 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
         Invoke("DestroyArrow", lifetime);
+        gameObject.layer = Constants.PROJECTILE_LAYER;
     }
 
-    public void SetAttributes()
+    public void SetAttributes(Vector2 lineToPlayer)
     {
+        
 
     }
 
@@ -26,6 +29,7 @@ public class Arrow : MonoBehaviour
     {
         //want to change it such that it goes straight where aimed using transform.up 
         //for raycast and translate
+        /*
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, -transform.right, distance, collisionLayer);
         if (hitInfo.collider != null)
         {
@@ -36,6 +40,7 @@ public class Arrow : MonoBehaviour
             }
             DestroyArrow();
         }
+        */
         transform.Translate(-transform.right * speed * Time.deltaTime);
     }
 
@@ -43,5 +48,14 @@ public class Arrow : MonoBehaviour
     {
         //Instantiate(destroyEffect, transform.position, Quaternion.identity)
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == Constants.PLAYER_LAYER)
+        {
+            collision.GetComponent<Bandit>().TakeDamage(damage, 0, false);
+        }
+        DestroyArrow();
     }
 }

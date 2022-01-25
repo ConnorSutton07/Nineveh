@@ -53,13 +53,26 @@ public class Enemy : MonoBehaviour
         playerScript = player.gameObject.GetComponent<Bandit>();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
         currentPosture = 0;
         attackCooldown = 0f;
         state = State.DEFAULT;
         prevDirection = transform.localScale.x;
+        Debug.Log(state);
+    }
+
+    #endregion
+
+    #region Update 
+
+    void Update()
+    {
+        // Debug.Log(state);
+        if (state != State.DEFAULT) return;
+        if (FindPlayer()) EnemyLogic();
+        else animator.SetInteger("AnimState", 1);
     }
 
     #endregion
@@ -93,7 +106,6 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Hurt");
             attackCooldown = 0;
         }
-
     }
 
     public void Attack()
@@ -116,7 +128,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public (bool, float) FindPlayer(ref Bandit playerScript, ref Transform player, ref Animator animator, float prevDirection)
+    public bool FindPlayer()
     {
         bool inRange = false;
         float direction = transform.localScale.x;
@@ -131,8 +143,9 @@ public class Enemy : MonoBehaviour
 
             transform.localScale = new Vector3(direction, 1.0f, 1.0f);
         }
-
-        return (inRange, direction);
+        prevDirection = direction;
+        Debug.Log(inRange);
+        return inRange;
     }
 
     public bool EnemyInBetween()
@@ -198,16 +211,17 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Protected Methods
-
+    /*
     protected bool InRange()
     {
         bool inRange = false;
         (inRange, prevDirection) = FindPlayer(ref playerScript, ref player, ref animator, prevDirection);
         return inRange;
     }
-
+    */
     protected void Die()
     {
+        Debug.Log(gameObject.name + " died");
         animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = Constants.DEAD_LAYER;
