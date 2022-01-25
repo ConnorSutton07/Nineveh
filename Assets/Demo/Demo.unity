@@ -478,7 +478,8 @@ PrefabInstance:
       propertyPath: raycastDetectionLayers.m_Bits
       value: 1536
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1424168950, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
 --- !u!4 &862572792 stripped
 Transform:
