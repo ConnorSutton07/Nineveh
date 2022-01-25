@@ -1,49 +1,49 @@
 fileFormatVersion: 2
-guid: 71d9d2fd3fc579040ba4b60c5c6fe36f
+guid: 52f472657f4051341959febffb2b61f4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5674585499602805736
-    second: Ranged_attack_0
+      213: -7231304139433089348
+    second: new_0
   - first:
-      213: -389631085165172976
-    second: Ranged_attack_1
+      213: -4030173745488346760
+    second: new_1
   - first:
-      213: 2265325437658893910
-    second: Ranged_attack_2
+      213: -8410562708701369651
+    second: new_2
   - first:
-      213: 9091534030219967970
-    second: Ranged_attack_3
+      213: 8084806573515591784
+    second: new_3
   - first:
-      213: 869442179965273414
-    second: Ranged_attack_4
+      213: 9180080264479691763
+    second: new_4
   - first:
-      213: -1266213029735196347
-    second: Ranged_attack_5
+      213: -4993135451479456716
+    second: new_5
   - first:
-      213: 2166023091510524562
-    second: Ranged_attack_6
+      213: -6696670446369776433
+    second: new_6
   - first:
-      213: 7738360787422467468
-    second: Ranged_attack_7
+      213: 6584802401065566302
+    second: new_7
   - first:
-      213: 8415971048296244127
-    second: Ranged_attack_8
+      213: 7588503767883093502
+    second: new_8
   - first:
-      213: -7025582073166671962
-    second: Ranged_attack_9
+      213: 6956321682815866000
+    second: new_9
   - first:
-      213: -8195977205116380039
-    second: Ranged_attack_10
+      213: -6144101655761606924
+    second: new_10
   - first:
-      213: 3757266242469098984
-    second: Ranged_attack_11
+      213: 4638390384687010391
+    second: new_11
   - first:
-      213: -1670305961961687399
-    second: Ranged_attack_12
+      213: -6023969185233007033
+    second: new_12
   - first:
-      213: 8294885273627559261
-    second: Ranged_attack_13
+      213: 3906086408714387167
+    second: new_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -145,12 +145,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ranged_attack_0
+      name: new_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -159,19 +159,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81c9798ad82df31b0800000000000000
-      internalID: -5674585499602805736
+      spriteID: cb66742c23f35ab90800000000000000
+      internalID: -7231304139433089348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_1
+      name: new_1
       rect:
         serializedVersion: 2
-        x: 180
+        x: 128
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -180,19 +180,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 017a747a790c79af0800000000000000
-      internalID: -389631085165172976
+      spriteID: 871cf0dc452f118c0800000000000000
+      internalID: -4030173745488346760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_2
+      name: new_2
       rect:
         serializedVersion: 2
-        x: 360
+        x: 256
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -201,19 +201,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65e805cbb7d007f10800000000000000
-      internalID: 2265325437658893910
+      spriteID: dca25ba07cda74b80800000000000000
+      internalID: -8410562708701369651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_3
+      name: new_3
       rect:
         serializedVersion: 2
-        x: 540
+        x: 384
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -222,19 +222,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2edf2ae080e9b2e70800000000000000
-      internalID: 9091534030219967970
+      spriteID: 860d3245eb0033070800000000000000
+      internalID: 8084806573515591784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_4
+      name: new_4
       rect:
         serializedVersion: 2
-        x: 720
+        x: 512
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -243,19 +243,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64542916e01e01c00800000000000000
-      internalID: 869442179965273414
+      spriteID: 3f3d2e5cc52366f70800000000000000
+      internalID: 9180080264479691763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_5
+      name: new_5
       rect:
         serializedVersion: 2
-        x: 900
+        x: 640
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -264,19 +264,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54999a845f18d6ee0800000000000000
-      internalID: -1266213029735196347
+      spriteID: 434482bf2c1d4bab0800000000000000
+      internalID: -4993135451479456716
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_6
+      name: new_6
       rect:
         serializedVersion: 2
-        x: 1080
+        x: 768
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -285,19 +285,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29a37c096824f0e10800000000000000
-      internalID: 2166023091510524562
+      spriteID: fccd542a5b5a013a0800000000000000
+      internalID: -6696670446369776433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_7
+      name: new_7
       rect:
         serializedVersion: 2
-        x: 1260
+        x: 896
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -306,19 +306,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c85d026f22e246b60800000000000000
-      internalID: 7738360787422467468
+      spriteID: e5007af55eae16b50800000000000000
+      internalID: 6584802401065566302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_8
+      name: new_8
       rect:
         serializedVersion: 2
-        x: 1440
+        x: 1024
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -327,19 +327,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f936ba524198bc470800000000000000
-      internalID: 8415971048296244127
+      spriteID: ef59265a8f7cf4960800000000000000
+      internalID: 7588503767883093502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_9
+      name: new_9
       rect:
         serializedVersion: 2
-        x: 1620
+        x: 1152
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -348,19 +348,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6af4c8cd35e108e90800000000000000
-      internalID: -7025582073166671962
+      spriteID: 094569fd6b1d98060800000000000000
+      internalID: 6956321682815866000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_10
+      name: new_10
       rect:
         serializedVersion: 2
-        x: 1800
+        x: 1280
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -369,19 +369,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97cd6d5f72a024e80800000000000000
-      internalID: -8195977205116380039
+      spriteID: 4f6a070d814cbbaa0800000000000000
+      internalID: -6144101655761606924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_11
+      name: new_11
       rect:
         serializedVersion: 2
-        x: 1980
+        x: 1408
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -390,19 +390,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e5ffec9dbd742430800000000000000
-      internalID: 3757266242469098984
+      spriteID: 7525bd8ca7fde5040800000000000000
+      internalID: 4638390384687010391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_12
+      name: new_12
       rect:
         serializedVersion: 2
-        x: 2160
+        x: 1536
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -411,19 +411,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9967e07c391e1d8e0800000000000000
-      internalID: -1670305961961687399
+      spriteID: 74e894041ff866ca0800000000000000
+      internalID: -6023969185233007033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ranged_attack_13
+      name: new_13
       rect:
         serializedVersion: 2
-        x: 2340
+        x: 1664
         y: 0
-        width: 180
+        width: 128
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -432,8 +432,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d55803b453a5d1370800000000000000
-      internalID: 8294885273627559261
+      spriteID: fdef665b4e4353630800000000000000
+      internalID: 3906086408714387167
       vertices: []
       indices: 
       edges: []
