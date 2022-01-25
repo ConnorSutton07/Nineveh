@@ -199,7 +199,7 @@ Animator:
   m_GameObject: {fileID: 7534857871625949265}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4e724e36848b91f41a2a1967dc1514b1, type: 2}
+  m_Controller: {fileID: 22100000, guid: 1a44eb1c783776b41a519932adc9fd73, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -243,6 +243,13 @@ MonoBehaviour:
   maxBlockTime: 0
   postureThreshold: 0
   canBlock: 0
+  awareDistance: 0
+  moveSpeed: 0
+  minGap: 0
+  maxGap: 0
+  raycastDetectionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &2794875830501937610
 PrefabInstance:
   m_ObjectHideFlags: 0

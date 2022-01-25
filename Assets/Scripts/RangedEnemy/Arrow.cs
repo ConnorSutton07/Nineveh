@@ -8,7 +8,7 @@ public class Arrow : MonoBehaviour
     public float lifetime;
     public float distance;
     public int damage;
-    public LayerMask whatIsSolid;
+    public LayerMask collisionLayer;
 
     //public GameObject destroyEffect
 
@@ -17,11 +17,16 @@ public class Arrow : MonoBehaviour
         Invoke("DestroyArrow", lifetime);
     }
 
+    public void SetAttributes()
+    {
+
+    }
+
     private void Update()
     {
         //want to change it such that it goes straight where aimed using transform.up 
         //for raycast and translate
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, -transform.right, distance, whatIsSolid);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, -transform.right, distance, collisionLayer);
         if (hitInfo.collider != null)
         {
             if (hitInfo.collider.CompareTag("Player"))
