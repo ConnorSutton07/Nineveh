@@ -10,3 +10,13 @@ public static class Constants
     public const int PLAYER_LAYER         = 9;
     public const int ENEMY_LAYER          = 10;
 }
+
+public enum State
+{
+    DEAD,
+    DEFAULT,
+    BLOCKING,
+    STUNNED,
+    DASHING,
+    ATTACKING
+};

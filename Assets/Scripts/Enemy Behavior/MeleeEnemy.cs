@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeCombat : Combat
+public class MeleeEnemy : Enemy
 {
     public float attackRange = 0.5f;
     public LayerMask enemyLayer;
@@ -39,11 +39,47 @@ public class MeleeCombat : Combat
             }
             else
             {
-                attackSound = "sword_hit"; 
+                attackSound = "sword_hit";
                 playerScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
             }
         }
         else attackSound = "sword_miss";
+    }
+
+    void Update()
+    {
+        if (state != State.DEFAULT) return;
+        if (InRange()) EnemyLogic();
+        else animator.SetInteger("AnimState", 1);
+    }
+
+    protected override void EnemyLogic()
+    {
+        distance = Vector2.Distance(transform.position, player.position);
+        if (EnemyInBetween())
+        {
+            AttemptBlock(true, 0.25f);
+        }
+        else if (distance > attackDistance)
+        {
+            Move();
+        }
+        else if (CanAttack())
+        {
+            animator.SetInteger("AnimState", 1);
+            StartAttack();
+            attackCooldown = Time.time + attackRate;
+        }
+    }
+
+    public override void MoveTowardsPlayer(ref Animator animator, ref Transform player)
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            animator.SetInteger("AnimState", 2);
+            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
     }
 
     private void OnDrawGizmosSelected()

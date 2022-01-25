@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour
 {
     #region Attributes
 
-
     public float attackDistance;
     public float shiftDistance = 0.1f;
     public int maxHealth = 100;
@@ -18,23 +17,27 @@ public class Enemy : MonoBehaviour
     public int postureThreshold;
     public bool canBlock;
 
-    private Transform player;
-    private RaycastHit2D hit;
-    private Animator animator;
-    private float distance = 0f;
-    private float attackCooldown;
-    private AudioSource m_audioSource;
-    private AudioManagerBanditScript m_audioManager; //use for now at least
-    private Combat combatScript;
-    private Movement movementScript;
-    private bool successfulDeflect = false;
-    private float prevDirection;
+    [SerializeField] protected float awareDistance;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float minGap;
+    [SerializeField] protected float maxGap;
+    [SerializeField] protected LayerMask raycastDetectionLayers;
+    protected Transform raycastPoint;
 
+    protected Transform player;
+    protected RaycastHit2D hit;
+    protected Animator animator;
+    protected float distance = 0f;
+    protected float attackCooldown;
+    protected AudioSource audioSource;
+    protected AudioManagerBanditScript audioManager; //use for now at least
+    protected bool successfulDeflect = false;
+    protected float prevDirection;
 
-    State state;
-    Bandit playerScript;
-    int currentHealth;
-    int currentPosture;
+    protected State state;
+    protected Bandit playerScript;
+    protected int currentHealth;
+    protected int currentPosture;
 
     #endregion
 
@@ -43,12 +46,11 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        m_audioSource = GetComponent<AudioSource>();
-        m_audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
+        audioSource = GetComponent<AudioSource>();
+        audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        raycastPoint = transform.Find("RaycastPoint");
         playerScript = player.gameObject.GetComponent<Bandit>();
-        combatScript = GetComponent<Combat>();
-        movementScript = GetComponent<Movement>();
     }
 
     void Start()
@@ -62,40 +64,11 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #region Update Functions
+    #region Overridden Methods
 
-    private void Update()
-    {
-        if (state != State.DEFAULT) return;
-        if (InRange()) EnemyLogic();
-        else animator.SetInteger("AnimState", 1);
-    }
-
-    void EnemyLogic()
-    {
-        distance = Vector2.Distance(transform.position, player.position);
-        if (movementScript.EnemyInBetween())
-        {
-            AttemptBlock(true, 0.25f);
-        }
-        else if (distance > attackDistance)
-        {
-            Move();
-        }
-        else if (CanAttack())
-        {
-            animator.SetInteger("AnimState", 1);
-            StartAttack();
-            attackCooldown = Time.time + attackRate;
-        }
-    }
-
-    bool InRange()
-    {
-        bool inRange = false;
-        (inRange, prevDirection) = movementScript.FindPlayer(ref playerScript, ref player, ref animator, prevDirection);
-        return inRange;
-    }
+    protected virtual void EnemyLogic() { return; }
+    public virtual void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage) { }
+    public virtual void MoveTowardsPlayer(ref Animator animator, ref Transform player) { return; }
 
     #endregion
 
@@ -127,7 +100,7 @@ public class Enemy : MonoBehaviour
     {
         string attackSound = "";
         int postureDamage = 0;
-        combatScript.AttackPlayer(ref playerScript, ref player, ref attackSound, ref postureDamage);
+        AttackPlayer(ref playerScript, ref player, ref attackSound, ref postureDamage);
         PlaySound(attackSound);
         TakeDamage(0, postureDamage);
     }
@@ -141,6 +114,43 @@ public class Enemy : MonoBehaviour
             if (duration == -1) duration = Random.Range(minBlockTime, maxBlockTime);
             StartCoroutine(EnterBlockingState(Time.time, duration));
         }
+    }
+
+    public (bool, float) FindPlayer(ref Bandit playerScript, ref Transform player, ref Animator animator, float prevDirection)
+    {
+        bool inRange = false;
+        float direction = transform.localScale.x;
+        if (Mathf.Abs(player.position.x - transform.position.x) <= awareDistance)
+        {
+            inRange = !playerScript.isDead(); // do not attack if player is dead
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                direction = prevDirection;
+            else
+                direction = (transform.position.x > player.position.x) ? 1 : -1;
+
+            transform.localScale = new Vector3(direction, 1.0f, 1.0f);
+        }
+
+        return (inRange, direction);
+    }
+
+    public bool EnemyInBetween()
+    {
+        gameObject.layer = Constants.IGNORE_RAYCAST_LAYER;
+        Vector2 direction = new Vector2(-transform.localScale.x, 0f);
+        float gapBetweenOtherEnemies = Random.Range(minGap, maxGap);
+        RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, direction, raycastDetectionLayers);
+        if (hit.collider != null && hit.collider.gameObject.layer == Constants.ENEMY_LAYER) // check for enemy in between
+        {
+            if (hit.distance <= gapBetweenOtherEnemies && hit.collider.gameObject.layer == Constants.ENEMY_LAYER)
+            {
+                gameObject.layer = Constants.ENEMY_LAYER;
+                return true;
+            }
+        }
+        gameObject.layer = Constants.ENEMY_LAYER;
+        return false;
     }
 
     IEnumerator EnterBlockingState(float startTime, float duration)
@@ -187,9 +197,16 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #region Private Methods
+    #region Protected Methods
 
-    private void Die()
+    protected bool InRange()
+    {
+        bool inRange = false;
+        (inRange, prevDirection) = FindPlayer(ref playerScript, ref player, ref animator, prevDirection);
+        return inRange;
+    }
+
+    protected void Die()
     {
         animator.SetTrigger("Death");
         state = State.DEAD;
@@ -197,26 +214,26 @@ public class Enemy : MonoBehaviour
         this.enabled = false;
     }
 
-    private bool CanAttack()
+    protected bool CanAttack()
     {
         return (!animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt") 
              && Time.time > attackCooldown);
     }
 
-    private void Move()
+    protected void Move()
     {
-        movementScript.MoveTowardsPlayer(ref animator, ref player);
+        MoveTowardsPlayer(ref animator, ref player);
     }
 
-    private void StartAttack()
+    protected void StartAttack()
     {
         animator.SetTrigger("Attack");
     }
 
 
-    private void PlaySound(string text)
+    protected void PlaySound(string text)
     {
-        m_audioManager.PlaySound(text);
+        audioManager.PlaySound(text);
     }
 
     #endregion

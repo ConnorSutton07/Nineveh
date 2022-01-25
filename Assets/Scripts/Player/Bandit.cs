@@ -3,16 +3,6 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
-enum State
-{
-    DEAD,
-    DEFAULT,
-    BLOCKING,
-    STUNNED,
-    DASHING,
-    ATTACKING
-};
-
 public class Bandit : MonoBehaviour
 {
     #region Attributes
