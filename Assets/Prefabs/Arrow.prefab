@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5162446653307519250}
   - component: {fileID: 463108890637073273}
   - component: {fileID: -3756056019892556870}
+  - component: {fileID: -7842699639530883404}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -97,9 +98,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  lifetime: 3
+  lifetime: 10
   distance: 0.5
   damage: 20
   whatIsSolid:
     serializedVersion: 2
     m_Bits: 512
+--- !u!61 &-7842699639530883404
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8988200510722177731}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.6253451}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.1875, y: 1.625}
+    newSize: {x: 2.91, y: 0.38}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1875, y: 0.24751204}
+  m_EdgeRadius: 0
