@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Bandit : MonoBehaviour
+public class Player : MonoBehaviour
 {
     #region Attributes
 
@@ -24,7 +24,7 @@ public class Bandit : MonoBehaviour
     private Rigidbody2D body;
     private AudioSource audioSource;
     private AudioManagerBanditScript audioManager;
-    private Sensor_Bandit groundSensor;
+    private GroundSensor groundSensor;
     private SparkEffect sparkEffect;
     private bool grounded = false;
     private PlayerInput controls;
@@ -69,7 +69,7 @@ public class Bandit : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
-        groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        groundSensor = transform.Find("GroundSensor").GetComponent<GroundSensor>();
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         raycastOrigin = transform.Find("RaycastOrigin").transform;
 

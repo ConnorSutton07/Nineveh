@@ -20,7 +20,7 @@ public class Recover : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (animator.gameObject.name == "Player")
-            animator.gameObject.GetComponent<Bandit>().ExitStun();
+            animator.gameObject.GetComponent<Player>().ExitStun();
         else
             animator.gameObject.GetComponent<Enemy>().ExitStun();
     }
