@@ -39,7 +39,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.layer == Constants.PLAYER_LAYER)
         {
-            collision.GetComponent<Bandit>().TakeDamage(damage, 0, true);
+            collision.GetComponent<Player>().TakeDamage(damage, 0, true);
         }
         DestroyArrow();
     }

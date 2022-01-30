@@ -21,7 +21,7 @@ public class Attack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (animator.gameObject.name == "Player")
-            animator.gameObject.GetComponent<Bandit>().ExitConditionally();
+            animator.gameObject.GetComponent<Player>().ExitConditionally();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

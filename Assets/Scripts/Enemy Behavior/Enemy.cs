@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
     protected float prevDirection;
 
     protected State state;
-    protected Bandit playerScript;
+    protected Player playerScript;
     protected int currentHealth;
     protected int currentPosture;
 
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
         audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         raycastPoint = transform.Find("RaycastPoint");
-        playerScript = player.gameObject.GetComponent<Bandit>();
+        playerScript = player.gameObject.GetComponent<Player>();
     }
 
     protected virtual void Start()
@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
     #region Overridden Methods
 
     protected virtual void EnemyLogic() { return; }
-    public virtual void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage) { }
+    public virtual void AttackPlayer(ref Player playerScript, ref Transform player, ref string attackSound, ref int postureDamage) { }
     public virtual void MoveTowardsPlayer(ref Animator animator, ref Transform player) { return; }
 
     #endregion

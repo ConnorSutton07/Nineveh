@@ -10,7 +10,7 @@ public class MeleeEnemy : Enemy
     public int attackDamage = 20;
     public int parryDamagePercentage;
 
-    public override void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
+    public override void AttackPlayer(ref Player playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
     {
         //float postureDamage = 0;
         //string attackSound = "";

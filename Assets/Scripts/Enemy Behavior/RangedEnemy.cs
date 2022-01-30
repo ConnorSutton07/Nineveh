@@ -15,7 +15,7 @@ public class RangedEnemy : Enemy
         projectileOrigin = transform.Find("ProjectileOrigin");
     }
 
-    public override void AttackPlayer(ref Bandit playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
+    public override void AttackPlayer(ref Player playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
     {
         Vector2 targetVector = target.position - projectileOrigin.position;
         int direction = -1 * (int)transform.localScale.x;
