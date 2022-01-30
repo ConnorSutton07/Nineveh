@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] float dashSpeed;
     [SerializeField] float dashCooldownLength;
     [SerializeField] float blockCooldownLength;
+    [SerializeField] float harmonyDamageAmplifier;
+    [SerializeField] float harmonyLifestealThreshold;
 
     private Animator animator;
     private Rigidbody2D body;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
 
     int currentHealth;
     int currentPosture;
+    int currentHarmony; 
     float attackCooldown = 0f;
     Transform raycastOrigin;
     private float moveDirection;
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour
         raycastOrigin = transform.Find("RaycastOrigin").transform;
 
         currentPosture = 0;
+        currentHarmony = 0;
         currentHealth = maxHealth;
         state = State.DEFAULT;
         blockStart = 0f;
