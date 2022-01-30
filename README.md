@@ -5,6 +5,6 @@
 
 
 
-Project Nineveh is a roguelike video game influenced by ancient cultures of the Near East. 
+Project Nineveh is a roguelike video game influenced by cultures of the ancient Near East. 
 The player character will fight to reestablish the dominance of a forgotten and jealous god. 
 <div>
