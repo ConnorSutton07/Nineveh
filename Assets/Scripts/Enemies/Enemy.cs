@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float maxGap;
     [SerializeField] protected LayerMask raycastDetectionLayers;
     [SerializeField] protected int flip;
+    [SerializeField] protected float deflectChance;
     protected Transform raycastPoint;
 
     protected Transform player;
@@ -108,6 +109,11 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Hurt");
             attackCooldown = 0;
         }
+    }
+
+    public bool AttempDeflect()
+    {
+        return (Random.Range(0f, 1f) < deflectChance);
     }
 
     public void Attack()

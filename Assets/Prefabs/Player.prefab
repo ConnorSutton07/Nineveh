@@ -639,28 +639,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8b435a8dc3f604e9a13c4acd7081c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  postureThreshold: 100
   moveSpeed: 4
   jumpForce: 7.5
-  deflectWindow: 0.25
-  shiftDistance: 0.1
-  attackPoint: {fileID: 1183356048232590789}
-  attackRange: 0.39
-  attackDamage: 20
-  stunnedAmplifier: 1.2
   dashTime: 0.12
   dashSpeed: 10
   dashCooldownLength: 0.2
+  attackDamage: 20
+  attackRange: 0.39
+  attackRate: 0.6
+  deflectWindow: 0.25
+  shiftDistance: 0.1
+  stunnedAmplifier: 1.2
   blockCooldownLength: 0.2
-  healthSlider: {fileID: 1635510570}
-  healthYellow: {fileID: 864047218}
-  postureSlider: {fileID: 76510573}
+  postureChipPercentage: 0.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  attackRate: 0.6
-  maxHealth: 100
-  postureThreshold: 100
-  postureChipPercentage: 0.5
+  harmonyDamageAmplifier: 0.5
+  harmonyLifestealThreshold: 0.75
+  harmonyPauseTime: 2
+  harmonyDimishRate: 0.2
+  harmonyHitGain: 5
+  harmonyDeflectGain: 10
+  attackPoint: {fileID: 1183356048232590789}
+  healthSlider: {fileID: 1635510570}
+  healthYellow: {fileID: 864047218}
+  postureSlider: {fileID: 76510573}
 --- !u!95 &1240809836481741314
 Animator:
   serializedVersion: 3

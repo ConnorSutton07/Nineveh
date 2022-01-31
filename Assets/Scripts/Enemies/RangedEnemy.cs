@@ -20,7 +20,6 @@ public class RangedEnemy : Enemy
         Vector2 targetVector = target.position - projectileOrigin.position;
         int direction = -1 * (int)transform.localScale.x;
         Quaternion arrowRotation = Quaternion.Euler(0f, 0f, direction * Vector2.Angle(targetVector, Vector2.up));
-        Debug.Log(Vector2.Angle(targetVector, Vector2.up));
         GameObject arrow = Instantiate(projectile, projectileOrigin.position, arrowRotation);
     }
 

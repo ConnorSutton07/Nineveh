@@ -7,20 +7,41 @@ public class Player : MonoBehaviour
 {
     #region Attributes
 
+    [Header ("Stats")]
+    public int maxHealth = 100;
+    public int postureThreshold = 100;
+
+    [Header ("Movement")]
     [SerializeField] float moveSpeed = 4.0f;
     [SerializeField] float jumpForce = 7.5f;
-    [SerializeField] float deflectWindow = 0.25f;
-    [SerializeField] float shiftDistance = 0.1f;
-    [SerializeField] Transform attackPoint;
-    [SerializeField] float attackRange = 0.5f;
-    [SerializeField] int attackDamage = 20;
-    [SerializeField] float stunnedAmplifier = 1.2f;
     [SerializeField] float dashTime;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashCooldownLength;
+
+    [Header ("Combat")]
+    [SerializeField] int attackDamage = 20;
+    [SerializeField] float attackRange = 0.5f;
+    [SerializeField] float attackRate = 0.9f;
+    [SerializeField] float deflectWindow = 0.25f;
+    [SerializeField] float shiftDistance = 0.1f;
+    [SerializeField] float stunnedAmplifier = 1.2f;
     [SerializeField] float blockCooldownLength;
+    [SerializeField] float postureChipPercentage;
+    [SerializeField] LayerMask enemyLayer;
+
+    [Header ("Harmony")]
     [SerializeField] float harmonyDamageAmplifier;
     [SerializeField] float harmonyLifestealThreshold;
+    [SerializeField] float harmonyPauseTime;
+    [SerializeField] float harmonyDimishRate;
+    [SerializeField] float harmonyHitGain;
+    [SerializeField] float harmonyDeflectGain;
+
+    [Header ("Objects")]
+    [SerializeField] Transform attackPoint;
+    [SerializeField] GameObject healthSlider;
+    [SerializeField] GameObject healthYellow;
+    [SerializeField] GameObject postureSlider;
 
     private Animator animator;
     private Rigidbody2D body;
@@ -31,20 +52,14 @@ public class Player : MonoBehaviour
     private bool grounded = false;
     private PlayerInput controls;
     
-    public GameObject healthSlider;
-    public GameObject healthYellow;
-    public GameObject postureSlider;
 
-    public LayerMask enemyLayer;
-    public float attackRate = 0.9f;
-    public int maxHealth = 100;
-    public int postureThreshold = 100;
-    public float postureChipPercentage;
     float raycastLength = 2f;
 
     int currentHealth;
     int currentPosture;
-    int currentHarmony; 
+    float lastHarmonyIncreaseTime;
+    float currentHarmony;
+    float maxHarmony;
     float attackCooldown = 0f;
     Transform raycastOrigin;
     private float moveDirection;
@@ -92,11 +107,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (healthYellow.transform.localScale.x > healthSlider.transform.localScale.x)
-        {
+        if (healthYellow.transform.localScale.x > healthSlider.transform.localScale.x) // update healthbar
             healthYellow.transform.localScale = new Vector3((healthYellow.transform.localScale.x) - .01f, 1f, 1f);
-        }
 
+        if (Time.time > lastHarmonyIncreaseTime + harmonyPauseTime) currentHarmony -= harmonyDimishRate;
+        currentHarmony = Mathf.Clamp(currentHarmony, 0f, 100f);
 
         if (currentHealth < 0) Die();
         if (Suspended()) return;
@@ -138,7 +153,6 @@ public class Player : MonoBehaviour
             if (grounded) StopMovement();
         }
     }
-
 
 
     private void updateHealthBar()
@@ -284,6 +298,7 @@ public class Player : MonoBehaviour
 
     public void Attack()
     {
+        Debug.Log("Harmony: " + currentHarmony);
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
@@ -293,10 +308,11 @@ public class Player : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
-
+            float damage = attackDamage * (1 + harmonyDamageAmplifier * (currentHarmony / 100));
+            Debug.Log("Damage: " + damage);
             if (enemyScript.isBlocking() && transform.localScale.x != enemyScript.gameObject.transform.localScale.x)
             {
-                if (Random.Range(0f, 1f) < 0.33f)
+                if (enemyScript.AttempDeflect())
                 {
                     StartAttackCooldown();
                     EmitDeflectedParticles();
@@ -305,13 +321,15 @@ public class Player : MonoBehaviour
                 }
                 int direction = (transform.position.x > enemy.transform.position.x) ? -1 : 1;
                 enemyScript.Shift(direction);
-                enemyScript.TakeDamage(0, Mathf.FloorToInt(attackDamage * postureChipPercentage));
+                enemyScript.TakeDamage(0, Mathf.FloorToInt(damage * postureChipPercentage));
                 PlaySound("block");
                 EmitAttackParticles();
             }
             else
             {
-                enemyScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
+                enemyScript.TakeDamage(Mathf.FloorToInt(damage), Mathf.FloorToInt(damage * 0.1f), true);
+                currentHarmony += harmonyHitGain;
+                lastHarmonyIncreaseTime = Time.time;
                 PlaySound("sword_hit");
             }
         }
@@ -350,6 +368,12 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Recover");
             currentPosture = 0;
         }
+    }
+
+    public void SuccessfulDeflect()
+    {
+        currentHarmony += harmonyDeflectGain;
+        lastHarmonyIncreaseTime = Time.time;
     }
 
     public void StartAttackCooldown()

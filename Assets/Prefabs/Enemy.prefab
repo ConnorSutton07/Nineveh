@@ -206,6 +206,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   flip: 1
+  deflectChance: 0.33
   attackRange: 0.41
   enemyLayer:
     serializedVersion: 2

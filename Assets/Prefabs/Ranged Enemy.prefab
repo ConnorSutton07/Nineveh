@@ -73,7 +73,6 @@ GameObject:
   - component: {fileID: 3456384772661489407}
   - component: {fileID: 1424168948}
   - component: {fileID: 1424168949}
-  - component: {fileID: 1424168950}
   - component: {fileID: 8996694513633028341}
   m_Layer: 10
   m_Name: Ranged Enemy
@@ -208,20 +207,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1424168950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534857871625949265}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b6306609e8e36468987fed62ca5958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
-  startTimeBtwShots: 2
 --- !u!114 &8996694513633028341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDistance: 20
   shiftDistance: 0.1
-  maxHealth: 100
+  maxHealth: 100000
   attackRate: 2
   blockChance: 0
   minBlockTime: 0
@@ -251,6 +236,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   flip: -1
+  deflectChance: 0
   projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
 --- !u!1001 &2794875830501937610
 PrefabInstance:

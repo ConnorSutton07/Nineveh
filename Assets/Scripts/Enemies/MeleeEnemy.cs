@@ -25,6 +25,7 @@ public class MeleeEnemy : Enemy
                 if (playerScript.isDeflect())
                 {
                     attackSound = "deflect"; // should play deflect noise
+                    playerScript.SuccessfulDeflect();
                     playerScript.EmitDeflectParticles();
                     postureDamage = parryDamagePercentage;
                 }
