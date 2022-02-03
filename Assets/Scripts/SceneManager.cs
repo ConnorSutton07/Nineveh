@@ -9,5 +9,10 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Tower");
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
 
