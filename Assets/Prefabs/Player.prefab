@@ -650,7 +650,7 @@ MonoBehaviour:
   attackRange: 0.39
   attackRate: 0.6
   deflectWindow: 0.25
-  shiftDistance: 0.1
+  shiftDistance: 0.01
   stunnedAmplifier: 1.2
   blockCooldownLength: 0.2
   postureChipPercentage: 0.5
