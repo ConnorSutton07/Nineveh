@@ -9,6 +9,7 @@ public class MeleeEnemy : Enemy
     public Transform attackPoint;
     public int attackDamage = 20;
     public int parryDamagePercentage;
+    [SerializeField] float unreachableHeightDistance;
 
     public override void AttackPlayer(ref Player playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
     {
@@ -50,7 +51,8 @@ public class MeleeEnemy : Enemy
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, player.position);
-        if (EnemyInBetween())
+        float yDistance = Mathf.Abs(transform.position.y - player.position.y);
+        if (EnemyInBetween() || yDistance >= unreachableHeightDistance)
         {
             AttemptBlock(true, 0.25f);
         }
