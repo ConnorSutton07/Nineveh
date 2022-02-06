@@ -221,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDistance: 20
   shiftDistance: 0.1
-  maxHealth: 100000
+  maxHealth: 100
   attackRate: 2
   blockChance: 0
   minBlockTime: 0
@@ -247,11 +247,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_sounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_sounds.Array.data[3].m_name
-      value: deflect
+      value: shoot
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_sounds.Array.data[4].m_name
@@ -274,6 +274,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.data[3].volumeNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_sounds.Array.data[3].m_clips.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -288,7 +292,7 @@ PrefabInstance:
     - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_sounds.Array.data[3].m_clips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 9065612b212e50c4b87fa8282efb6413, type: 3}
+      objectReference: {fileID: 8300000, guid: aa71f6fd36250c342bd8fe7828b9bc2b, type: 3}
     - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_sounds.Array.data[3].m_clips.Array.data[1]
       value: 
