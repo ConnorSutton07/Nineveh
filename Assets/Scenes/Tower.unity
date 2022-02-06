@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2988569, g: 0.18382311, b: 0.077684715, a: 1}
+  m_IndirectSpecularColor: {r: 0.2988422, g: 0.18382767, b: 0.07768692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4177477321819603768, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.292
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 4177477321819603768, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
       propertyPath: m_LocalPosition.z
@@ -522,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7534857871625949265, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9078362943686397372, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
       propertyPath: raycastDetectionLayers.m_Bits
@@ -982,6 +982,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[7].m_name
+      value: arrow_hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[7].pitchNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[7].volumeNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[7].m_clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[7].m_clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd864fd64b8265b438a9932f0b60a79d, type: 3}
     - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_RootOrder
       value: 2

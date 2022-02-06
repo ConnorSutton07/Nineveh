@@ -39,7 +39,9 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.layer == Constants.PLAYER_LAYER)
         {
-            collision.GetComponent<Player>().TakeDamage(damage, 0, true);
+            Player playerScript = collision.GetComponent<Player>();
+            playerScript.TakeDamage(damage, 0, true);
+            playerScript.PlaySound("arrow_hit");
         }
         DestroyArrow();
     }
