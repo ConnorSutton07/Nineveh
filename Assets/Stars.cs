@@ -11,6 +11,7 @@ public class Stars : MonoBehaviour
     [SerializeField] Vector2 bottomRight;
     [SerializeField] float expandTime;
     [SerializeField] float expandRate;
+    [SerializeField] float expandDrop;
     [SerializeField] float shrinkTime;
     [SerializeField] float shrinkRate;
     [SerializeField] float maxBrightness;
@@ -41,7 +42,7 @@ public class Stars : MonoBehaviour
         }
         // Array.Sort(stars, (x, y) => (x.transform.localPosition.x <= y.transform.localPosition.x) ? -1 : 1);
         Expand();
-        expandRate /= (1920 / width);
+        //expandRate /= (1920 / width);
     }
 
     public void Expand()
@@ -71,7 +72,10 @@ public class Stars : MonoBehaviour
                 scale.x += expandRate;
                 scale.y += expandRate;
                 star.transform.localScale = scale;
-                StarObject.transform.localScale = new Vector3(0.5f + scale.x / 250, 0.5f + scale.y / 250);
+                StarObject.transform.localScale = new Vector3(0.5f + scale.x / 100, 0.5f + scale.y / 100);
+                Vector3 pos = StarObject.transform.localPosition;
+                pos.y -= expandDrop;
+                StarObject.transform.localPosition = pos;
                 float v = maxBrightness * (Time.time - startTime) / (endTime - startTime);
                 squareRenderer.color = Color.HSVToRGB(0f, 0f, v);
                 squareRenderer2.color = Color.HSVToRGB(0f, 0f, v);
@@ -93,6 +97,8 @@ public class Stars : MonoBehaviour
                 scale.x = Mathf.Clamp(scale.x - shrinkRate, 0, scale.x);
                 scale.y = Mathf.Clamp(scale.y - shrinkRate, 0, scale.x);
                 star.transform.localScale = scale;
+                Vector3 starScale = StarObject.transform.localScale;
+                StarObject.transform.localScale = new Vector3(starScale.x - shrinkRate / 500, starScale.y - shrinkRate / 500);
                 float v = maxBrightness * ( 1 - ((Time.time - startTime) / (endTime - startTime)));
                 squareRenderer.color = Color.HSVToRGB(0f, 0f, v);
                 squareRenderer2.color = Color.HSVToRGB(0f, 0f, v);

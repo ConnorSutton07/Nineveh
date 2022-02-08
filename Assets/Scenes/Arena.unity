@@ -897,9 +897,10 @@ MonoBehaviour:
   topLeft: {x: -1920, y: -1080}
   bottomRight: {x: 1920, y: 1080}
   expandTime: 3
-  expandRate: 0.35
+  expandRate: 0.035
+  expandDrop: 0.001
   shrinkTime: 1
-  shrinkRate: 0.8
+  shrinkRate: 0.2
   maxBrightness: 0.3
   fadeRate: 64
 --- !u!1001 &1343491127
