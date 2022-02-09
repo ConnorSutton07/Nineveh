@@ -14,6 +14,7 @@ public class Stars : MonoBehaviour
     [SerializeField] float expandDrop;
     [SerializeField] float shrinkTime;
     [SerializeField] float shrinkRate;
+    [SerializeField] float shrinkScale;
     [SerializeField] float maxBrightness;
     [SerializeField] float fadeRate;
     GameObject[] stars;
@@ -98,7 +99,7 @@ public class Stars : MonoBehaviour
                 scale.y = Mathf.Clamp(scale.y - shrinkRate, 0, scale.x);
                 star.transform.localScale = scale;
                 Vector3 starScale = StarObject.transform.localScale;
-                StarObject.transform.localScale = new Vector3(starScale.x - shrinkRate / 500, starScale.y - shrinkRate / 500);
+                StarObject.transform.localScale = new Vector3(starScale.x - shrinkScale, starScale.y - shrinkScale);
                 float v = maxBrightness * ( 1 - ((Time.time - startTime) / (endTime - startTime)));
                 squareRenderer.color = Color.HSVToRGB(0f, 0f, v);
                 squareRenderer2.color = Color.HSVToRGB(0f, 0f, v);
