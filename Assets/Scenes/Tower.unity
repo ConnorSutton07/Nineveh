@@ -613,9 +613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c6cfcc69a011145ab8097c737163d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
-  sectionCount: 0
-  sectionWidth: 0
 --- !u!483693784 &304871934
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -857,7 +854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &885596029
 Transform:
   m_ObjectHideFlags: 0
