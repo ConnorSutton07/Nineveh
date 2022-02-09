@@ -5,49 +5,43 @@ using UnityEngine.Tilemaps;
 
 public class LevelGen : MonoBehaviour
 {
-    [SerializeField]
-    private int n_sections = 5;
-    [SerializeField]
-    private GameObject ground;
-    [SerializeField]
-    private GameObject platform;
-    [SerializeField]
-    private GameObject barricade;
+    [SerializeField] private int n_sections = 5;
+
+    private List<Section> sections;
+    private const int sectionWidth = 20;
+    private const int sectionHeight = 10;
+    private int ground_left_transform = 10;
+
+    [SerializeField] private GameObject ground;
+    [SerializeField] private GameObject platform;
+    [SerializeField] private GameObject barricade;
     /*
     [SerializeField]
     private GameObject watchtower;
     [SerializeField]
     private GameObject hill;
     */
+
     private Tilemap map;
 
-    [SerializeField]
-    private Tile floorTile;
-
+    [SerializeField] Tile floorTile;
     [SerializeField] int floorHeight;
     [SerializeField] int tileSize;
 
-    private List<Section> sections;
-    private const int sectionWidth = 20;
-    private const int sectionHeight = 10;
-
-
     void Generate()
     {
-        int ground_x_transform = 10;
-
         for (int i = 0; i < n_sections; i++)
         {
             for (int j = 0; j < sectionWidth; j += tileSize)
             {
                 // create floor of the section
-                map.SetTile(new Vector3Int(i * sectionWidth - ground_x_transform + j, floorHeight, 0), floorTile);
-                map.SetTile(new Vector3Int(i * sectionWidth - ground_x_transform + j, floorHeight - tileSize, 0), floorTile);
+                map.SetTile(new Vector3Int(i * sectionWidth - ground_left_transform + j, floorHeight, 0), floorTile);
+                map.SetTile(new Vector3Int(i * sectionWidth - ground_left_transform + j, floorHeight - tileSize, 0), floorTile);
             }
 
             // create room objects based on room type
             int section_idx = Random.Range(0, sections.Count);
-            //sections[section_idx].GenerateRoomObjects(i, sectionWidth, sectionHeight);
+            sections[section_idx].GenerateRoomObjects(i, sectionWidth, sectionHeight);
         }
 
     }
