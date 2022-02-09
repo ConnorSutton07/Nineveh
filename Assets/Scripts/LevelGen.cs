@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LevelGen : MonoBehaviour
 {
     [SerializeField]
-    private int n_sections;
+    private int n_sections = 5;
     [SerializeField]
     private GameObject ground;
     [SerializeField]
@@ -17,26 +18,39 @@ public class LevelGen : MonoBehaviour
     [SerializeField]
     private GameObject hill;
 
+    private Tilemap map;
+
+    [SerializeField]
+    private Tile floorTile;
+
     private List<Section> sections;
-    private const float sectionWidth = 17.5f;
+    private const int sectionWidth = 20;
     private const int sectionHeight = 10;
+
+    public LevelGen()
+    {
+        
+    }
 
     void Generate()
     {
-        float ground_x_transform = 0;
-        float ground_y_transform = ground.GetComponent<BoxCollider2D>().bounds.size.y / 2;
-        //Debug.Log("Ground x tranform: " + ground_x_transform);
-        // Debug.Log("Ground y transform: " + ground_y_transform);
+        int ground_x_transform = 10;
+        int ground_y_transform = 0; //(int)(ground.GetComponent<BoxCollider2D>().bounds.size.y * 4);
 
         for (int i = 0; i < n_sections; i++)
         {
-            // create floor of the section
-            Instantiate(ground, new Vector2(i * sectionWidth - ground_x_transform, 0 - ground_y_transform), Quaternion.identity);
-            //Debug.Log("Ground x position: " + (i * sectionWidth - ground_x_transform));
-            // Debug.Log("Ground y position: " + (0 - ground_y_transform));
+            for (int j = 0; j < sectionWidth; j++)
+            {
+                // create floor of the section
+                map.SetTile(new Vector3Int(i * sectionWidth - ground_x_transform + j, 0 - ground_y_transform, 0), floorTile);
+                Debug.Log($"Tile set at {i * sectionWidth - ground_x_transform + j}, {0 - ground_y_transform}, {0}");
+            }
+
+            //Instantiate(ground, new Vector2(i * sectionWidth - ground_x_transform, 0 - ground_y_transform), Quaternion.identity);
+
             // create room objects based on room type
             int section_idx = Random.Range(0, sections.Count);
-            sections[section_idx].GenerateRoomObjects(i, sectionWidth, sectionHeight);
+            //sections[section_idx].GenerateRoomObjects(i, sectionWidth, sectionHeight);
         }
     
     }
@@ -51,6 +65,7 @@ public class LevelGen : MonoBehaviour
             new DoublePlatformSection(platform),
             new SimpleSection()
         };
+        map = gameObject.GetComponent<Tilemap>();
         Generate();
     }
 }

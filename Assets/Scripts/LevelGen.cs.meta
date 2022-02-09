@@ -7,8 +7,9 @@ MonoImporter:
   - ground: {fileID: 108735252566674693, guid: e7dad49d5649b41508116a8f613c3661, type: 3}
   - platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   - barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
-  - watchtower: {instanceID: 0}
-  - hill: {instanceID: 0}
+  - watchtower: {fileID: 1861181326016951318, guid: ea3afb29e32c14d6d9ce289779dc0beb, type: 3}
+  - hill: {fileID: 3945277225784494854, guid: 680bafeb178d84ad98c9bf8d1b8f4590, type: 3}
+  - floorTile: {fileID: 11400000, guid: c7c00632bf75c451785f93b2d24e7f79, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
