@@ -148,7 +148,7 @@ RectTransform:
   m_GameObject: {fileID: 127164037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 1341956133}
   m_RootOrder: 2
@@ -466,8 +466,9 @@ MonoBehaviour:
   ground: {fileID: 108735252566674693, guid: e7dad49d5649b41508116a8f613c3661, type: 3}
   platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
-  watchtower: {fileID: 1861181326016951318, guid: ea3afb29e32c14d6d9ce289779dc0beb, type: 3}
-  hill: {fileID: 3945277225784494854, guid: 680bafeb178d84ad98c9bf8d1b8f4590, type: 3}
+  floorTile: {fileID: 0}
+  floorHeight: 0
+  tileSize: 0
 --- !u!4 &304871931
 Transform:
   m_ObjectHideFlags: 0
@@ -893,17 +894,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   star: {fileID: 1344535524578929297, guid: 7f14bfd40254d0a4d97624e6195de685, type: 3}
-  numStars: 250
-  topLeft: {x: -1920, y: -500}
-  bottomRight: {x: 1920, y: 1500}
+  numStars: 600
+  topLeft: {x: -2000, y: 1500}
+  bottomRight: {x: 2000, y: -1500}
+  numOuterStars: 1000
+  outerTopLeft: {x: -10000, y: 5000}
+  outerBottomRight: {x: 10000, y: 5000}
   expandTime: 3
-  expandRate: 0.25
-  expandDrop: 0.01
-  shrinkTime: 1
-  shrinkRate: 1
-  shrinkScale: 0.00003
-  maxBrightness: 0.3
-  fadeRate: 64
+  expandRate: 0.05
+  expandDrop: 0.001
+  expandScale: 0.0000009
+  shrinkTime: 1.4
+  shrinkRate: 0.6
+  shrinkScale: 0.9999
+  maxBrightness: 0.2
+  fadeRate: 80
 --- !u!1001 &1343491127
 PrefabInstance:
   m_ObjectHideFlags: 0

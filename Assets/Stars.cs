@@ -5,19 +5,34 @@ using UnityEngine;
 
 public class Stars : MonoBehaviour
 {
+    [Header("Inner Stars")]
     [SerializeField] GameObject star;
     [SerializeField] int numStars;
     [SerializeField] Vector2 topLeft;
     [SerializeField] Vector2 bottomRight;
+
+    [Header("Outer Stars")]
+    [SerializeField] int numOuterStars;
+    [SerializeField] Vector2 outerTopLeft;
+    [SerializeField] Vector2 outerBottomRight;
+
+
+    [Header("Expand")]
     [SerializeField] float expandTime;
     [SerializeField] float expandRate;
     [SerializeField] float expandDrop;
+    [SerializeField] float expandScale;
+
+    [Header("Shrink")]
     [SerializeField] float shrinkTime;
     [SerializeField] float shrinkRate;
     [SerializeField] float shrinkScale;
     [SerializeField] float maxBrightness;
+
+    [Header("Fade")]
     [SerializeField] float fadeRate;
     GameObject[] stars;
+    GameObject[] outerStars;
     GameObject square2;
     GameObject StarObject;
     SpriteRenderer squareRenderer;
@@ -29,10 +44,12 @@ public class Stars : MonoBehaviour
     {
         width = Screen.width;
         stars = new GameObject[numStars];
+        outerStars = new GameObject[numOuterStars];
         square2 = GameObject.Find("Square2");
         StarObject = GameObject.Find("Stars");
         squareRenderer = GameObject.Find("Square").GetComponent<SpriteRenderer>();
         squareRenderer2 = GameObject.Find("Square2").GetComponent<SpriteRenderer>();
+
         for (int i = 0; i < numStars; i++)
         {
             float x = UnityEngine.Random.Range(topLeft.x, bottomRight.x);
@@ -41,9 +58,31 @@ public class Stars : MonoBehaviour
             stars[i].transform.localPosition = new Vector3(x, y, 0f);
             //stars[i].transform.position = new Vector3(x, y, star.transform.position.z);
         }
+
+        for (int i = 0; i < numOuterStars; i++)
+        {
+            float x = UnityEngine.Random.Range(outerTopLeft.x, outerBottomRight.x);
+            float y = UnityEngine.Random.Range(outerTopLeft.y, outerBottomRight.y);
+            outerStars[i] = Instantiate(star, StarObject.transform, false);
+            outerStars[i].transform.localPosition = new Vector3(x, y, 0f);
+        }
         // Array.Sort(stars, (x, y) => (x.transform.localPosition.x <= y.transform.localPosition.x) ? -1 : 1);
-        Expand();
+        BeginSequence();
         //expandRate /= (1920 / width);
+    }
+
+    public void BeginSequence()
+    {
+        StartCoroutine(Wait(Time.time, 3f, Expand));
+    }
+
+    IEnumerator Wait(float startTime, float duration, Action callable)
+    {
+        while (Time.time < startTime + duration)
+        {
+            yield return null;
+        }
+        callable();
     }
 
     public void Expand()
@@ -73,10 +112,16 @@ public class Stars : MonoBehaviour
                 scale.x += expandRate;
                 scale.y += expandRate;
                 star.transform.localScale = scale;
-                StarObject.transform.localScale = new Vector3(0.5f + scale.x / 100, 0.5f + scale.y / 100);
+
+                Vector3 planeScale = StarObject.transform.localScale;
+                planeScale.x += expandScale;
+                planeScale.y += expandScale;
+                StarObject.transform.localScale = planeScale;
+
                 Vector3 pos = StarObject.transform.localPosition;
                 pos.y -= expandDrop;
                 StarObject.transform.localPosition = pos;
+
                 float v = maxBrightness * (Time.time - startTime) / (endTime - startTime);
                 squareRenderer.color = Color.HSVToRGB(0f, 0f, v);
                 squareRenderer2.color = Color.HSVToRGB(0f, 0f, v);
@@ -98,14 +143,21 @@ public class Stars : MonoBehaviour
                 scale.x = Mathf.Clamp(scale.x - shrinkRate, 0, scale.x);
                 scale.y = Mathf.Clamp(scale.y - shrinkRate, 0, scale.x);
                 star.transform.localScale = scale;
+
                 Vector3 starScale = StarObject.transform.localScale;
-                StarObject.transform.localScale = new Vector3(starScale.x - shrinkScale, starScale.y - shrinkScale);
+                StarObject.transform.localScale = starScale * shrinkScale; //new Vector3(starScale.x - shrinkScale, starScale.y - shrinkScale);
+
+                Vector3 pos = StarObject.transform.localPosition;
+                pos.y += expandDrop * (expandTime / shrinkTime);
+                StarObject.transform.localPosition = pos;
+
                 float v = maxBrightness * ( 1 - ((Time.time - startTime) / (endTime - startTime)));
                 squareRenderer.color = Color.HSVToRGB(0f, 0f, v);
                 squareRenderer2.color = Color.HSVToRGB(0f, 0f, v);
             }
             yield return null;
         }
+        Destroy(StarObject);
     }
 
     IEnumerator FadeStars()

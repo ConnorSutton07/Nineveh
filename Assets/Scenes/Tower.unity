@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 173920015}
   - component: {fileID: 173920014}
   - component: {fileID: 173920013}
+  - component: {fileID: 173920016}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -209,10 +210,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 173920011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c6cfcc69a011145ab8097c737163d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 38bdb6deadb014f7c81a3d53e6aedf8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 581c5cd278296eb4caa40a95a377f117, type: 2}
+  n_sections: 5
+  ground: {fileID: 108735252566674693, guid: e7dad49d5649b41508116a8f613c3661, type: 3}
+  platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
+  barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
+  floorTile: {fileID: 11400000, guid: 581c5cd278296eb4caa40a95a377f117, type: 2}
+  floorHeight: -3
+  tileSize: 3
 --- !u!483693784 &173920014
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -300,6 +307,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &173920016
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173920011}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &269240981
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,8 +374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1183356046884593268}
-  panSpeed: 0.012
-  panWidth: 3.2
+  panSpeed: 0.15
+  panWidth: 3.3
 --- !u!20 &269240985
 Camera:
   m_ObjectHideFlags: 0
@@ -506,7 +529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &304871930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,7 +537,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304871929}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38bdb6deadb014f7c81a3d53e6aedf8a, type: 3}
   m_Name: 
@@ -523,8 +546,9 @@ MonoBehaviour:
   ground: {fileID: 108735252566674693, guid: e7dad49d5649b41508116a8f613c3661, type: 3}
   platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
-  watchtower: {fileID: 1861181326016951318, guid: ea3afb29e32c14d6d9ce289779dc0beb, type: 3}
-  hill: {fileID: 3945277225784494854, guid: 680bafeb178d84ad98c9bf8d1b8f4590, type: 3}
+  floorTile: {fileID: 0}
+  floorHeight: 0
+  tileSize: 0
 --- !u!4 &304871931
 Transform:
   m_ObjectHideFlags: 0
@@ -589,7 +613,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c6cfcc69a011145ab8097c737163d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 581c5cd278296eb4caa40a95a377f117, type: 2}
+  tile: {fileID: 0}
+  sectionCount: 0
+  sectionWidth: 0
 --- !u!483693784 &304871934
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -831,7 +857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &885596029
 Transform:
   m_ObjectHideFlags: 0
