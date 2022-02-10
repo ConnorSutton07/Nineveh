@@ -1,8 +1,11 @@
 <div align="center">
   
 ![title](https://user-images.githubusercontent.com/55513603/152469001-2193918b-afa3-4422-8ea3-2fd8c0ccae35.png)
+ 
   
-![poster](https://user-images.githubusercontent.com/55513603/153309657-a257bf8e-f98b-46d5-9252-c8967550e42e.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/55513603/153309657-a257bf8e-f98b-46d5-9252-c8967550e42e.png" width="575"/>
+</p>
 
 <br>
 
