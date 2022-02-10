@@ -21,6 +21,10 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 6426868497666326525, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
+    - time: 0.083333336
+      value: {fileID: 6426868497666326525, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
+    - time: 0.16666667
+      value: {fileID: 6426868497666326525, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
     - time: 0.23333333
       value: {fileID: -2418196558428526619, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
     - time: 0.41666666
@@ -48,6 +52,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
+    - {fileID: 6426868497666326525, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
+    - {fileID: 6426868497666326525, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
     - {fileID: 6426868497666326525, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
     - {fileID: -2418196558428526619, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
     - {fileID: -480808811739928509, guid: 6a3518827a9307b4c814dabe1203cb5a, type: 3}
@@ -78,6 +84,20 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.083333336
+    functionName: AlertEnemiesOfAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.16666667
+    functionName: EnterAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.23333333
     functionName: Attack
     data: 
