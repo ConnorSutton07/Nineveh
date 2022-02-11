@@ -162,7 +162,7 @@ public class Stars : MonoBehaviour
             squareRenderer.color = Color.HSVToRGB(0f, 0f, v);
             yield return null;
         }
-        Shrink();
+        Fade();
     }
     IEnumerator ShrinkStars(float startTime, float endTime)
     {
@@ -202,17 +202,16 @@ public class Stars : MonoBehaviour
     
     IEnumerator FadeStars(float startTime)
     {
-        while (Time.time < startTime + 1f)
+        while (Time.time < startTime + 3f)
         {
             foreach (GameObject star in stars)
             {
                 Vector3 pos = star.transform.localPosition;
-                pos.x += 0.005f;
+                pos.x += 65f;
                 star.transform.localPosition = pos;
 
                 Vector3 scale = star.transform.localScale;
-                scale.y *= 0.99f;
-                scale.x *= 0.99f;
+                scale.x += 1.5f;
                 star.transform.localScale = scale;
             }
 
