@@ -15,6 +15,7 @@ public class LevelGen : MonoBehaviour
     [SerializeField] private GameObject ground;
     [SerializeField] private GameObject platform;
     [SerializeField] private GameObject barricade;
+    [SerializeField] private bool onlyFloor;
     /*
     [SerializeField]
     private GameObject watchtower;
@@ -40,8 +41,11 @@ public class LevelGen : MonoBehaviour
             }
 
             // create room objects based on room type
-            int section_idx = Random.Range(0, sections.Count);
-            sections[section_idx].GenerateRoomObjects(i, sectionWidth, sectionHeight);
+            if (!onlyFloor)
+            { 
+                int section_idx = Random.Range(0, sections.Count);
+                sections[section_idx].GenerateRoomObjects(i, sectionWidth, sectionHeight);            
+            }
         }
 
     }
