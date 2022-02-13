@@ -6020,7 +6020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 1979633757}
-  intensityIncrease: 0.00065
+  intensityIncrease: 0.0003
   star: {fileID: 1344535524578929297, guid: 7f14bfd40254d0a4d97624e6195de685, type: 3}
   numStars: 700
   topLeft: {x: -1000, y: -500}
@@ -6029,23 +6029,26 @@ MonoBehaviour:
   maxBrightness: 0.22
   expandTime: 15
   expandScale:
-  - 0.001
   - 0.0005
+  - 0.0004
   expandRate:
-  - 0.0035
-  - 0.0025
+  - 0.0013
+  - 0.0011
   expandDrop:
   - 0.0001
   - -0.0001
   expandRotationRate:
-  - 0.03
-  - 0.01
-  spinTime: 5
-  fadeRate: 0.001
+  - 0.012
+  - 0.001
+  spinTime: 8
+  fadeRate: 0.0001
   fadeTime: 3
   fadeScale:
   - 0.95
   - 0.95
+  fadeRotation:
+  - 0.3
+  - 0.01
 --- !u!1001 &1343491127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6428,7 +6431,7 @@ Light:
   serializedVersion: 10
   m_Type: 4
   m_Shape: 0
-  m_Color: {r: 0.9245283, g: 0.546103, b: 0.33531108, a: 0.21960784}
+  m_Color: {r: 0.8207547, g: 0.5840619, b: 0.2206746, a: 0.21960784}
   m_Intensity: 0.8
   m_Range: 30
   m_SpotAngle: 30
@@ -6470,7 +6473,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 25, y: 1}
+  m_AreaSize: {x: 32.53, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0

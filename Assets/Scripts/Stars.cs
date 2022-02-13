@@ -31,6 +31,7 @@ public class Stars : MonoBehaviour
     [SerializeField] float fadeRate;
     [SerializeField] float fadeTime;
     [SerializeField] float[] fadeScale;
+    [SerializeField] float[] fadeRotation;
 
     GameObject[] stars;
     Star[] starData;
@@ -40,8 +41,8 @@ public class Stars : MonoBehaviour
     GameObject[] StarObjects;
     SpriteRenderer squareRenderer;
     SpriteRenderer squareRenderer2;
-    float width;
-
+    float widthFactor;
+    
     public class Star
     {
         float expandRate;
@@ -76,17 +77,26 @@ public class Stars : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        width = Screen.width;
+        widthFactor = Screen.currentResolution.width / 1920f;
+        Debug.Log(widthFactor);
         stars = new GameObject[numStars];
         starData = new Star[numStars];
         square2 = GameObject.Find("Square2");
         StarObjects = new GameObject[2];
         StarObjects[0] = GameObject.Find("Stars");
         StarObjects[1] = GameObject.Find("Stars2");
-        //squareRenderer = GameObject.Find("Square").GetComponent<SpriteRenderer>();
-        //squareRenderer2 = GameObject.Find("Square2").GetComponent<SpriteRenderer>();
         vortex = GameObject.Find("Vortex");
         light.intensity = 0;
+
+        for (int i = 0; i < expandRate.Length; i++)
+        {
+            expandScale[i] *= widthFactor;
+            expandRate[i] *= widthFactor;
+            expandRotationRate[i] *= widthFactor;
+            expandDrop[i] *= widthFactor;
+            intensityIncrease *= 1 + Mathf.Log(widthFactor, 4); // (widthFactor * 0.75f);
+        }
+
 
         for (int i = 0; i < numStars; i++)
         {
@@ -99,6 +109,7 @@ public class Stars : MonoBehaviour
 
             stars[i] = Instantiate(star, StarObjects[i % 2].transform, false);
             stars[i].transform.localPosition = new Vector3(x, y, 0f);
+            stars[i].transform.localScale = new Vector3(0, 0, 1);
             starData[i] = new Star(expandRate[i % 2], expandDrop[i % 2], stars[i].transform.localPosition, stars[i].transform.localScale);
         }
 
@@ -205,10 +216,13 @@ public class Stars : MonoBehaviour
             
             for (int i = 0; i < 2; i++)
             {
+                Vector3 rot = StarObjects[i].transform.rotation.eulerAngles;
                 Vector3 scale = StarObjects[i].transform.localScale;
                 scale.x *= fadeScale[i];
                 scale.y *= fadeScale[i];
+                rot.z += fadeRotation[i];
                 StarObjects[i].transform.localScale = scale;
+                StarObjects[i].transform.rotation = Quaternion.Euler(rot);
             }
             light.intensity -= intensityIncrease * (expandTime / fadeTime);
             yield return null;
