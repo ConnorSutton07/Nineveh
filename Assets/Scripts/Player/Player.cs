@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject healthSlider;
     [SerializeField] GameObject healthYellow;
     [SerializeField] GameObject postureSlider;
+    [SerializeField] GameObject pauseMenu;
 
     private Animator animator;
     private Rigidbody2D body;
@@ -55,8 +56,8 @@ public class Player : MonoBehaviour
 
     float raycastLength = 2f;
 
-    int currentHealth;
-    int currentPosture;
+    public int currentHealth;
+    public int currentPosture;
     float lastHarmonyIncreaseTime;
     float currentHarmony;
     float maxHarmony;
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
     private float healthPercentage = 1f;
     private float posturePercentage = 0f;
     private float currentBlockFrames = 0f;
+    private float menuLoc = 1200f; //700 is on screen
     private bool canDoubleJump = true;
     private bool blockInput = false;
     private bool moveInput = false;
@@ -152,8 +154,20 @@ public class Player : MonoBehaviour
             animator.SetInteger("AnimState", 0);
             if (grounded) StopMovement();
         }
-    }
 
+        
+    }
+    private void Update()
+    {
+        if (pauseMenu.transform.position.x != menuLoc)
+        {
+            if(Mathf.Abs(menuLoc- pauseMenu.transform.position.x) < 1)
+            {
+                pauseMenu.transform.position = new Vector3(menuLoc, pauseMenu.transform.position.y, pauseMenu.transform.position.z);
+            }
+            pauseMenu.transform.position = Vector3.Lerp(pauseMenu.transform.position, new Vector3(menuLoc, pauseMenu.transform.position.y, pauseMenu.transform.position.z),Time.fixedDeltaTime*1f);
+        }
+    }
 
     private void updateHealthBar()
     {
@@ -262,7 +276,23 @@ public class Player : MonoBehaviour
         body.velocity = new Vector2(0f, body.velocity.y);
     }
 
+    void OnPause()
+    {
+        if (Time.timeScale == 0)
+        {
+            //unpausing
+            Time.timeScale = 1;
+            menuLoc = 1200f;
+        }
+        else
+        {
+            //pausing
+            Time.timeScale = 0;
+            menuLoc = 700f;
+        }
+    }
     #endregion
+
 
     #region Coroutines
 
@@ -449,6 +479,18 @@ public class Player : MonoBehaviour
     public void PlaySound(string text)
     {
         audioManager.PlaySound(text);
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        currentHealth = data.health;
+        currentPosture = data.posture;
     }
 
     #endregion

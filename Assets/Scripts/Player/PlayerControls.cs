@@ -73,6 +73,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""9359050c-8d66-4474-8722-b2b975a8b9d2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -471,6 +479,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""StopMoving"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e1086db-1e06-4bb5-a9b2-66dc80c1d50c"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f39dc2ea-217a-42ee-b120-dcbbc57c6fd7"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -531,6 +561,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_ExitBlock = m_Gameplay.FindAction("ExitBlock", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -587,6 +618,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_Block;
     private readonly InputAction m_Gameplay_ExitBlock;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -598,6 +630,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputAction @ExitBlock => m_Wrapper.m_Gameplay_ExitBlock;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +661,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @ExitBlock.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnExitBlock;
                 @ExitBlock.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnExitBlock;
                 @ExitBlock.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnExitBlock;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -653,6 +689,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @ExitBlock.started += instance.OnExitBlock;
                 @ExitBlock.performed += instance.OnExitBlock;
                 @ExitBlock.canceled += instance.OnExitBlock;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -702,5 +741,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnExitBlock(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
