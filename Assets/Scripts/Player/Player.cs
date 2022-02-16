@@ -491,6 +491,8 @@ public class Player : MonoBehaviour
 
         currentHealth = data.health;
         currentPosture = data.posture;
+        updateHealthBar();
+        updatePostureBar();
     }
 
     #endregion
