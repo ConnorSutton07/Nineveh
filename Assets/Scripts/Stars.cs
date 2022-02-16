@@ -33,6 +33,9 @@ public class Stars : MonoBehaviour
     [SerializeField] float[] fadeScale;
     [SerializeField] float[] fadeRotation;
 
+    [Header("Player")]
+    [SerializeField] Player player;
+
     GameObject[] stars;
     Star[] starData;
     GameObject vortex;
@@ -87,14 +90,14 @@ public class Stars : MonoBehaviour
         StarObjects[1] = GameObject.Find("Stars2");
         vortex = GameObject.Find("Vortex");
         light.intensity = 0;
-
+        float amplifier = 1 + Mathf.Log(widthFactor, 1024);
         for (int i = 0; i < expandRate.Length; i++)
         {
-            expandScale[i] *= widthFactor;
-            expandRate[i] *= widthFactor;
-            expandRotationRate[i] *= widthFactor;
-            expandDrop[i] *= widthFactor;
-            intensityIncrease *= 1 + Mathf.Log(widthFactor, 4); // (widthFactor * 0.75f);
+            expandScale[i] *= amplifier;
+            expandRate[i] *= amplifier;
+            expandRotationRate[i] *= amplifier;
+            expandDrop[i] *= amplifier;
+            intensityIncrease *= amplifier; // 1 + Mathf.Log(widthFactor, 1024); // (widthFactor * 0.75f);
         }
 
 
@@ -227,6 +230,7 @@ public class Stars : MonoBehaviour
             light.intensity -= intensityIncrease * (expandTime / fadeTime);
             yield return null;
         }
+        player.ActivateLight();
     }
 
 

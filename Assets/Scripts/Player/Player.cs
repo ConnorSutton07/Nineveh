@@ -43,6 +43,10 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject healthYellow;
     [SerializeField] GameObject postureSlider;
 
+    [Header("Light")]
+    [SerializeField] float maxIntensity;
+    [SerializeField] float intensityRate;
+
     private Animator animator;
     private Rigidbody2D body;
     private AudioSource audioSource;
@@ -73,7 +77,7 @@ public class Player : MonoBehaviour
     private bool blockInput = false;
     private bool moveInput = false;
     private bool canAirDash = true;
-
+    private Light spotlight; 
 
     State state;
 
@@ -85,6 +89,7 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
+        spotlight = transform.Find("Light").GetComponent<Light>();
         audioSource = GetComponent<AudioSource>();
         audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
         groundSensor = transform.Find("GroundSensor").GetComponent<GroundSensor>();
@@ -97,6 +102,8 @@ public class Player : MonoBehaviour
         state = State.DEFAULT;
         blockStart = 0f;
         blockEnd = -blockCooldownLength;
+        spotlight.intensity = 0f;
+        spotlight.enabled = false;
         updatePostureBar();
     }
 
@@ -277,6 +284,27 @@ public class Player : MonoBehaviour
         state = State.DEFAULT;
     }
 
+    IEnumerator IncreaseLight()
+    {
+        while (spotlight.intensity < maxIntensity)
+        {
+            spotlight.intensity += intensityRate;
+            yield return new WaitForSeconds(0.01f);
+        }
+        spotlight.intensity = maxIntensity;
+    }
+
+    IEnumerator FadeLight()
+    {
+        while (spotlight.intensity > 0)
+        {
+            spotlight.intensity -= intensityRate;
+            yield return new WaitForSeconds(0.01f);
+        }
+        spotlight.intensity = 0;
+        spotlight.enabled = false;
+    }
+
     #endregion
 
     #region Private Methods
@@ -368,6 +396,18 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Recover");
             currentPosture = 0;
         }
+    }
+
+    public void ActivateLight()
+    {
+        spotlight.enabled = true;
+        Debug.Log("here");
+        StartCoroutine(IncreaseLight());
+    }
+
+    public void DeactivateLight()
+    {
+        StartCoroutine(FadeLight());
     }
 
     public void SuccessfulDeflect()
