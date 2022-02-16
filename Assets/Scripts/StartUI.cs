@@ -10,8 +10,4 @@ public class StartUI : MonoBehaviour
       SceneManager.Load(SceneManager.Scene.Tower1);
     }
 
-    public void doSomething()
-  {
-    Debug.Log("test");
-  }
 }
