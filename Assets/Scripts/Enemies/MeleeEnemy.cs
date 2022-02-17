@@ -52,7 +52,6 @@ public class MeleeEnemy : Enemy
     {
         distance = Vector2.Distance(transform.position, target.position);
         float yDistance = Mathf.Abs(transform.position.y - target.position.y);
-        Debug.Log(yDistance);
         if (EnemyInBetween() || yDistance >= unreachableHeightDistance)
         {
             AttemptBlock(true, 0.25f);

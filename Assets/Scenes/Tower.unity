@@ -616,6 +616,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 420700259, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4eeacab1dc26f1c4ab77b1f5d65b556c, type: 3}
+    - target: {fileID: 451881437, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Name
+      value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 927444829, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Name
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 944463547, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Name
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150320417, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442457047, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4eeacab1dc26f1c4ab77b1f5d65b556c, type: 3}
+    - target: {fileID: 1870522848, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4eeacab1dc26f1c4ab77b1f5d65b556c, type: 3}
+    - target: {fileID: 2030666130, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4eeacab1dc26f1c4ab77b1f5d65b556c, type: 3}
     - target: {fileID: 1182497253661175514, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_Name
       value: Player
