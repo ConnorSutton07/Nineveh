@@ -6,12 +6,10 @@ public class RangedEnemy : Enemy
 {
     [SerializeField] GameObject projectile;
     Transform projectileOrigin;
-    Transform target;
 
     protected override void Start()
     {
         base.Start();
-        target = player.Find("RaycastOrigin");
         projectileOrigin = transform.Find("ProjectileOrigin");
     }
 

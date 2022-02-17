@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int flip;
     [SerializeField] protected float deflectChance;
     protected Transform raycastPoint;
-
+    protected Transform target;
     protected Transform player;
     protected RaycastHit2D hit;
     protected Animator animator;
@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     protected Player playerScript;
     protected int currentHealth;
     protected int currentPosture;
+
 
     #endregion
 
@@ -62,7 +63,7 @@ public class Enemy : MonoBehaviour
         attackCooldown = 0f;
         state = State.DEFAULT;
         prevDirection = transform.localScale.x * flip;
-        Debug.Log(state);
+        target = player.Find("RaycastOrigin");
     }
 
     #endregion
