@@ -7,6 +7,7 @@ public class StartUI : MonoBehaviour
 {
   public void StartGame()
   {
+    Debug.Log("Call StartUI StartGame");
     SceneManager.Load(SceneManager.Scene.Tower);
   }
 

@@ -18,14 +18,16 @@ public static class SceneManager
 
   public static void Load(Scene scene)
   {
+    Debug.Log("call SceneManager Load");
     //set lodaer callback action to load target scene
     onLoaderCallback = () =>
     {
+      Debug.Log("Should go to called scene");
       UnityEngine.SceneManagement.SceneManager.LoadScene(scene.ToString());
     };
 
     //loads loading screen
-    //currently a pause is not working 
+
     LoadScreenDelay();
   }
 
