@@ -6,7 +6,7 @@ public class LoaderCallback : MonoBehaviour
 {
   private bool isDoneUpdating = false;
   private int counter = 0;
-  private int updates_to_wait = 1000;
+  private int updates_to_wait = 500;
 
   private void Update()
   {
