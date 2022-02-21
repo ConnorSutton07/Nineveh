@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class LoaderCallback : MonoBehaviour
 {
-  private bool isFirstUpdate = true;
+  private bool isDoneUpdating = false;
+  private int counter = 0;
+  private int updates_to_wait = 1000;
 
   private void Update()
   {
-    if (isFirstUpdate)
+    counter += 1;
+    if (counter > updates_to_wait)
     {
-      isFirstUpdate = false;
+      isDoneUpdating = true;
+      //its possible the init values need to be reset at this point
+    }
+    if (isDoneUpdating)
+    {
       SceneManager.LoaderCallback();
     }
   }
 
   private void Start()
   {
-    //StartCoroutine(delay()); //does not delay in the right spot and
-    //caused bug
     Debug.Log("We have triggered start");
   }
 
-  IEnumerator delay()
-  {
-    Debug.Log("waiting...");
-    yield return new WaitForSeconds(2);
-    Debug.Log("Done");
-  }
 }
