@@ -1,18 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public static class SceneManager
 {
-    public void StartGame()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Tower");
-    }
+  public enum Scene
+  {
+    Start,
+    Arena,
+    Tower,
+    Loading
+  }
 
-    public void Exit()
+  private static Action onLoaderCallback;
+
+  public static void Load(Scene scene)
+  {
+    //set lodaer callback action to load target scene
+    onLoaderCallback = () =>
     {
-        Application.Quit();
+      UnityEngine.SceneManagement.SceneManager.LoadScene(scene.ToString());
+    };
+
+    //loads loading screen
+    //currently a pause is not working 
+    LoadScreenDelay();
+  }
+
+  private static void LoadScreenDelay()
+  {
+    //generated so that invoke can be called to delay time 
+    UnityEngine.SceneManagement.SceneManager.LoadScene(Scene.Loading.ToString());
+  }
+
+  public static void LoaderCallback()
+  {
+    //necessary for delay of loading screen lad
+    if (onLoaderCallback != null)
+    {
+      onLoaderCallback();
+      onLoaderCallback = null;
     }
+  }
+
+  public static void Exit()
+  {
+    Application.Quit();
+  }
+
 }
-
