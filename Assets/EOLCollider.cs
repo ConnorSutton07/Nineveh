@@ -15,4 +15,13 @@ public class EOLCollider : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+      if (collision.gameObject.layer == Constants.PLAYER_LAYER)
+      {
+          //call function to store the player vals
+          SceneManager.Load(SceneManager.Scene.Tower);
+      }
+    }
 }
