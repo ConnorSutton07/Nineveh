@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,7 +9,10 @@ public class LevelGen : MonoBehaviour
     public int TowerFloorNumber;
     private List<Section> sections = new List<Section>();
     public int n_sections = 5;
+
     private const int n_unique_sections = 4; // 6
+    private List<int> RandomSectionGrabBag = Enumerable.Range(0, n_unique_sections).ToList();
+
     private const int sectionWidth = 20;
     private const int sectionHeight = 8;
     private const int ground_left_transform = 10;
@@ -35,7 +39,6 @@ public class LevelGen : MonoBehaviour
 
     public bool onlyFloor;
     public bool spawnEnemies;
-    private int lastSectionGenerated = 0;
 
     void Generate()
     {
@@ -69,38 +72,53 @@ public class LevelGen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Random.State currentState = Random.state;
         map = gameObject.GetComponent<Tilemap>();
         Generate();
+        for (int i = 0; i < sections.Count(); i++)
+        {
+            Debug.Log("Section " + i + " is of type: " + sections[i].sectionType);
+        }
     }
 
     Section GetRandomSection(){
-        int randomSectionNum = Random.Range(0, n_unique_sections);
-
-        if (randomSectionNum == lastSectionGenerated)
+        if (RandomSectionGrabBag.Count() == 0)
         {
-            randomSectionNum = (randomSectionNum + 1) % n_unique_sections;
+            foreach (int number in Enumerable.Range(0, n_unique_sections)){
+                RandomSectionGrabBag.Add(number);
+            }
         }
 
-        lastSectionGenerated = randomSectionNum;
+        int randomSectionNum = RandomSectionGrabBag[Random.Range(0, RandomSectionGrabBag.Count())];
+        Section selectedSection = null;
 
         switch (randomSectionNum)
         {
             case 0:
-                return new SimpleSection(TowerFloorNumber, SwordEnemy, EnemyParent);
+                selectedSection = new SimpleSection(TowerFloorNumber, SwordEnemy, EnemyParent);
+                break;
             case 1:
-                return new SinglePlatformSection(TowerFloorNumber, platform, SwordEnemy, BowEnemy, EnemyParent, PlatformParent);
+                selectedSection = new SinglePlatformSection(TowerFloorNumber, platform, SwordEnemy, BowEnemy, EnemyParent, PlatformParent);
+                break;
             case 2:
-                return new DoublePlatformSection(TowerFloorNumber, platform, SwordEnemy, BowEnemy, EnemyParent, PlatformParent);
+                selectedSection = new DoublePlatformSection(TowerFloorNumber, platform, SwordEnemy, BowEnemy, EnemyParent, PlatformParent);
+                break;
             case 3:
-                return new BarricadeSection(TowerFloorNumber, barricade, SwordEnemy, EnemyParent, PlatformParent);
+                selectedSection = new BarricadeSection(TowerFloorNumber, barricade, SwordEnemy, EnemyParent, PlatformParent);
+                break;
             // case 4:
-            //     return new HeightStruggleSection(hill);
+            //     selectedSection =  new HeightStruggleSection(hill);
             // case 5:
-            //     return new WatchTowerSection(watchtower);
+            //     selectedSection =  new WatchTowerSection(watchtower);
             default:
                 Debug.Log("Invalid section number generated in GetRandomSection()");
-                return new SimpleSection(TowerFloorNumber, SwordEnemy, EnemyParent);
+                selectedSection = new SimpleSection(TowerFloorNumber, SwordEnemy, EnemyParent);
+                break;
         }
+
+        RandomSectionGrabBag.Remove(randomSectionNum);
+
+        return selectedSection;
     }
 
     
