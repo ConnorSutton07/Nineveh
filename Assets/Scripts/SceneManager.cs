@@ -7,7 +7,7 @@ public class SceneManager : MonoBehaviour
 {
     public void StartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Tower");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Floor 1");
     }
 
     public void Exit()

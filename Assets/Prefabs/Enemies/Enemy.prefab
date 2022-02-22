@@ -214,7 +214,7 @@ MonoBehaviour:
   attackPoint: {fileID: 6707923284739050073}
   attackDamage: 20
   parryDamagePercentage: 20
-  unreachableHeightDistance: 1
+  unreachableHeightDistance: 2.5
 --- !u!1 &8348768811320835002
 GameObject:
   m_ObjectHideFlags: 0

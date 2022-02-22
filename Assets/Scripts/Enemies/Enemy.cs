@@ -19,8 +19,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected float awareDistance;
     [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float minGap;
-    [SerializeField] protected float maxGap;
+    [SerializeField] protected float gap;
     [SerializeField] protected LayerMask raycastDetectionLayers;
     [SerializeField] protected int flip;
     [SerializeField] protected float deflectChance;
@@ -160,11 +159,10 @@ public class Enemy : MonoBehaviour
     {
         gameObject.layer = Constants.IGNORE_RAYCAST_LAYER;
         Vector2 direction = new Vector2(-transform.localScale.x, 0f);
-        float gapBetweenOtherEnemies = Random.Range(minGap, maxGap);
         RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, direction, raycastDetectionLayers);
         if (hit.collider != null && hit.collider.gameObject.layer == Constants.ENEMY_LAYER) // check for enemy in between
         {
-            if (hit.distance <= gapBetweenOtherEnemies && hit.collider.gameObject.layer == Constants.ENEMY_LAYER)
+            if (hit.distance <= gap && hit.collider.gameObject.layer == Constants.ENEMY_LAYER)
             {
                 gameObject.layer = Constants.ENEMY_LAYER;
                 return true;
