@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skybox Cubemap Extended Night
+  m_Name: Floor 5
   m_Shader: {fileID: 4800000, guid: 82881a2d011b0964696411c822cdd00b, type: 3}
   m_ShaderKeywords: _ENABLEFOG_ON
   m_LightmapFlags: 0
@@ -87,14 +87,14 @@ Material:
     - _DstBlend: 0
     - _EnableFog: 1
     - _EnableRotation: 0
-    - _Exposure: 1
+    - _Exposure: 1.3
     - _Float0: -0.21
     - _FogFill: 0.548
-    - _FogHeight: 0.929
+    - _FogHeight: 1
     - _FogIntensity: 1
     - _FogMessage: 0
     - _FogPosition: -0.39
-    - _FogSmoothness: 0.035
+    - _FogSmoothness: 0.01
     - _Fogg: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -119,5 +119,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Tex_HDR: {r: 1, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _TintColor: {r: 0.4339623, g: 0.21084018, b: 0.35871336, a: 1}
   m_BuildTextureStacks: []
