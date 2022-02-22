@@ -24,9 +24,9 @@ public class LevelGen : MonoBehaviour
     */
     public GameObject SwordEnemy;
     public GameObject BowEnemy;
-    public GameObject EOLCollider;
     public Transform EnemyParent;
     public Transform PlatformParent;
+    public Transform EndOfLevelCollider;
 
     private Tilemap map;
 
@@ -65,14 +65,10 @@ public class LevelGen : MonoBehaviour
                 sec.SpawnRoomEnemies(i, sectionWidth, sectionHeight);
             }
 
-            //create collider for end of level 
-            if (i == (n_sections -1))
-            {
-                //create object as a child object of sec??
-                Debug.Log("last section number: " + i);
-                sec.CreateEndOfLevelCollider(i, sectionWidth, sectionHeight);
-            }
         }
+        //set end of level collider position
+        Vector3 tmp = new Vector3((n_sections - 1) * sectionWidth - (sectionWidth/5) , 1, 0);
+        EndOfLevelCollider.position = tmp;
 
     }
     // Start is called before the first frame update
@@ -127,14 +123,6 @@ public abstract class Section : MonoBehaviour
         // weigh the TowerFloorNumber into the probability of spawning enemies
         // chance = 10% + (TowerFloorNumber * 10%)
         return Random.Range(0, 100) < 10 + TowerFloorNumber * 10;
-    }
-    public void CreateEndOfLevelCollider(int sectionIndex, int sectionWidth, int sectionHeight)
-    {
-        float x_loc = (sectionIndex * sectionWidth) - (sectionWidth / 4);
-        //instantiate the collider object
-        
-        //Instantiate(EOLCollider, new Vector2(x_loc, 1), Quaternion.identity); //no parent object needed?
-        Debug.Log("Expected location of collider: " + x_loc);
     }
 }
 
