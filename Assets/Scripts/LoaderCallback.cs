@@ -24,7 +24,6 @@ public class LoaderCallback : MonoBehaviour
 
   private void Start()
   {
-    Debug.Log("Start LoaderCallback");
   }
 
 }
