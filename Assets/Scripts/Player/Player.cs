@@ -554,11 +554,16 @@ public class Player : MonoBehaviour
         updatePostureBar();
     }
 
+    public void StorePlayerDataGlobal()
+    {
+        GlobalDataPassing.Instance.SetPlayerData(currentHealth, currentHarmony, currentPosture);
+    }
+
     #endregion
 
-    #region Trigger State
+  #region Trigger State
 
-    public void EnterStun()
+  public void EnterStun()
     {
         state = State.STUNNED;
     }

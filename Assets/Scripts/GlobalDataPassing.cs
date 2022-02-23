@@ -7,16 +7,16 @@ public class GlobalDataPassing : MonoBehaviour
 
     public static GlobalDataPassing Instance;
     private bool isPlayerDataChanged = false;
-    int playerHealth = 80;
-    int playerHarmony = 40;
-    int playerPosture = 40;
+    int playerHealth;
+    float playerHarmony;
+    int playerPosture;
     
     public int GetPlayerHealth()
     {
         return playerHealth;
     }
 
-    public int GetPlayerHarmony()
+    public float GetPlayerHarmony()
     {
       return playerHarmony;
     }
@@ -31,7 +31,7 @@ public class GlobalDataPassing : MonoBehaviour
         playerHealth = health;
     }
 
-    public void SetPlayerHarmony(int harmony)
+    public void SetPlayerHarmony(float harmony)
     {
         playerHarmony = harmony;
     }
@@ -42,7 +42,7 @@ public class GlobalDataPassing : MonoBehaviour
     }
 
 
-    public void SetPlayerData(int health, int harmony, int posture)
+    public void SetPlayerData(int health, float harmony, int posture)
     {
         SetPlayerHealth(health);
         SetPlayerHarmony(harmony);

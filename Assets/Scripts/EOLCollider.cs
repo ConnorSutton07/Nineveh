@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class EOLCollider : MonoBehaviour
 {
+
+    [SerializeField]
+    public GameObject player;
+
+    private Player playerScpt;
+
+    void Start()
+    {
+      playerScpt = player.GetComponent<Player>();   
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
       if (collision.gameObject.layer == Constants.PLAYER_LAYER)
       {
-          //call function to store the player vals
-          //how to get player data/call function in player?
-          //ask connor
+          playerScpt.StorePlayerDataGlobal();
           SceneManager.Load(SceneManager.Scene.Tower);
       }
     }
