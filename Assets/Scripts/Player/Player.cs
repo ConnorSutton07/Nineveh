@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    #region Attributes
+  #region Attributes
 
     [Header ("Stats")]
     public int maxHealth = 100;
