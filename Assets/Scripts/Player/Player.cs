@@ -118,14 +118,7 @@ public class Player : MonoBehaviour
         if (!GlobalDataPassing.Instance.IsFirstLevel())
         {
           //pass over player stats from previous level
-          currentHealth = GlobalDataPassing.Instance.GetPlayerHealth();
-          currentHarmony = GlobalDataPassing.Instance.GetPlayerHarmony();
-          currentPosture = GlobalDataPassing.Instance.GetPlayerPosture();
-          Debug.Log("Health: " + currentHealth);
-          Debug.Log("Harmony: " + currentHarmony);
-          Debug.Log("Posture: " + currentPosture);
-          updateHealthBar();
-          updatePostureBar();
+          LoadPlayerData();
         }
     }
 
@@ -367,6 +360,15 @@ public class Player : MonoBehaviour
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    private void LoadPlayerData()
+    {
+        currentHealth = GlobalDataPassing.Instance.GetPlayerHealth();
+        currentHarmony = GlobalDataPassing.Instance.GetPlayerHarmony();
+        currentPosture = GlobalDataPassing.Instance.GetPlayerPosture();
+        updateHealthBar();
+        updatePostureBar();
     }
 
     #endregion

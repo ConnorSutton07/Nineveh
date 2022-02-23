@@ -611,6 +611,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &640498692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1182497253661175514, guid: acea72d430d65314b9c510667a653e44, type: 3}
+  m_PrefabInstance: {fileID: 783058426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &783058426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1115,6 +1120,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7864632178241535590, guid: c90b8c25350032f4ea0d9ee2efb01719, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 640498692}
     - target: {fileID: 7864632178241535591, guid: c90b8c25350032f4ea0d9ee2efb01719, type: 3}
       propertyPath: m_Name
       value: EOLCollider
