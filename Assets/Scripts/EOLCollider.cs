@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class EOLCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
       if (collision.gameObject.layer == Constants.PLAYER_LAYER)
       {
           //call function to store the player vals
+          //how to get player data/call function in player?
+          //ask connor
           SceneManager.Load(SceneManager.Scene.Tower);
       }
     }

@@ -86,9 +86,9 @@ public class Player : MonoBehaviour
 
     State state;
 
-    #endregion
+  #endregion
 
-    #region Initialization
+  #region Initialization
 
     void Start()
     {
@@ -114,6 +114,19 @@ public class Player : MonoBehaviour
         spotlight.intensity = 0f;
         spotlight.enabled = false;
         updatePostureBar();
+
+        if (!GlobalDataPassing.Instance.IsFirstLevel())
+        {
+          //pass over player stats from previous level
+          currentHealth = GlobalDataPassing.Instance.GetPlayerHealth();
+          currentHarmony = GlobalDataPassing.Instance.GetPlayerHarmony();
+          currentPosture = GlobalDataPassing.Instance.GetPlayerPosture();
+          Debug.Log("Health: " + currentHealth);
+          Debug.Log("Harmony: " + currentHarmony);
+          Debug.Log("Posture: " + currentPosture);
+          updateHealthBar();
+          updatePostureBar();
+        }
     }
 
     #endregion
