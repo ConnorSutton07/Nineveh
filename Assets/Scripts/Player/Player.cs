@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    #region Attributes
+  #region Attributes
 
     [Header ("Stats")]
     public int maxHealth = 100;
@@ -86,9 +86,9 @@ public class Player : MonoBehaviour
 
     State state;
 
-    #endregion
+  #endregion
 
-    #region Initialization
+  #region Initialization
 
     void Start()
     {
@@ -114,6 +114,12 @@ public class Player : MonoBehaviour
         spotlight.intensity = 0f;
         spotlight.enabled = false;
         updatePostureBar();
+
+        if (!GlobalDataPassing.Instance.IsFirstLevel())
+        {
+          //pass over player stats from previous level
+          LoadPlayerData();
+        }
     }
 
     #endregion
@@ -356,6 +362,15 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
+    private void LoadPlayerData()
+    {
+        currentHealth = GlobalDataPassing.Instance.GetPlayerHealth();
+        currentHarmony = GlobalDataPassing.Instance.GetPlayerHarmony();
+        currentPosture = GlobalDataPassing.Instance.GetPlayerPosture();
+        updateHealthBar();
+        updatePostureBar();
+    }
+
     #endregion
 
     #region Public Methods
@@ -541,11 +556,16 @@ public class Player : MonoBehaviour
         updatePostureBar();
     }
 
+    public void StorePlayerDataGlobal()
+    {
+        GlobalDataPassing.Instance.SetPlayerData(currentHealth, currentHarmony, currentPosture);
+    }
+
     #endregion
 
-    #region Trigger State
+  #region Trigger State
 
-    public void EnterStun()
+  public void EnterStun()
     {
         state = State.STUNNED;
     }

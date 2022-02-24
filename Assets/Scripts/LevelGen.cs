@@ -30,6 +30,7 @@ public class LevelGen : MonoBehaviour
     public GameObject BowEnemy;
     public Transform EnemyParent;
     public Transform PlatformParent;
+    public Transform EndOfLevelCollider;
 
     private Tilemap map;
 
@@ -66,7 +67,11 @@ public class LevelGen : MonoBehaviour
             {
                 sec.SpawnRoomEnemies(i, sectionWidth, sectionHeight);
             }
+
         }
+        //set end of level collider position
+        Vector3 tmp = new Vector3((n_sections - 1) * sectionWidth - (sectionWidth/5) , 1, 0);
+        EndOfLevelCollider.position = tmp;
 
     }
     // Start is called before the first frame update
