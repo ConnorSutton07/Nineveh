@@ -70,8 +70,11 @@ public class LevelGen : MonoBehaviour
 
         }
         //set end of level collider position
-        Vector3 tmp = new Vector3((n_sections - 1) * sectionWidth - (sectionWidth/5) , 1, 0);
-        EndOfLevelCollider.position = tmp;
+        if (!onlyFloor)
+        {
+            Vector3 endPosition = new Vector3((n_sections - 1) * sectionWidth - (sectionWidth/5) , 1, 0);
+            EndOfLevelCollider.position = endPosition;
+        }
 
     }
     // Start is called before the first frame update
