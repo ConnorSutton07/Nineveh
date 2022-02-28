@@ -10,7 +10,12 @@ public static class SceneManager
   {
     Start,
     Arena,
-    Tower,
+    Floor1,
+    Floor2,
+    Floor3,
+    Floor4,
+    Floor5,
+    Floor6,
     Loading
   }
 

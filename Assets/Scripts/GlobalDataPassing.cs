@@ -10,6 +10,7 @@ public class GlobalDataPassing : MonoBehaviour
     int playerHealth;
     float playerHarmony;
     int playerPosture;
+    int currLevel = 1;
     
     public int GetPlayerHealth()
     {
@@ -18,12 +19,17 @@ public class GlobalDataPassing : MonoBehaviour
 
     public float GetPlayerHarmony()
     {
-      return playerHarmony;
+        return playerHarmony;
     }
 
     public int GetPlayerPosture()
     {
-      return playerPosture;
+        return playerPosture;
+    }
+
+    public int GetCurrentLevel()
+    {
+        return currLevel;
     }
 
     public void SetPlayerHealth(int health)
@@ -40,7 +46,11 @@ public class GlobalDataPassing : MonoBehaviour
     {
         playerPosture = posture;
     }
-
+    
+    public void IncreaseLevel()
+    {
+        currLevel += 1;
+    }
 
     public void SetPlayerData(int health, float harmony, int posture)
     {
