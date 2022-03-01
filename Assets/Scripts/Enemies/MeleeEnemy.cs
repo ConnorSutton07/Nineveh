@@ -11,11 +11,12 @@ public class MeleeEnemy : Enemy
     public int parryDamagePercentage;
     [SerializeField] float unreachableHeightDistance;
 
-    public override void AttackPlayer(ref Player playerScript, ref Transform player, ref string attackSound, ref int postureDamage)
+    public override void AttackPlayer()
     {
         //float postureDamage = 0;
         //string attackSound = "";
-
+        string attackSound;
+        int postureDamage = 0;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
         // Damage them
@@ -46,6 +47,8 @@ public class MeleeEnemy : Enemy
             }
         }
         else attackSound = "sword_miss";
+        PlaySound(attackSound);
+        TakeDamage(0, postureDamage);
     }
 
     protected override void EnemyLogic()

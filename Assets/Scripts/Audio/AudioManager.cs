@@ -33,7 +33,7 @@ public class Sound2
     }
 }
 
-public class AudioManagerBanditScript : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] Sound2[] m_sounds;
 
