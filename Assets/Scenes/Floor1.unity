@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29841363, g: 0.18394546, b: 0.07774226, a: 1}
+  m_IndirectSpecularColor: {r: 0.2988422, g: 0.18382767, b: 0.07768692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -178,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 1434735538674771885, guid: 546afc7a3589c8f4788e9752230c0d8f, type: 3}
       propertyPath: m_Name
       value: Melee 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434735538674771885, guid: 546afc7a3589c8f4788e9752230c0d8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1440631793206868783, guid: 546afc7a3589c8f4788e9752230c0d8f, type: 3}
       propertyPath: m_RootOrder
@@ -990,6 +994,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1434735538674771885, guid: 57aa6da3741742c44aee5b65cc872a7a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1440631793206868783, guid: 57aa6da3741742c44aee5b65cc872a7a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1264,6 +1272,10 @@ PrefabInstance:
     - target: {fileID: 1434735538674771885, guid: 3982ebffd353b934cb373ce7b6ea2397, type: 3}
       propertyPath: m_Name
       value: Melee 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434735538674771885, guid: 3982ebffd353b934cb373ce7b6ea2397, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1440631793206868783, guid: 3982ebffd353b934cb373ce7b6ea2397, type: 3}
       propertyPath: m_RootOrder
