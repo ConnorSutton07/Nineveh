@@ -26,7 +26,7 @@ public class LevelGen : MonoBehaviour
     [SerializeField]
     private GameObject hill;
     */
-    public GameObject SwordEnemy;
+    public GameObject[] MeleeEnemies;
     public GameObject BowEnemy;
     public Transform EnemyParent;
     public Transform PlatformParent;
@@ -95,16 +95,16 @@ public class LevelGen : MonoBehaviour
         switch (randomSectionNum)
         {
             case 0:
-                selectedSection = new SimpleSection(TowerFloorNumber, SwordEnemy, EnemyParent);
+                selectedSection = new SimpleSection(TowerFloorNumber, MeleeEnemies, EnemyParent);
                 break;
             case 1:
-                selectedSection = new SinglePlatformSection(TowerFloorNumber, platform, SwordEnemy, BowEnemy, EnemyParent, PlatformParent);
+                selectedSection = new SinglePlatformSection(TowerFloorNumber, platform, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
                 break;
             case 2:
-                selectedSection = new DoublePlatformSection(TowerFloorNumber, platform, SwordEnemy, BowEnemy, EnemyParent, PlatformParent);
+                selectedSection = new DoublePlatformSection(TowerFloorNumber, platform, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
                 break;
             case 3:
-                selectedSection = new BarricadeSection(TowerFloorNumber, barricade, SwordEnemy, EnemyParent, PlatformParent);
+                selectedSection = new BarricadeSection(TowerFloorNumber, barricade, MeleeEnemies, EnemyParent, PlatformParent);
                 break;
             // case 4:
             //     selectedSection =  new HeightStruggleSection(hill);
@@ -112,7 +112,7 @@ public class LevelGen : MonoBehaviour
             //     selectedSection =  new WatchTowerSection(watchtower);
             default:
                 Debug.Log("Invalid section number generated in GetRandomSection()");
-                selectedSection = new SimpleSection(TowerFloorNumber, SwordEnemy, EnemyParent);
+                selectedSection = new SimpleSection(TowerFloorNumber, MeleeEnemies, EnemyParent);
                 break;
         }
 
@@ -137,16 +137,20 @@ public abstract class Section : MonoBehaviour
         // chance = 10% + (TowerFloorNumber * 10%)
         return Random.Range(0, 100) < 10 + TowerFloorNumber * 10;
     }
+    public GameObject getRandomDifficulty(GameObject[] enemyChoices)
+    {
+        return enemyChoices[Random.Range(0, enemyChoices.Length)];
+    }
 }
 
 public class SimpleSection : Section
 {
-    private GameObject MeleeEnemy;
-    public SimpleSection(int floorNum, GameObject meleeEnemy, Transform enemies)
+    private GameObject[] MeleeEnemies;
+    public SimpleSection(int floorNum, GameObject[] meleeEnemies, Transform enemies)
     {
         sectionType = "Simple";
         TowerFloorNumber = floorNum;
-        MeleeEnemy = meleeEnemy;
+        MeleeEnemies = meleeEnemies;
         EnemyParent = enemies;
     }
     public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
@@ -159,11 +163,11 @@ public class SimpleSection : Section
         float e1_x = (sectionIndex * sectionWidth) - (sectionWidth / 2);
         float e2_x = (sectionIndex * sectionWidth) - (sectionWidth / 3); 
         // spawn a melee enemy no matter what
-        Instantiate(MeleeEnemy, new Vector2(e1_x, 0), Quaternion.identity, EnemyParent);
+        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e1_x, 0), Quaternion.identity, EnemyParent);
         // maybe spawn another melee enemy
         if (ShouldSpawnEnemy())
         {
-            Instantiate(MeleeEnemy, new Vector2(e2_x, 0), Quaternion.identity, EnemyParent);
+            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e2_x, 0), Quaternion.identity, EnemyParent);
         }
         return;
     }
@@ -172,7 +176,7 @@ public class SimpleSection : Section
 public class SinglePlatformSection : Section
 {
     private GameObject platform;
-    private GameObject MeleeEnemy;
+    private GameObject[] MeleeEnemies;
     private GameObject RangedEnemy;
 
     private float x_transform;
@@ -180,12 +184,12 @@ public class SinglePlatformSection : Section
     private float plat_x;
     private float plat_y;
 
-    public SinglePlatformSection(int floorNum, GameObject plat, GameObject M_enemy, GameObject R_enemy, Transform enemies, Transform platforms)
+    public SinglePlatformSection(int floorNum, GameObject plat, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
     {
         sectionType = "SinglePlatform";
         TowerFloorNumber = floorNum;
         platform = plat;
-        MeleeEnemy = M_enemy;
+        MeleeEnemies = meleeEnemies;
         RangedEnemy = R_enemy;
         EnemyParent = enemies;
         PlatformParent = platforms;
@@ -207,7 +211,7 @@ public class SinglePlatformSection : Section
     public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         // spawn a melee enemy no matter what
-        Instantiate(MeleeEnemy, new Vector2(plat_x, 0), Quaternion.identity, EnemyParent);
+        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(plat_x, 0), Quaternion.identity, EnemyParent);
         // maybe spawn a ranged enemy
         if (ShouldSpawnEnemy())
         {
@@ -220,7 +224,7 @@ public class SinglePlatformSection : Section
 public class DoublePlatformSection : Section
 {
     private GameObject platform;
-    private GameObject MeleeEnemy;
+    private GameObject[] MeleeEnemies;
     private GameObject RangedEnemy;
     private float x_transform;
     private float y_transform;
@@ -229,12 +233,12 @@ public class DoublePlatformSection : Section
     private float platform_2_x;
     private float platform_2_y;
 
-    public DoublePlatformSection(int floorNum, GameObject plat, GameObject M_enemy, GameObject R_enemy, Transform enemies, Transform platforms)
+    public DoublePlatformSection(int floorNum, GameObject plat, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
     {
         sectionType = "DoublePlatform";
         TowerFloorNumber = floorNum;
         platform = plat;
-        MeleeEnemy = M_enemy;
+        MeleeEnemies = meleeEnemies;
         RangedEnemy = R_enemy;
         EnemyParent = enemies;
         PlatformParent = platforms;
@@ -268,7 +272,7 @@ public class DoublePlatformSection : Section
         // maybe spawn a melee enemy
         if (ShouldSpawnEnemy())
         {
-            Instantiate(MeleeEnemy, new Vector2(platform_1_x, 0), Quaternion.identity, EnemyParent);
+            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(platform_1_x, 0), Quaternion.identity, EnemyParent);
         }
         return;
     }
@@ -277,17 +281,17 @@ public class DoublePlatformSection : Section
 public class BarricadeSection : Section
 {
     private GameObject barricade;
-    private GameObject MeleeEnemy;
+    private GameObject[] MeleeEnemies;
     private float x_transform;
     private float y_transform;
     private float barricade_x;
 
-    public BarricadeSection(int floorNum, GameObject bar, GameObject M_enemy, Transform enemies, Transform platforms)
+    public BarricadeSection(int floorNum, GameObject bar, GameObject[] meleeEnemies, Transform enemies, Transform platforms)
     {
         sectionType = "Barricade";
         TowerFloorNumber = floorNum;
         barricade = bar;
-        MeleeEnemy = M_enemy;
+        MeleeEnemies = meleeEnemies;
         EnemyParent = enemies;
         PlatformParent = platforms; 
     }
@@ -307,70 +311,70 @@ public class BarricadeSection : Section
     public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         // spawn a melee enemy no matter what
-        Instantiate(MeleeEnemy, new Vector2(barricade_x + 2, 0), Quaternion.identity, EnemyParent); // right of barricade
+        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x + 2, 0), Quaternion.identity, EnemyParent); // right of barricade
         // maybe spawn a another melee enemy
         if (ShouldSpawnEnemy())
         {
-            Instantiate(MeleeEnemy, new Vector2(barricade_x - 2, 0), Quaternion.identity, EnemyParent); // left of barricade
+            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x - 2, 0), Quaternion.identity, EnemyParent); // left of barricade
         }
         return;
     }
 }
 
-public class WatchTowerSection : Section
-{
-    [SerializeField]
-    private GameObject watchtower;
+//public class WatchTowerSection : Section
+//{
+//    [SerializeField]
+//    private GameObject watchtower;
 
-    private float x_transform;
-    private float y_transform;
+//    private float x_transform;
+//    private float y_transform;
 
-    public WatchTowerSection(GameObject bar)
-    {
-        sectionType = "WatchTower";
-        watchtower = bar;
-    }
-    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
-    {
-        x_transform = sectionWidth / 2;
-        y_transform = watchtower.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        Instantiate(watchtower,
-            new Vector2((sectionIndex * sectionWidth) - x_transform, ((3 * sectionHeight) / 4) + (y_transform)),
-            Quaternion.identity
-        );
-    }
+//    public WatchTowerSection(GameObject bar)
+//    {
+//        sectionType = "WatchTower";
+//        watchtower = bar;
+//    }
+//    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
+//    {
+//        x_transform = sectionWidth / 2;
+//        y_transform = watchtower.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+//        Instantiate(watchtower,
+//            new Vector2((sectionIndex * sectionWidth) - x_transform, ((3 * sectionHeight) / 4) + (y_transform)),
+//            Quaternion.identity
+//        );
+//    }
 
-    public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
-    {
-        return;
-    }
-}
+//    public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
+//    {
+//        return;
+//    }
+//}
 
-public class HeightStruggleSection : Section
-{
-    [SerializeField]
-    private GameObject hill;
+//public class HeightStruggleSection : Section
+//{
+//    [SerializeField]
+//    private GameObject hill;
 
-    private float x_transform;
-    private float y_transform;
+//    private float x_transform;
+//    private float y_transform;
 
-    public HeightStruggleSection(GameObject hill_)
-    {
-        sectionType = "HeightStruggle";
-        hill = hill_;
-    }
-    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
-    {
-        x_transform = sectionWidth / 2;
-        y_transform = hill.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        Instantiate(hill,
-            new Vector2((sectionIndex * sectionWidth) - x_transform, 0.5F), // floor is actually 0.5 :/
-            Quaternion.identity
-        );
-    }
+//    public HeightStruggleSection(GameObject hill_)
+//    {
+//        sectionType = "HeightStruggle";
+//        hill = hill_;
+//    }
+//    public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
+//    {
+//        x_transform = sectionWidth / 2;
+//        y_transform = hill.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+//        Instantiate(hill,
+//            new Vector2((sectionIndex * sectionWidth) - x_transform, 0.5F), // floor is actually 0.5 :/
+//            Quaternion.identity
+//        );
+//    }
 
-    public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
-    {
-        return;
-    }
-}
+//    public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
+//    {
+//        return;
+//    }
+//}
