@@ -560,7 +560,7 @@ MonoBehaviour:
   n_sections: 10
   platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
-  SwordEnemy: {fileID: 0}
+  MeleeEnemies: []
   BowEnemy: {fileID: 0}
   EnemyParent: {fileID: 0}
   PlatformParent: {fileID: 0}
@@ -5910,7 +5910,7 @@ MonoBehaviour:
   n_sections: 5
   platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
-  SwordEnemy: {fileID: 0}
+  MeleeEnemies: []
   BowEnemy: {fileID: 0}
   EnemyParent: {fileID: 0}
   PlatformParent: {fileID: 0}
@@ -6082,7 +6082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1341956130
 MonoBehaviour:
   m_ObjectHideFlags: 0

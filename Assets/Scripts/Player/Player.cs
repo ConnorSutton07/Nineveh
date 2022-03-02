@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] float harmonyDimishRate;
     [SerializeField] float harmonyHitGain;
     [SerializeField] float harmonyDeflectGain;
+    [SerializeField] ParticleSystem harmonyFog;
 
     [Header ("Objects")]
     [SerializeField] Transform attackPoint;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject healthYellow;
     [SerializeField] GameObject postureSlider;
     [SerializeField] GameObject pauseMenu;
+
 
     [Header("Light")]
     [SerializeField] float maxIntensity;
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour
 
     public int currentHealth;
     public int currentPosture;
+    
     float lastHarmonyIncreaseTime;
     float currentHarmony;
     float maxHarmony;
@@ -84,7 +87,8 @@ public class Player : MonoBehaviour
     private float menuLoc; //700 is on screen
     private float menuOff;
     private float menuOn;
-
+    private float harmonyemissionrate = 0f;
+    private ParticleSystem.EmissionModule HarmonyEmit;
     State state;
 
   #endregion
@@ -101,6 +105,7 @@ public class Player : MonoBehaviour
         groundSensor = transform.Find("GroundSensor").GetComponent<GroundSensor>();
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         raycastOrigin = transform.Find("RaycastOrigin").transform;
+        HarmonyEmit = harmonyFog.emission;
 
         menuOff = Screen.width * 1.5f;
         menuOn = Screen.width / 2;
@@ -115,6 +120,7 @@ public class Player : MonoBehaviour
         spotlight.intensity = 0f;
         spotlight.enabled = false;
         updatePostureBar();
+        
 
         if (!GlobalDataPassing.Instance.IsFirstLevel())
         {
@@ -135,6 +141,11 @@ public class Player : MonoBehaviour
 
         if (Time.time > lastHarmonyIncreaseTime + harmonyPauseTime) currentHarmony -= harmonyDimishRate;
         currentHarmony = Mathf.Clamp(currentHarmony, 0f, 100f);
+        harmonyemissionrate = (currentHarmony / maxHarmony) * 60;
+        HarmonyEmit.rateOverTime = currentHarmony;
+        Debug.Log("harmony:"+ currentHarmony);
+        Debug.Log("harmony emit rate:" + harmonyemissionrate);
+
 
         if (currentHealth < 0) Die();
         if (Suspended()) return;
