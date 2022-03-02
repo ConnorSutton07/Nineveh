@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     protected float distance = 0f;
     protected float attackCooldown;
     protected AudioSource audioSource;
-    protected AudioManagerBanditScript audioManager; //use for now at least
+    protected AudioManager audioManager; //use for now at least
     protected bool successfulDeflect = false;
     protected float prevDirection;
 
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
+        audioManager = transform.Find("AudioManager").GetComponent<AudioManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         raycastPoint = transform.Find("RaycastPoint");
         playerScript = player.gameObject.GetComponent<Player>();
@@ -71,7 +71,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log(state);
         if (state != State.DEFAULT) return;
         if (FindPlayer()) EnemyLogic();
         else animator.SetInteger("AnimState", 1);
@@ -82,14 +81,14 @@ public class Enemy : MonoBehaviour
     #region Overridden Methods
 
     protected virtual void EnemyLogic() { return; }
-    public virtual void AttackPlayer(ref Player playerScript, ref Transform player, ref string attackSound, ref int postureDamage) { }
+    public virtual void AttackPlayer() { }
     public virtual void MoveTowardsPlayer(ref Animator animator, ref Transform player) { return; }
 
     #endregion
 
     #region Public Methods
 
-    public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
+    public virtual void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
     {
         currentHealth -= healthDamage;
         currentPosture += postureDamage;
@@ -118,11 +117,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        string attackSound = "";
-        int postureDamage = 0;
-        AttackPlayer(ref playerScript, ref player, ref attackSound, ref postureDamage);
-        PlaySound(attackSound);
-        TakeDamage(0, postureDamage);
+        AttackPlayer();
     }
 
     public void AttemptBlock(bool forceSucess = false, float duration = -1f)
@@ -212,6 +207,17 @@ public class Enemy : MonoBehaviour
     {
         attackCooldown = Time.time + attackRate;
         AttemptBlock(true);
+    }
+
+    public void EnterAttack()
+    {
+        state = State.ATTACKING;
+        print("HERE");
+    }
+
+    public void ExitState()
+    {
+        state = State.DEFAULT;
     }
 
     #endregion

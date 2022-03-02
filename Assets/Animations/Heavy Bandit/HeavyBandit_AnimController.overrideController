@@ -4,7 +4,8 @@
 AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: HeavyBandit_AnimController
   m_Controller: {fileID: 9100000, guid: b95265f99b6d90e438df1308a89c8bab, type: 2}
   m_Clips:
@@ -24,3 +25,5 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 9adbb6eb25891a14b892bd7583d64ce7, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: d756094fc5e8c594ba2e2ba808fe9a90, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 6862262ae453990458ce4d7bffa67e7d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1947612af40d4144b9a338428bfece0b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 55855508312d92143a67a54f910896a0, type: 2}

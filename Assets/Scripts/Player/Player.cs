@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    #region Attributes
+  #region Attributes
 
     [Header ("Stats")]
     public int maxHealth = 100;
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashTime;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashCooldownLength;
+    [SerializeField] float pushbackSpeed;
 
     [Header ("Combat")]
     [SerializeField] int attackDamage = 20;
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     private Rigidbody2D body;
     private AudioSource audioSource;
-    private AudioManagerBanditScript audioManager;
+    private AudioManager audioManager;
     private GroundSensor groundSensor;
     private SparkEffect sparkEffect;
     private bool grounded = false;
@@ -86,9 +87,9 @@ public class Player : MonoBehaviour
 
     State state;
 
-    #endregion
+  #endregion
 
-    #region Initialization
+  #region Initialization
 
     void Start()
     {
@@ -96,7 +97,7 @@ public class Player : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         spotlight = transform.Find("Light").GetComponent<Light>();
         audioSource = GetComponent<AudioSource>();
-        audioManager = transform.Find("AudioManager").GetComponent<AudioManagerBanditScript>();
+        audioManager = transform.Find("AudioManager").GetComponent<AudioManager>();
         groundSensor = transform.Find("GroundSensor").GetComponent<GroundSensor>();
         sparkEffect = transform.Find("SparkEffect").GetComponent<SparkEffect>();
         raycastOrigin = transform.Find("RaycastOrigin").transform;
@@ -114,6 +115,12 @@ public class Player : MonoBehaviour
         spotlight.intensity = 0f;
         spotlight.enabled = false;
         updatePostureBar();
+
+        if (!GlobalDataPassing.Instance.IsFirstLevel())
+        {
+          //pass over player stats from previous level
+          LoadPlayerData();
+        }
     }
 
     #endregion
@@ -320,6 +327,16 @@ public class Player : MonoBehaviour
         state = State.DEFAULT;
     }
 
+    IEnumerator EnterPushback(float startTime, int direction, float pushbackTime)
+    {
+        while (Time.time - startTime < pushbackTime)
+        {
+            transform.position = new Vector3(transform.position.x + pushbackSpeed * direction * Time.deltaTime, transform.position.y, transform.position.z);
+            yield return null;
+        }
+        state = State.DEFAULT;
+    }
+
     IEnumerator IncreaseLight()
     {
         while (spotlight.intensity < maxIntensity)
@@ -354,6 +371,15 @@ public class Player : MonoBehaviour
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    private void LoadPlayerData()
+    {
+        currentHealth = GlobalDataPassing.Instance.GetPlayerHealth();
+        currentHarmony = GlobalDataPassing.Instance.GetPlayerHarmony();
+        currentPosture = GlobalDataPassing.Instance.GetPlayerPosture();
+        updateHealthBar();
+        updatePostureBar();
     }
 
     #endregion
@@ -412,7 +438,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
+    public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false, float pushBackTime = 0)
     {
         if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
         currentHealth  -= healthDamage;
@@ -420,6 +446,13 @@ public class Player : MonoBehaviour
 
         updateHealthBar();
         updatePostureBar();
+
+        if (pushBackTime > 0)
+        {
+            state = State.DASHING;
+            int direction = (int)transform.localScale.x;
+            StartCoroutine(EnterPushback(Time.time, direction, pushBackTime));
+        }
 
         if (breakStance) animator.SetTrigger("Hurt");
 
@@ -539,6 +572,11 @@ public class Player : MonoBehaviour
         currentPosture = data.posture;
         updateHealthBar();
         updatePostureBar();
+    }
+
+    public void StorePlayerDataGlobal()
+    {
+        GlobalDataPassing.Instance.SetPlayerData(currentHealth, currentHarmony, currentPosture);
     }
 
     #endregion
