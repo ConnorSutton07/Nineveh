@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8988200510722177731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8520389, y: -0.50135314, z: -2.9080977}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,9 +101,9 @@ MonoBehaviour:
   lifetime: 10
   distance: 0.5
   damage: 20
-  whatIsSolid:
+  collisionLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
 --- !u!61 &-7842699639530883404
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.1875, y: 1.625}
+    oldSize: {x: 0.09375, y: 0.8125}
     newSize: {x: 2.91, y: 0.38}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

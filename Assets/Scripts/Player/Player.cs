@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-  #region Attributes
+    #region Attributes
 
     [Header ("Stats")]
     public int maxHealth = 100;
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] float harmonyDimishRate;
     [SerializeField] float harmonyHitGain;
     [SerializeField] float harmonyDeflectGain;
+    [SerializeField] float maxHarmony;
     [SerializeField] ParticleSystem harmonyFog;
 
     [Header ("Objects")]
@@ -68,7 +69,6 @@ public class Player : MonoBehaviour
     
     float lastHarmonyIncreaseTime;
     float currentHarmony;
-    float maxHarmony;
     float attackCooldown = 0f;
     Transform raycastOrigin;
     private float moveDirection;
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
   #endregion
 
-  #region Initialization
+    #region Initialization
 
     void Start()
     {
@@ -401,6 +401,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Harmony: " + currentHarmony);
         // Detect enemies in range of attack
+        currentHarmony = Mathf.Min(currentHarmony, maxHarmony);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
         if (hitEnemies.Length == 0) PlaySound("sword_miss");

@@ -39,7 +39,17 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.layer == Constants.PLAYER_LAYER)
         {
+            int direction = (int)collision.transform.localScale.x;
+            bool leftOfPlayer = transform.position.x < collision.transform.position.x;
             Player playerScript = collision.GetComponent<Player>();
+            if (playerScript.isBlocking())
+            {
+                if ((direction == 1 && leftOfPlayer) || (direction == -1 && !leftOfPlayer))
+                {
+                    DestroyArrow();
+                    return;
+                }
+            }
             playerScript.TakeDamage(damage, 0, true);
             playerScript.PlaySound("arrow_hit");
         }
