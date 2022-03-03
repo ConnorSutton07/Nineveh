@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2988569, g: 0.18382311, b: 0.077684715, a: 1}
+  m_IndirectSpecularColor: {r: 0.2988422, g: 0.18382767, b: 0.07768692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 1042913049}
   - component: {fileID: 1042913048}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,8 +853,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7264151, g: 0.6661769, b: 0.47590086, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7d8b82016ce256b4e875ca9f203d304e, type: 3}
+  m_Color: {r: 0.7735849, g: 0.7165695, b: 0.53031915, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -872,8 +872,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042913047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.94, y: 84.89, z: 0}
-  m_LocalScale: {x: 640, y: 640, z: 0}
+  m_LocalPosition: {x: 0.94, y: 33.15, z: 0}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 0}
   m_Children: []
   m_Father: {fileID: 1341956133}
   m_RootOrder: 0
