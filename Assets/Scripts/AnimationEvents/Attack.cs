@@ -10,7 +10,6 @@ public class Attack : StateMachineBehaviour
         if (animator.gameObject.name != "Player")
         {
             animator.gameObject.GetComponent<Enemy>().EnterAttack();
-            Debug.Log("Enter first");
         }
     }
     

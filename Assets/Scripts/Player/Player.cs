@@ -143,9 +143,6 @@ public class Player : MonoBehaviour
         currentHarmony = Mathf.Clamp(currentHarmony, 0f, 100f);
         harmonyemissionrate = (currentHarmony / maxHarmony) * 60;
         HarmonyEmit.rateOverTime = currentHarmony;
-        Debug.Log("harmony:"+ currentHarmony);
-        Debug.Log("harmony emit rate:" + harmonyemissionrate);
-
 
         if (currentHealth < 0) Die();
         if (Suspended()) return;
@@ -399,7 +396,6 @@ public class Player : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Harmony: " + currentHarmony);
         // Detect enemies in range of attack
         currentHarmony = Mathf.Min(currentHarmony, maxHarmony);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
@@ -411,7 +407,6 @@ public class Player : MonoBehaviour
         {
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             float damage = attackDamage * (1 + harmonyDamageAmplifier * (currentHarmony / 100));
-            Debug.Log("Damage: " + damage);
             if (enemyScript.isBlocking() && transform.localScale.x != enemyScript.gameObject.transform.localScale.x)
             {
                 if (enemyScript.AttempDeflect())
@@ -445,6 +440,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin.position, direction, raycastLength, enemyLayer);
         if (hit.collider != null)
         {
+            Debug.Log("hit");
             Enemy enemyScript = hit.collider.GetComponent<Enemy>();
             enemyScript.AttemptBlock();
         }

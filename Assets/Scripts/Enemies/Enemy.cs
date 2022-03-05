@@ -122,8 +122,9 @@ public class Enemy : MonoBehaviour
 
     public void AttemptBlock(bool forceSucess = false, float duration = -1f)
     {
-        if (forceSucess || (canBlock && state == State.DEFAULT && Random.Range(0f, 1f) < blockChance))
+        if (forceSucess || (canBlock && Random.Range(0f, 1f) < blockChance))
         {
+            Debug.Log("Block");
             animator.SetInteger("AnimState", 1);
             state = State.BLOCKING;
             if (duration == -1) duration = Random.Range(minBlockTime, maxBlockTime);
