@@ -5787,24 +5787,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
-      propertyPath: moveSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
-      propertyPath: postureThreshold
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
-      propertyPath: deflectPostureDamage
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
-      propertyPath: followupPushbackTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7923174894105496340, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.5
+      propertyPath: rangedCooldownTime
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8387150193119032137, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_Name
@@ -5854,10 +5838,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8387150193119032139, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 88994b9eb1603f94fa55017f9bae324a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
 --- !u!1 &1242477079

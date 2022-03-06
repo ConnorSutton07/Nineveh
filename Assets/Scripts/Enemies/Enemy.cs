@@ -213,7 +213,6 @@ public class Enemy : MonoBehaviour
     public void EnterAttack()
     {
         state = State.ATTACKING;
-        print("HERE");
     }
 
     public void ExitState()

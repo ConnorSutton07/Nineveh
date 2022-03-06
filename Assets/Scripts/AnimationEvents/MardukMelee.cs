@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : StateMachineBehaviour
+public class MardukMelee : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.gameObject.name != "Player")
-        {
-            animator.gameObject.GetComponent<Enemy>().EnterAttack();
-        }
+        animator.gameObject.GetComponent<Marduk>().EnterAttack();
     }
-    
+
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -20,15 +17,11 @@ public class Attack : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+ 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.gameObject.name == "Player")
-            animator.gameObject.GetComponent<Player>().ExitConditionally();
-        else
-        {
-            animator.gameObject.GetComponent<Enemy>().ExitState();
-            //Debug.Log("Exit first");
-        }
+        Marduk marduk = animator.GetComponent<Marduk>();
+        if (!marduk.inAttackState()) { animator.gameObject.GetComponent<Enemy>().ExitState(); }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

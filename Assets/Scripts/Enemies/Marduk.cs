@@ -17,6 +17,20 @@ public class Marduk : Enemy
     [SerializeField] float distanceForAttackFollowup;
     [SerializeField] float followupPushbackTime;
 
+    [Header("Ranged")]
+    [SerializeField] GameObject projectile;
+    [SerializeField] float rangedCooldownTime;
+    float rangedCooldown;
+    Transform projectileOrigin;
+
+    protected override void Start()
+    {
+        base.Start();
+        projectileOrigin = transform.Find("ProjectileOrigin");
+        rangedCooldown = 0;
+    }
+
+    #region Attacks
 
     public override void AttackPlayer()
     {
@@ -62,7 +76,7 @@ public class Marduk : Enemy
         TakeDamage(0, postureDamage);
     }
 
-    public void Attack2()
+    public void FollowupMeleeAttack()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint2.position, attackRange2, enemyLayer);
         int postureDamage = 0;
@@ -101,6 +115,29 @@ public class Marduk : Enemy
         PlaySound(attackSound);
     }
 
+    public void RangedAttack()
+    {
+        rangedCooldown = Time.time + rangedCooldownTime;
+        Vector2 targetVector = target.position - projectileOrigin.position;
+        int direction = (int)transform.localScale.x;
+        Quaternion arrowRotation = Quaternion.Euler(0f, 0f, direction * Vector2.Angle(targetVector, Vector2.up));
+        GameObject arrow = Instantiate(projectile, projectileOrigin.position, arrowRotation);
+    }
+
+    void BeginRangedAttack()
+    {
+        animator.SetTrigger("Ranged");
+    }
+
+    #endregion
+
+    public bool inAttackState()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") 
+            || animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2")
+            || animator.GetCurrentAnimatorStateInfo(0).IsName("Ranged");
+    }
+
     public override void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
     {
         currentHealth -= healthDamage;
@@ -122,11 +159,11 @@ public class Marduk : Enemy
         distance = Vector2.Distance(transform.position, target.position);
         if (distance > attackDistance)
         {
-            Move();
+            if (Time.time > rangedCooldown) { BeginRangedAttack(); }
+            else { Move(); }
         }
         else if (CanAttack())
         {
-            print("Start Attack");
             animator.SetInteger("AnimState", 1);
             StartAttack();
             attackCooldown = Time.time + attackRate;

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &556020121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 556020122}
+  m_Layer: 10
+  m_Name: ProjectileOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &556020122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556020121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.02, y: 1.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8387150193119032138}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852562782
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,6 +126,7 @@ Transform:
   - {fileID: 1852562783}
   - {fileID: 1920487929}
   - {fileID: 3161071639320820880}
+  - {fileID: 556020122}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,7 +150,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 88994b9eb1603f94fa55017f9bae324a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,7 +192,7 @@ Animator:
   m_GameObject: {fileID: 8387150193119032137}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 1097a831ef9541049b0c2d67638c1d3e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 878a69792847ff245aece5bad9980653, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -226,10 +257,10 @@ MonoBehaviour:
   blockChance: 0
   minBlockTime: 0
   maxBlockTime: 0
-  postureThreshold: 250
+  postureThreshold: 125
   canBlock: 0
   awareDistance: 1000
-  moveSpeed: 1
+  moveSpeed: 2.5
   gap: 0
   raycastDetectionLayers:
     serializedVersion: 2
@@ -244,8 +275,10 @@ MonoBehaviour:
   attackRange1: 0.5
   attackPoint2: {fileID: 1920487929}
   attackRange2: 0.96
-  parryDamagePercentage: 0
+  deflectPostureDamage: 25
   distanceForAttackFollowup: 5
+  followupPushbackTime: 0.5
+  projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
 --- !u!1001 &319030876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,7 +382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7923174893737868181, guid: 56a103ec2c2947541ba805a8cf3170e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.54
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7923174893737868181, guid: 56a103ec2c2947541ba805a8cf3170e5, type: 3}
       propertyPath: m_LocalPosition.z
