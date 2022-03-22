@@ -10,8 +10,9 @@ public class LoaderCallback : MonoBehaviour
   public GameObject levelText;
   public GameObject tipCharacter;
   public GameObject tipText;
-  public Sprite character1;
-  public Sprite character2;
+  public GameObject tipCharName;
+  public Sprite jake;
+  public Sprite connor;
 
   private bool isDoneUpdating = false;
   private int counter = 0;
@@ -45,9 +46,9 @@ public class LoaderCallback : MonoBehaviour
     //change tipText
     string tip = GetRandomTip();
     tipText.GetComponent<Text>().text = tip;
+
     //change tipCharacter
-    Sprite character = GetRandomCharacter();
-    tipCharacter.GetComponent<Image>().sprite = character;
+    SetCharacterDisplay();
   }
 
   private string GetRandomTip()
@@ -70,11 +71,22 @@ public class LoaderCallback : MonoBehaviour
     return strTips[randomEntry];
   }
   
-  private Sprite GetRandomCharacter()
+  private void SetCharacterDisplay()
   {
-    Sprite[] characters = new Sprite[] { character1, character2 };
-    int randomCharacter = Random.Range(0, characters.Length);
-    return characters[randomCharacter];
+    int randomCharacter = Random.Range(0, 2);
+    switch (randomCharacter)
+    {
+      case (0):
+        tipCharacter.GetComponent<Image>().sprite = jake;
+        tipCharName.GetComponent<Text>().text = "Jake";
+        break;
+      case (1):
+        tipCharacter.GetComponent<Image>().sprite = connor;
+        tipCharName.GetComponent<Text>().text = "Connor";
+        break;
+      default:
+        break;
+    }
   }
 
 }
