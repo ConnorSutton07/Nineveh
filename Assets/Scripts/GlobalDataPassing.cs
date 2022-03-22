@@ -32,6 +32,29 @@ public class GlobalDataPassing : MonoBehaviour
         return currLevel;
     }
 
+    public string GetLevelString()
+    { 
+        switch(currLevel)
+        {
+          case (1):
+            return "1: The Scourge of Babylon";
+          case (2):
+            return "2: Sennacherib's Ghost";
+          case (3):
+            return "3: Herodotus' Resting Place";
+          case (4):
+            return "4: Nimrod''s Appeal";
+          case (5):
+            return "5: The Folly of Antiochus";
+          case (6):
+            return "6: Alexander's Plight";
+          case (7):
+            return "Marduk's Revenge";
+          default:
+            return "ERROR";
+    }
+    }
+
     public void SetPlayerHealth(int health)
     {
         playerHealth = health;

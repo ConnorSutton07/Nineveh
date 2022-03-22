@@ -89,7 +89,9 @@ public class Marduk : Enemy
             {
                 if (playerScript.isDeflect())
                 {
-                    attackSound = "deflect"; // should play deflect noise
+                    //attackSound = "deflect"; // should play deflect noise
+                    //attackSound = "marduk_deflect";
+                    playerScript.PlaySound("marduk_deflect");
                     playerScript.SuccessfulDeflect();
                     playerScript.EmitDeflectParticles();
                     postureDamage = deflectPostureDamage;

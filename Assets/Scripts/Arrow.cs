@@ -46,6 +46,7 @@ public class Arrow : MonoBehaviour
             {
                 if ((direction == 1 && leftOfPlayer) || (direction == -1 && !leftOfPlayer))
                 {
+                    playerScript.PlaySound("arrow_deflect");
                     DestroyArrow();
                     return;
                 }
