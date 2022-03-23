@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.gasgiant.camera-shake": {
+      "version": "https://github.com/gasgiant/Camera-Shake.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ab8159a3f352235d2eb7f1c604d2a199700a643a"
+    },
     "com.unity.2d.animation": {
       "version": "6.0.5",
       "depth": 0,
