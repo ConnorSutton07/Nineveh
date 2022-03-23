@@ -7,6 +7,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] float panSpeed;
     [SerializeField] float panWidth;
+    [SerializeField] float shakeMagnitude;
     float panUnits;
     Camera cam;
 
