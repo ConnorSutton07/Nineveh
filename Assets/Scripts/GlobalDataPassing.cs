@@ -37,7 +37,7 @@ public class GlobalDataPassing : MonoBehaviour
         switch(currLevel)
         {
           case (1):
-            return "1: The Scourge of Babylon";
+            return "Tower Bridge";
           case (2):
             return "2: Sennacherib's Ghost";
           case (3):

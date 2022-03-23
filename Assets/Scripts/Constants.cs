@@ -20,5 +20,6 @@ public enum State
     BLOCKING,
     STUNNED,
     DASHING,
-    ATTACKING
+    ATTACKING,
+    FROZEN
 };

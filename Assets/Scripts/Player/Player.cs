@@ -366,6 +366,11 @@ public class Player : MonoBehaviour
         spotlight.enabled = false;
     }
 
+    IEnumerator EnterFreeze(float startTime, float duration)
+    {
+        while (Time.time < startTime + duration) { yield return null; }
+        state = State.DEFAULT;
+    }
     #endregion
 
     #region Private Methods
@@ -530,7 +535,7 @@ public class Player : MonoBehaviour
 
     public bool Suspended()
     {
-        return state == State.DEAD || state == State.STUNNED || state == State.DASHING;
+        return state == State.DEAD || state == State.STUNNED || state == State.DASHING || state == State.FROZEN;
     }
 
     public bool isDeflect()
@@ -556,6 +561,13 @@ public class Player : MonoBehaviour
     public void EmitAttackParticles()
     {
         sparkEffect.EmitAttackSparks();
+    }
+
+    public void Freeze(float duration)
+    {
+        state = State.FROZEN;
+        animator.SetInteger("AnimState", 1);
+        StartCoroutine(EnterFreeze(Time.time, duration));
     }
 
     public void EmitDeflectedParticles()
