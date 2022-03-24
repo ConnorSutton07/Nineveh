@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     [Header ("Harmony")]
     [SerializeField] float harmonyDamageAmplifier;
     [SerializeField] float harmonyLifestealThreshold;
+    [SerializeField] int   harmonyLifestealRate;
     [SerializeField] float harmonyPauseTime;
     [SerializeField] float harmonyDimishRate;
     [SerializeField] float harmonyHitGain;
@@ -430,6 +431,7 @@ public class Player : MonoBehaviour
             else
             {
                 enemyScript.TakeDamage(Mathf.FloorToInt(damage), Mathf.FloorToInt(damage * 0.1f), true);
+                if (currentHarmony > harmonyLifestealThreshold) { currentHarmony = Mathf.Min(maxHealth, currentHealth + harmonyLifestealRate); }
                 currentHarmony += harmonyHitGain;
                 lastHarmonyIncreaseTime = Time.time;
                 PlaySound("sword_hit");

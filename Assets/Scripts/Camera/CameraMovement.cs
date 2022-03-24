@@ -7,7 +7,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] float panSpeed;
     [SerializeField] float panWidth;
-    [SerializeField] float shakeMagnitude;
     float panUnits;
     Camera cam;
 
@@ -23,27 +22,27 @@ public class CameraMovement : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 viewPos = cam.WorldToViewportPoint(player.position);
-        if (viewPos.x > 1) StartCoroutine(PanRight(transform.position));
-        else if (viewPos.x < 0) StartCoroutine(PanLeft(transform.position));
+        if (viewPos.x > 1) StartCoroutine(PanRight(transform.parent.transform.position));
+        else if (viewPos.x < 0) StartCoroutine(PanLeft(transform.parent.transform.position));
     }
 
     IEnumerator PanRight(Vector3 initialPosition)
     {
-        while (transform.position.x <= initialPosition.x + panUnits)
+        while (transform.parent.transform.position.x <= initialPosition.x + panUnits)
         {
-            transform.position = new Vector3(transform.position.x + panSpeed, initialPosition.y, initialPosition.z);
+            transform.parent.transform.position = new Vector3(transform.parent.transform.position.x + panSpeed, initialPosition.y, initialPosition.z);
             yield return null;
         }
-        transform.position = new Vector3(initialPosition.x + panUnits, initialPosition.y, initialPosition.z);
+        transform.parent.transform.position = new Vector3(initialPosition.x + panUnits, initialPosition.y, initialPosition.z);
     }
 
     IEnumerator PanLeft(Vector3 initialPosition)
     {
-        while (transform.position.x >= initialPosition.x - panUnits)
+        while (transform.parent.transform.position.x >= initialPosition.x - panUnits)
         {
-            transform.position = new Vector3(transform.position.x - panSpeed, initialPosition.y, initialPosition.z);
+            transform.parent.transform.position = new Vector3(transform.parent.transform.position.x - panSpeed, initialPosition.y, initialPosition.z);
             yield return null;
         }
-        transform.position = new Vector3(initialPosition.x - panUnits, initialPosition.y, initialPosition.z);
+        transform.parent.transform.position = new Vector3(initialPosition.x - panUnits, initialPosition.y, initialPosition.z);
     }
 }
