@@ -214,10 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bdb6deadb014f7c81a3d53e6aedf8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerFloorNumber: 1
+  TowerFloorNumber: 5
   n_sections: 8
   platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
+  double_platform: {fileID: 370116954743722975, guid: 48376bf1b9a4c6a4bad7c7d8a6afe520, type: 3}
   MeleeEnemies:
   - {fileID: 1434735538674771885, guid: 546afc7a3589c8f4788e9752230c0d8f, type: 3}
   - {fileID: 1434735538674771885, guid: 57aa6da3741742c44aee5b65cc872a7a, type: 3}
@@ -250,7 +251,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 88994b9eb1603f94fa55017f9bae324a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -270,7 +271,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -361,7 +362,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.9445159, b: 0.9009434, a: 1}
+  m_Color: {r: 0.45755708, g: 0.5074559, b: 0.6603774, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -831,7 +832,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 7c74f56ef873eb14db85c0dcf74e0f59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1145,6 +1146,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 70900254}
     m_Modifications:
+    - target: {fileID: 7864632178241535584, guid: c90b8c25350032f4ea0d9ee2efb01719, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 7864632178241535585, guid: c90b8c25350032f4ea0d9ee2efb01719, type: 3}
       propertyPath: m_IsTrigger
       value: 1
