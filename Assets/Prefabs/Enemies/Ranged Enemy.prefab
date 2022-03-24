@@ -221,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDistance: 20
   shiftDistance: 0.1
-  maxHealth: 100
+  maxHealth: 30
   attackRate: 2
   blockChance: 0
   minBlockTime: 0
@@ -230,8 +230,7 @@ MonoBehaviour:
   canBlock: 0
   awareDistance: 20
   moveSpeed: 0
-  minGap: 0
-  maxGap: 0
+  gap: 0
   raycastDetectionLayers:
     serializedVersion: 2
     m_Bits: 1536

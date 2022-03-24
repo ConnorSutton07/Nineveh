@@ -6478,8 +6478,9 @@ MonoBehaviour:
     m_Bits: 1024
   harmonyDamageAmplifier: 0.5
   harmonyLifestealThreshold: 0.75
+  harmonyLifestealRate: 0
   harmonyPauseTime: 2
-  harmonyDimishRate: 0.2
+  harmonyDimishRate: 0.12
   harmonyHitGain: 5
   harmonyDeflectGain: 10
   maxHarmony: 100

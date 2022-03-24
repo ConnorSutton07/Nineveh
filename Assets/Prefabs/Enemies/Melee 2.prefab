@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDistance: 0.92
   shiftDistance: 0.1
-  maxHealth: 100
+  maxHealth: 28
   attackRate: 1
   blockChance: 0.85
   minBlockTime: 0.8
