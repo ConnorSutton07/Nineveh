@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  panSpeed: 0.15
+  panSpeed: 0.32
   panWidth: 3.5
 --- !u!114 &5586172202890443172
 MonoBehaviour:

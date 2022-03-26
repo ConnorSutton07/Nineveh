@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class GlobalDataPassing : MonoBehaviour
 {
-
     public static GlobalDataPassing Instance;
     private bool isPlayerDataChanged = false;
     int playerHealth;
     float playerHarmony;
     int playerPosture;
-    int currLevel = 1;
-    List<int> AliveEnemiesInSections = new List<int>();
-    int playerSection = 0;
+    int curLevel = 1;
+    List<int> AliveEnemiesInSections;
+    int playerSection;
+
+    public void ResetSections()
+    {
+        AliveEnemiesInSections = new List<int>();
+        playerSection = 0;
+    }
 
     public int GetPlayerHealth()
     {
@@ -31,7 +36,7 @@ public class GlobalDataPassing : MonoBehaviour
 
     public int GetCurrentLevel()
     {
-        return currLevel;
+        return curLevel;
     }
 
     public List<int> GetAliveEnemiesInSections()
@@ -50,24 +55,9 @@ public class GlobalDataPassing : MonoBehaviour
     }
 
     public string GetLevelString()
-    { 
-        switch(currLevel)
-        {
-          case (1):
-            return "Tower Bridge";
-          case (2):
-            return "The Foundation of Heaven and Earth";
-          case (3):
-            return "Temple Gardens";
-          case (4):
-            return "Astrologer's Court";
-          case (5):
-            return "The Haunt of Communion";
-          case (6):
-            return "The Overworld";
-          default:
-            return "ERROR";
-    }
+    {
+        if (curLevel < 7 && curLevel >= 1) return Constants.Floors[curLevel - 1];
+        return "Error";
     }
 
     public void SetPlayerHealth(int health)
@@ -87,7 +77,7 @@ public class GlobalDataPassing : MonoBehaviour
     
     public void IncreaseLevel()
     {
-        currLevel += 1;
+        curLevel += 1;
     }
 
     public void AppendAliveEnemiesInSections(int numEnemies)

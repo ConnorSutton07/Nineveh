@@ -24,11 +24,24 @@ public class LevelManager : MonoBehaviour
         audioManager = GetComponent<AudioManager>();
         string levelString = GlobalDataPassing.Instance.GetLevelString();
         levelText.GetComponent<Text>().text = levelString;
+        int level = GlobalDataPassing.Instance.GetCurrentLevel();
 
-        switch (levelString)
+        switch (level)
         {
-            case "Tower Bridge":
-                StartCoroutine(StartFloor1(Time.time, 3f));
+            case 1: 
+                Floor1();
+                break;
+            case 2:
+                StartCoroutine(StartFloor2(Time.time, 3f));
+                break;
+            case 3:
+                Floor3();
+                break;
+            case 4:
+                Floor4();
+                break;
+            case 5:
+                Floor5();
                 break;
             default: return;
         }
@@ -51,12 +64,10 @@ public class LevelManager : MonoBehaviour
 
     void Floor1()
     {
-        player.Freeze(freezeDuration);
-        PlaySound("Thunder");
-        PerlinShake();
+
     }
 
-    IEnumerator StartFloor1(float startTime, float delay)
+    IEnumerator StartFloor2(float startTime, float delay)
     {
         while (Time.time < startTime + delay) { yield return null; }
         Floor1();
@@ -64,7 +75,9 @@ public class LevelManager : MonoBehaviour
 
     void Floor2()
     {
-
+        player.Freeze(freezeDuration);
+        PlaySound("Thunder");
+        PerlinShake();
     }
 
     void Floor3()

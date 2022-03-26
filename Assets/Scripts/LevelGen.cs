@@ -10,7 +10,7 @@ public class LevelGen : MonoBehaviour
     private List<Section> sections = new List<Section>();
     public int n_sections = 5;
 
-    private const int n_unique_sections = 4; // 6
+    private const int n_unique_sections = 3; // 6
     private List<int> RandomSectionGrabBag = Enumerable.Range(0, n_unique_sections).ToList();
 
     private float sectionWidth;
@@ -56,7 +56,7 @@ public class LevelGen : MonoBehaviour
             var col = Instantiate(SectionCollider, new Vector2((i * sectionWidth) - ground_left_transform, 1), Quaternion.identity);
             SectionColliders.Add(col);
 
-            for (int j = 0; j < sectionWidth; j += tileSize)
+            for (int j = -tileSize; j < sectionWidth; j += tileSize)
             {
                 // create floor of the section
                 int tileX = i * (int)sectionWidth - (int)ground_left_transform + j;
@@ -81,7 +81,7 @@ public class LevelGen : MonoBehaviour
         //set end of level collider position
         if (!onlyFloor)
         {
-            Vector3 endPosition = new Vector3((n_sections - 1) * sectionWidth - (sectionWidth/5) , 1, 0);
+            Vector3 endPosition = new Vector3((n_sections - 1) * sectionWidth + (sectionWidth / 2), 1, 0);
             EndOfLevelCollider.position = endPosition;
         }
 
@@ -91,6 +91,7 @@ public class LevelGen : MonoBehaviour
     {
         Random.State currentState = Random.state;
         map = gameObject.GetComponent<Tilemap>();
+        GlobalDataPassing.Instance.ResetSections();
         sectionWidth = 2 * Camera.main.orthographicSize * Camera.main.aspect;
         ground_left_transform = sectionWidth / 2;
         Generate();
@@ -192,15 +193,19 @@ public class SimpleSection : Section
 
     public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
     {
-        if (empty) return;
-        float e1_x = (sectionIndex * sectionWidth) - (sectionWidth / 2);
+        if (empty)
+        {
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(0);
+            return;
+        }
+            float e1_x = (sectionIndex * sectionWidth) - (sectionWidth / 2);
         float e2_x = (sectionIndex * sectionWidth) - (sectionWidth / 3); 
         // spawn a melee enemy no matter what
-        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e1_x, 0), Quaternion.identity, EnemyParent);
+        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e1_x, 2.25f), Quaternion.identity, EnemyParent);
         // maybe spawn another melee enemy
         if (ShouldSpawnEnemy())
         {
-            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e2_x, 0), Quaternion.identity, EnemyParent);
+            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e2_x, 2.25f), Quaternion.identity, EnemyParent);
             GlobalDataPassing.Instance.AppendAliveEnemiesInSections(2);
         }
         else
@@ -234,7 +239,7 @@ public class SinglePlatformSection : Section
     }
     public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
-        x_transform = sectionWidth / 2;
+        x_transform = 0; // sectionWidth / 2;
         y_transform = platform.GetComponent<BoxCollider2D>().bounds.size.y / 2;
 
         plat_x = (sectionIndex * sectionWidth) - x_transform;
@@ -249,7 +254,7 @@ public class SinglePlatformSection : Section
     public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         // spawn a melee enemy no matter what
-        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(plat_x, 0), Quaternion.identity, EnemyParent);
+        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(plat_x, 2.25f), Quaternion.identity, EnemyParent);
         // maybe spawn a ranged enemy
         if (ShouldSpawnEnemy())
         {
@@ -286,7 +291,7 @@ public class DoublePlatformSection : Section
     }
     public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {
-        x_transform = sectionWidth / 2;
+        x_transform = 0; // sectionWidth / 2;
         y_transform = platform.GetComponent<BoxCollider2D>().bounds.size.y / 2;
 
         platform_x = (sectionIndex * sectionWidth) - x_transform;
@@ -327,7 +332,7 @@ public class DoublePlatformSection : Section
         if (ShouldSpawnEnemy())
         {
             enemies++;
-            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(platform_x, 0), Quaternion.identity, EnemyParent);
+            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(platform_x, 2.25f), Quaternion.identity, EnemyParent);
         }
         GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemies);
         return;
@@ -367,11 +372,11 @@ public class BarricadeSection : Section
     public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
     {
         // spawn a melee enemy no matter what
-        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x + 2, 0), Quaternion.identity, EnemyParent); // right of barricade
+        Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x + 2, 2.25f), Quaternion.identity, EnemyParent); // right of barricade
                                                                                                                            // maybe spawn a another melee enemy
         if (ShouldSpawnEnemy())
         {
-            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x - 2, 0), Quaternion.identity, EnemyParent); // left of barricade
+            Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x - 2, 2.25f), Quaternion.identity, EnemyParent); // left of barricade
             GlobalDataPassing.Instance.AppendAliveEnemiesInSections(2);
         }
         else

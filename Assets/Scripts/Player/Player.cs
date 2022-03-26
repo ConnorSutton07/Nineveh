@@ -218,6 +218,7 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        Debug.Log("moving");
         moveDirection = value.Get<float>();
         moveInput = true;
     }

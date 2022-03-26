@@ -237,8 +237,8 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = Constants.DEAD_LAYER;
-        this.enabled = false;
         GlobalDataPassing.Instance.DecrementEnemiesInCurrentSection();
+        this.enabled = false;
     }
 
     protected bool CanAttack()

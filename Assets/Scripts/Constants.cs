@@ -11,6 +11,15 @@ public static class Constants
     public const int PLAYER_LAYER         = 9;
     public const int ENEMY_LAYER          = 10;
     public const int GROUND_LAYER         = 11;
+
+    public static readonly string[] Floors = new string[] {
+        "Tower Bridge",
+        "The Foundation of Heaven and Earth",
+        "Temple Gardens",
+        "Astrologer's Court",
+        "Haunt of Communion",
+        "The Overworld"
+    };
 }
 
 public enum State
