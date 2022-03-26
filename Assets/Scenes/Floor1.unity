@@ -225,6 +225,7 @@ MonoBehaviour:
   EnemyParent: {fileID: 885596029}
   PlatformParent: {fileID: 1039368640}
   EndOfLevelCollider: {fileID: 1386248713}
+  SectionCollider: {fileID: 7060749275775509404, guid: 2eb390b807f07c946b8e97a486304906, type: 3}
   floorTile: {fileID: 11400000, guid: 24bf557126a87d34b81c30a1521365e0, type: 2}
   floorHeight: -1
   tileSize: 3

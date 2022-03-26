@@ -11,7 +11,9 @@ public class GlobalDataPassing : MonoBehaviour
     float playerHarmony;
     int playerPosture;
     int currLevel = 1;
-    
+    List<int> AliveEnemiesInSections = new List<int>();
+    int playerSection = 0;
+
     public int GetPlayerHealth()
     {
         return playerHealth;
@@ -32,6 +34,21 @@ public class GlobalDataPassing : MonoBehaviour
         return currLevel;
     }
 
+    public List<int> GetAliveEnemiesInSections()
+    {
+        return AliveEnemiesInSections;
+    }
+
+    public int GetAliveEnemiesInCurrentSection()
+    {
+        return AliveEnemiesInSections[playerSection];
+    }
+
+    public int GetPlayerSection()
+    {
+        return playerSection;
+    }
+
     public string GetLevelString()
     { 
         switch(currLevel)
@@ -39,17 +56,15 @@ public class GlobalDataPassing : MonoBehaviour
           case (1):
             return "Tower Bridge";
           case (2):
-            return "2: Sennacherib's Ghost";
+            return "The Foundation of Heaven and Earth";
           case (3):
-            return "3: Herodotus' Resting Place";
+            return "Temple Gardens";
           case (4):
-            return "4: Nimrod''s Appeal";
+            return "Astrologer's Court";
           case (5):
-            return "5: The Folly of Antiochus";
+            return "The Haunt of Communion";
           case (6):
-            return "6: Alexander's Plight";
-          case (7):
-            return "Marduk's Revenge";
+            return "The Overworld";
           default:
             return "ERROR";
     }
@@ -73,6 +88,21 @@ public class GlobalDataPassing : MonoBehaviour
     public void IncreaseLevel()
     {
         currLevel += 1;
+    }
+
+    public void AppendAliveEnemiesInSections(int numEnemies)
+    {
+        AliveEnemiesInSections.Add(numEnemies);
+    }
+
+    public void IncrementPlayerSection()
+    {
+        playerSection++;
+    }
+
+    public void DecrementEnemiesInCurrentSection()
+    {
+        AliveEnemiesInSections[playerSection]--;
     }
 
     public void SetPlayerData(int health, float harmony, int posture)

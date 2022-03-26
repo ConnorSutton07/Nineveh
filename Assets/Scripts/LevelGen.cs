@@ -13,9 +13,9 @@ public class LevelGen : MonoBehaviour
     private const int n_unique_sections = 4; // 6
     private List<int> RandomSectionGrabBag = Enumerable.Range(0, n_unique_sections).ToList();
 
-    private const int sectionWidth = 20;
+    private float sectionWidth;
     private const int sectionHeight = 8;
-    private const int ground_left_transform = 10;
+    private float ground_left_transform;
 
     public GameObject platform;
     public GameObject barricade;
@@ -32,6 +32,8 @@ public class LevelGen : MonoBehaviour
     public Transform EnemyParent;
     public Transform PlatformParent;
     public Transform EndOfLevelCollider;
+    public Transform SectionCollider;
+    private List<Transform> SectionColliders = new List<Transform>();
 
     private Tilemap map;
 
@@ -51,11 +53,15 @@ public class LevelGen : MonoBehaviour
             else { sec = GetRandomSection(); }
             sections.Add(sec);
 
+            var col = Instantiate(SectionCollider, new Vector2((i * sectionWidth) - ground_left_transform, 1), Quaternion.identity);
+            SectionColliders.Add(col);
+
             for (int j = 0; j < sectionWidth; j += tileSize)
             {
                 // create floor of the section
-                map.SetTile(new Vector3Int(i * sectionWidth - ground_left_transform + j, floorHeight, 0), floorTile);
-                map.SetTile(new Vector3Int(i * sectionWidth - ground_left_transform + j, floorHeight - tileSize, 0), floorTile);
+                int tileX = i * (int)sectionWidth - (int)ground_left_transform + j;
+                map.SetTile(new Vector3Int(tileX + (tileSize - 1), floorHeight, 0), floorTile);
+                map.SetTile(new Vector3Int(tileX + (tileSize - 1), floorHeight - tileSize, 0), floorTile);
             }
 
             // int section_idx = Random.Range(0, sections.Count);
@@ -85,10 +91,22 @@ public class LevelGen : MonoBehaviour
     {
         Random.State currentState = Random.state;
         map = gameObject.GetComponent<Tilemap>();
+        sectionWidth = 2 * Camera.main.orthographicSize * Camera.main.aspect;
+        ground_left_transform = sectionWidth / 2;
         Generate();
         for (int i = 0; i < sections.Count(); i++)
         {
             Debug.Log("Section " + i + " is of type: " + sections[i].sectionType);
+        }
+    }
+
+    private void Update()
+    {
+        if (GlobalDataPassing.Instance.GetAliveEnemiesInCurrentSection() == 0)
+        {
+            Destroy(SectionColliders[GlobalDataPassing.Instance.GetPlayerSection() + 1].gameObject);
+            Debug.Log("DESTROYING COLLIDER AT INDEX:" + (GlobalDataPassing.Instance.GetPlayerSection() + 1));
+            GlobalDataPassing.Instance.IncrementPlayerSection();
         }
     }
 
@@ -183,6 +201,11 @@ public class SimpleSection : Section
         if (ShouldSpawnEnemy())
         {
             Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(e2_x, 0), Quaternion.identity, EnemyParent);
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(2);
+        }
+        else
+        {
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(1);
         }
         return;
     }
@@ -231,6 +254,11 @@ public class SinglePlatformSection : Section
         if (ShouldSpawnEnemy())
         {
             Instantiate(RangedEnemy, new Vector2(plat_x, plat_y + 1), Quaternion.identity, EnemyParent);
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(2);
+        }
+        else
+        {
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(1);
         }
         return;
     }
@@ -283,6 +311,7 @@ public class DoublePlatformSection : Section
     {
         // spawn a ranged enemy no matter what
         bool left = false;
+        int enemies = 1;
         if (Random.value < 0.5) left = true;
         float shift = left ? -1f : 1f;
         Instantiate(RangedEnemy, new Vector2(platform_x + shift, platform_y + 1), Quaternion.identity, EnemyParent);
@@ -290,14 +319,17 @@ public class DoublePlatformSection : Section
         // maybe spawn a second ranged enemy
         if (ShouldSpawnEnemy())
         {
+            enemies++;
             Instantiate(RangedEnemy, new Vector2(platform_x - shift, platform_y + 1), Quaternion.identity, EnemyParent);
         }
 
         // maybe spawn a melee enemy
         if (ShouldSpawnEnemy())
         {
+            enemies++;
             Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(platform_x, 0), Quaternion.identity, EnemyParent);
         }
+        GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemies);
         return;
     }
 }
@@ -336,10 +368,15 @@ public class BarricadeSection : Section
     {
         // spawn a melee enemy no matter what
         Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x + 2, 0), Quaternion.identity, EnemyParent); // right of barricade
-        // maybe spawn a another melee enemy
+                                                                                                                           // maybe spawn a another melee enemy
         if (ShouldSpawnEnemy())
         {
             Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(barricade_x - 2, 0), Quaternion.identity, EnemyParent); // left of barricade
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(2);
+        }
+        else
+        {
+            GlobalDataPassing.Instance.AppendAliveEnemiesInSections(1);
         }
         return;
     }

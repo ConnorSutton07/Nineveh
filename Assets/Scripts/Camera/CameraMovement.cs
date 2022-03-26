@@ -10,39 +10,40 @@ public class CameraMovement : MonoBehaviour
     float panUnits;
     Camera cam;
 
-
     // Start is called before the first frame update
     void Start()
     {
         cam = GetComponent<Camera>();
-        panUnits = cam.orthographicSize * panWidth;
+        //panUnits = cam.orthographicSize * panWidth; 
+        panUnits = 2 * Camera.main.orthographicSize * Camera.main.aspect;
+        this.transform.parent.position = new Vector3(0, 2, -10);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Vector3 viewPos = cam.WorldToViewportPoint(player.position);
-        if (viewPos.x > 1) StartCoroutine(PanRight(transform.parent.transform.position));
-        else if (viewPos.x < 0) StartCoroutine(PanLeft(transform.parent.transform.position));
+        if (viewPos.x > 1) StartCoroutine(PanRight(transform.parent.position));
+        else if (viewPos.x < 0) StartCoroutine(PanLeft(transform.parent.position));
     }
 
     IEnumerator PanRight(Vector3 initialPosition)
     {
-        while (transform.parent.transform.position.x <= initialPosition.x + panUnits)
+        while (transform.parent.position.x <= initialPosition.x + panUnits)
         {
-            transform.parent.transform.position = new Vector3(transform.parent.transform.position.x + panSpeed, initialPosition.y, initialPosition.z);
+            transform.parent.position = new Vector3(transform.parent.position.x + panSpeed, initialPosition.y, initialPosition.z);
             yield return null;
         }
-        transform.parent.transform.position = new Vector3(initialPosition.x + panUnits, initialPosition.y, initialPosition.z);
+        transform.parent.position = new Vector3(initialPosition.x + panUnits, initialPosition.y, initialPosition.z);
     }
 
     IEnumerator PanLeft(Vector3 initialPosition)
     {
-        while (transform.parent.transform.position.x >= initialPosition.x - panUnits)
+        while (transform.parent.position.x >= initialPosition.x - panUnits)
         {
-            transform.parent.transform.position = new Vector3(transform.parent.transform.position.x - panSpeed, initialPosition.y, initialPosition.z);
+            transform.parent.position = new Vector3(transform.parent.position.x - panSpeed, initialPosition.y, initialPosition.z);
             yield return null;
         }
-        transform.parent.transform.position = new Vector3(initialPosition.x - panUnits, initialPosition.y, initialPosition.z);
+        transform.parent.position = new Vector3(initialPosition.x - panUnits, initialPosition.y, initialPosition.z);
     }
 }

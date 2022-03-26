@@ -238,6 +238,7 @@ public class Enemy : MonoBehaviour
         state = State.DEAD;
         gameObject.layer = Constants.DEAD_LAYER;
         this.enabled = false;
+        GlobalDataPassing.Instance.DecrementEnemiesInCurrentSection();
     }
 
     protected bool CanAttack()

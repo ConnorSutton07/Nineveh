@@ -42,8 +42,6 @@ public class EOLCollider : MonoBehaviour
             case 5:
               return SceneManager.Scene.Floor5;
             case 6:
-              return SceneManager.Scene.Floor6;
-            case 7:
               return SceneManager.Scene.Arena;
             default:
               Debug.Log("ERROR");
