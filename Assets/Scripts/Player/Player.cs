@@ -494,6 +494,16 @@ public class Player : MonoBehaviour
         StartCoroutine(FadeLight());
     }
 
+    public void DisableUI()
+    {
+        transform.Find("UI").transform.Find("Health").gameObject.SetActive(false);
+    }
+    
+    public void EnableUI()
+    {
+        transform.Find("UI").transform.Find("Health").gameObject.SetActive(true);
+    }
+
     public void SuccessfulDeflect()
     {
         currentHarmony += harmonyDeflectGain;

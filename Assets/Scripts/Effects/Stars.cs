@@ -81,7 +81,6 @@ public class Stars : MonoBehaviour
     void Start()
     {
         widthFactor = Screen.currentResolution.width / 1920f;
-        Debug.Log(widthFactor);
         stars = new GameObject[numStars];
         starData = new Star[numStars];
         square2 = GameObject.Find("Square2");

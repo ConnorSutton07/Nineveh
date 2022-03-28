@@ -43,7 +43,10 @@ public class LevelManager : MonoBehaviour
             case 5:
                 Floor5();
                 break;
-            default: return;
+            case 6:
+                Overworld();
+                break;
+            default: break;
         }
     }
 
@@ -93,6 +96,13 @@ public class LevelManager : MonoBehaviour
     void Floor5()
     {
 
+    }
+
+    void Overworld()
+    {
+        player.DisableUI();
+        GameObject marduk = GameObject.Find("Marduk");
+        marduk.SetActive(false);
     }
 
     #endregion

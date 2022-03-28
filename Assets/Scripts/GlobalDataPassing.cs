@@ -121,6 +121,7 @@ public class GlobalDataPassing : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            curLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
         }
         else if (Instance != this)
         {
