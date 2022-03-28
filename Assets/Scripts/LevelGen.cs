@@ -90,7 +90,6 @@ public class LevelGen : MonoBehaviour
     void Start()
     {
         Random.State currentState = Random.state;
-        transform.GetComponent<SpriteRenderer>().sortingOrder = 5;
         map = gameObject.GetComponent<Tilemap>();
         GlobalDataPassing.Instance.ResetSections();
         sectionWidth = 2 * Camera.main.orthographicSize * Camera.main.aspect;
