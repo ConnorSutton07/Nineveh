@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour
     Transform groundSensor;
     Transform leftEnd;
     Transform rightEnd;
+    Renderer particleRenderer;
     SpriteRenderer renderer;
 
     void Start()
@@ -20,6 +21,7 @@ public class Tower : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         groundSensor = player.Find("GroundSensor");
         renderer = player.GetComponent<SpriteRenderer>();
+        particleRenderer = player.transform.Find("Harmony Fog").GetComponent<ParticleSystem>().GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -29,9 +31,14 @@ public class Tower : MonoBehaviour
         {
             if (groundSensor.position.y >= threshold.position.y)
             {
-                renderer.sortingOrder = -2; 
+                renderer.sortingOrder = -2;
+                particleRenderer.sortingOrder = -3;
             }
-            else { renderer.sortingOrder = 2; }
+            else
+            {
+                renderer.sortingOrder = 2;
+                particleRenderer.sortingOrder = 1;
+            }
         }
     }
 
