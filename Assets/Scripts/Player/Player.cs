@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] float harmonyHitGain;
     [SerializeField] float harmonyDeflectGain;
     [SerializeField] float maxHarmony;
+    [SerializeField] float harmonyEmission;
     [SerializeField] ParticleSystem harmonyFog;
 
     [Header ("Objects")]
@@ -142,7 +143,7 @@ public class Player : MonoBehaviour
 
         if (Time.time > lastHarmonyIncreaseTime + harmonyPauseTime) currentHarmony -= harmonyDimishRate;
         currentHarmony = Mathf.Clamp(currentHarmony, 0f, 100f);
-        harmonyemissionrate = (currentHarmony / maxHarmony) * 60;
+        harmonyemissionrate = (currentHarmony / maxHarmony) * harmonyEmission;
         HarmonyEmit.rateOverTime = currentHarmony;
 
         if (currentHealth < 0) Die();

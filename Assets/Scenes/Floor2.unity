@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22854064, g: 0.11863534, b: 0.07028517, a: 1}
+  m_IndirectSpecularColor: {r: 0.1624664, g: 0.10069067, b: 0.07817702, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -464,6 +464,22 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 4eeacab1dc26f1c4ab77b1f5d65b556c, type: 3}
+    - target: {fileID: 1547687459, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: ShapeModule.type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547687459, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547687459, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547687459, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.16
+      objectReference: {fileID: 0}
     - target: {fileID: 1870522848, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
@@ -1014,6 +1030,18 @@ PrefabInstance:
     - target: {fileID: 1531439234160760312, guid: 92d0344601cecab438fe1ba8389ccfeb, type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531439235416361458, guid: 92d0344601cecab438fe1ba8389ccfeb, type: 3}
+      propertyPath: m_Text
+      value: The Foundation of Heaven and Earth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531439235416361458, guid: 92d0344601cecab438fe1ba8389ccfeb, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531439235416361459, guid: 92d0344601cecab438fe1ba8389ccfeb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2537
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92d0344601cecab438fe1ba8389ccfeb, type: 3}

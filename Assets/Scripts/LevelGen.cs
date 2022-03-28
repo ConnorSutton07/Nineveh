@@ -103,10 +103,10 @@ public class LevelGen : MonoBehaviour
 
     private void Update()
     {
-        if (GlobalDataPassing.Instance.GetAliveEnemiesInCurrentSection() == 0)
+        if (GlobalDataPassing.Instance.EnemiesCleared())
         {
-            Destroy(SectionColliders[GlobalDataPassing.Instance.GetPlayerSection() + 1].gameObject);
-            Debug.Log("DESTROYING COLLIDER AT INDEX:" + (GlobalDataPassing.Instance.GetPlayerSection() + 1));
+            if (GlobalDataPassing.Instance.GetPlayerSection() + 1 < SectionColliders.Count)
+                Destroy(SectionColliders[GlobalDataPassing.Instance.GetPlayerSection() + 1].gameObject);
             GlobalDataPassing.Instance.IncrementPlayerSection();
         }
     }

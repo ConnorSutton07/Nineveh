@@ -7,7 +7,6 @@ public class LoaderCallback : MonoBehaviour
 {
   [SerializeField]
   public GameObject background;
-  public GameObject levelText;
   public GameObject tipCharacter;
   public GameObject tipText;
   public GameObject tipCharName;
@@ -39,9 +38,6 @@ public class LoaderCallback : MonoBehaviour
     Color32 temp = background.GetComponent<Image>().color;
     background.GetComponent<Image>().color = new Color32((byte)(temp[0]+(byte)(levelNum * 25)), 
       (byte)(temp[1] + (byte)(levelNum * 25)), (byte)(temp[2] + (byte)(levelNum * 25)), temp[3]);
-
-    //add text of level
-    levelText.GetComponent<Text>().text = GlobalDataPassing.Instance.GetLevelString();
 
     //change tipText
     string tip = GetRandomTip();

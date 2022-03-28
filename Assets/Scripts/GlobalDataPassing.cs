@@ -44,9 +44,16 @@ public class GlobalDataPassing : MonoBehaviour
         return AliveEnemiesInSections;
     }
 
+    /*
     public int GetAliveEnemiesInCurrentSection()
     {
-        return AliveEnemiesInSections[playerSection];
+        return playerSection <= AliveEnemiesInSections.Count && AliveEnemiesInSections[playerSection];
+    }
+    */
+
+    public bool EnemiesCleared()
+    {
+        return playerSection < AliveEnemiesInSections.Count && AliveEnemiesInSections[playerSection] == 0;
     }
 
     public int GetPlayerSection()
