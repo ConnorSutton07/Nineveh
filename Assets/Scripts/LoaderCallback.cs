@@ -14,6 +14,8 @@ public class LoaderCallback : MonoBehaviour
   public Sprite jake;
   public Sprite connor;
   public Sprite daniel;
+  public Sprite dojo;
+  public Sprite aidan;
 
   private bool isDoneUpdating = false;
   private int counter = 0;
@@ -74,7 +76,7 @@ public class LoaderCallback : MonoBehaviour
   
   private void SetCharacterDisplay()
   {
-    int randomCharacter = Random.Range(0, 3);
+    int randomCharacter = Random.Range(0, 5);
     switch (randomCharacter)
     {
       case (0):
@@ -88,6 +90,14 @@ public class LoaderCallback : MonoBehaviour
       case (2):
         tipCharacter.GetComponent<Image>().sprite = daniel;
         tipCharName.GetComponent<Text>().text = "Daniel";
+        break;
+      case (3):
+        tipCharacter.GetComponent<Image>().sprite = aidan;
+        tipCharName.GetComponent<Text>().text = "Aidan";
+        break;
+      case (4):
+        tipCharacter.GetComponent<Image>().sprite = dojo;
+        tipCharName.GetComponent<Text>().text = "Dr. J";
         break;
       default:
         break;

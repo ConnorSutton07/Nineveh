@@ -683,6 +683,8 @@ MonoBehaviour:
   jake: {fileID: 21300000, guid: 34da844df20c8c8469f79150e096e93d, type: 3}
   connor: {fileID: 21300000, guid: 4d874b7d73d32784d832a9d3b252171e, type: 3}
   daniel: {fileID: 21300000, guid: b31101838fee59b4fb5d92c618406d2f, type: 3}
+  dojo: {fileID: 21300000, guid: 8fcadcb76313f6d4ba8fec3f46194ffa, type: 3}
+  aidan: {fileID: 21300000, guid: 3a475a89d7cd56541a82abcc70dbbd8c, type: 3}
 --- !u!4 &1176452363
 Transform:
   m_ObjectHideFlags: 0
