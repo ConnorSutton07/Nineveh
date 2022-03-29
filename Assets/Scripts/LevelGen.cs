@@ -10,7 +10,7 @@ public class LevelGen : MonoBehaviour
     private List<Section> sections = new List<Section>();
     public int n_sections = 5;
 
-    private const int n_unique_sections = 4; // 6
+    private const int n_unique_sections = 8; // 6
     private List<int> RandomSectionGrabBag = Enumerable.Range(0, n_unique_sections).ToList();
 
     private float sectionWidth;
@@ -22,6 +22,10 @@ public class LevelGen : MonoBehaviour
     public GameObject double_tower;
     public GameObject tall_tower;
     public GameObject short_tall_tower;
+    public GameObject twin_towers;
+    public GameObject steps;
+    public GameObject separate;
+    public GameObject pentatower;
 
     /*
     [SerializeField]
@@ -140,15 +144,27 @@ public class LevelGen : MonoBehaviour
                 selectedSection = new ShortTallTowerSection(TowerFloorNumber, short_tall_tower, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
                 break;
             case 4:
+                selectedSection = new TwinTowerSection(TowerFloorNumber, twin_towers, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
+                break;
+            case 5:
+                selectedSection = new StepsSection(TowerFloorNumber, steps, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
+                break;
+            case 6:
+                selectedSection = new SeparateSection(TowerFloorNumber, separate, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
+                break;
+            case 7:
+                selectedSection = new PentatowerSection(TowerFloorNumber, pentatower, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
+                break;
+            case 8:
                 selectedSection = new BarricadeSection(TowerFloorNumber, barricade, MeleeEnemies, EnemyParent, PlatformParent);
                 break;
-          //case 4:
-           //     selectedSection = new TallTowerSection(TowerFloorNumber, tall_tower, MeleeEnemies,)
-            // case 4:
-            //     selectedSection =  new HeightStruggleSection(hill);
-            // case 5:
-            //     selectedSection =  new WatchTowerSection(watchtower);
-            default:
+      //case 4:
+      //     selectedSection = new TallTowerSection(TowerFloorNumber, tall_tower, MeleeEnemies,)
+      // case 4:
+      //     selectedSection =  new HeightStruggleSection(hill);
+      // case 5:
+      //     selectedSection =  new WatchTowerSection(watchtower);
+          default:
                 Debug.Log("Invalid section number generated in GetRandomSection()");
                 selectedSection = new SimpleSection(TowerFloorNumber, MeleeEnemies, EnemyParent);
                 break;
@@ -408,7 +424,7 @@ public class ShortTallTowerSection : Section
 
   public ShortTallTowerSection(int floorNum, GameObject tow, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
   {
-    sectionType = "ShortTallTowerSection";
+    sectionType = "ShortTall";
     TowerFloorNumber = floorNum;
     tower = tow;
     MeleeEnemies = meleeEnemies;
@@ -448,6 +464,215 @@ public class ShortTallTowerSection : Section
   }
 }
 
+public class TwinTowerSection : Section
+{
+  private GameObject tower;
+  private GameObject[] MeleeEnemies;
+  private GameObject RangedEnemy;
+
+  private float x_transform;
+  private float y_transform;
+  private float tower_x;
+  private float tower_y;
+
+  public TwinTowerSection(int floorNum, GameObject tow, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
+  {
+    sectionType = "TwinTower";
+    TowerFloorNumber = floorNum;
+    tower = tow;
+    MeleeEnemies = meleeEnemies;
+    RangedEnemy = R_enemy;
+    EnemyParent = enemies;
+    PlatformParent = platforms;
+  }
+  public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    //short tower
+    x_transform = 0;
+    y_transform = 0;
+    tower_x = (sectionIndex * sectionWidth) - x_transform;
+    tower_y = (sectionHeight / 3) + y_transform;
+    Instantiate(tower,
+        new Vector2(tower_x, tower_y),
+        Quaternion.identity,
+        PlatformParent
+    );
+  }
+
+  public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    int enemiesSpawned = 1;
+    //spawn a ranged enemy no matter what
+    Instantiate(RangedEnemy, new Vector2(tower_x + 0.5f, 4.0f), Quaternion.identity, EnemyParent);
+    //maybe spawn melee enemy
+    if (ShouldSpawnEnemy())
+    {
+      Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x + 2.5f, 2.25f), Quaternion.identity, EnemyParent);
+      enemiesSpawned++;
+    }
+    GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned);
+    return;
+  }
+}
+
+public class StepsSection : Section
+{
+  private GameObject tower;
+  private GameObject[] MeleeEnemies;
+  private GameObject RangedEnemy;
+
+  private float x_transform;
+  private float y_transform;
+  private float tower_x;
+  private float tower_y;
+
+  public StepsSection(int floorNum, GameObject tow, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
+  {
+    sectionType = "Steps";
+    TowerFloorNumber = floorNum;
+    tower = tow;
+    MeleeEnemies = meleeEnemies;
+    RangedEnemy = R_enemy;
+    EnemyParent = enemies;
+    PlatformParent = platforms;
+  }
+  public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    //short tower
+    x_transform = 0;
+    y_transform = 0;
+    tower_x = (sectionIndex * sectionWidth + sectionWidth/3) - x_transform;
+    tower_y = (sectionHeight / 3) + y_transform;
+    Instantiate(tower,
+        new Vector2(tower_x, tower_y),
+        Quaternion.identity,
+        PlatformParent
+    );
+  }
+
+  public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    
+    int enemiesSpawned = 1;
+    //spawn a ranged enemy no matter what
+    Instantiate(RangedEnemy, new Vector2(tower_x , 4.0f), Quaternion.identity, EnemyParent);
+    //maybe spawn melee enemy
+    if (ShouldSpawnEnemy())
+    {
+      Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x -8.0f, 2.25f), Quaternion.identity, EnemyParent);
+      enemiesSpawned++;
+    }
+    //maybe spawn melee enemy
+    if (ShouldSpawnEnemy())
+    {
+      Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x - 9.0f, 2.25f), Quaternion.identity, EnemyParent);
+      enemiesSpawned++;
+    }
+    GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned); 
+    return;
+  }
+}
+
+public class SeparateSection : Section
+{
+  private GameObject tower;
+  private GameObject[] MeleeEnemies;
+  private GameObject RangedEnemy;
+
+  private float x_transform;
+  private float y_transform;
+  private float tower_x;
+  private float tower_y;
+
+  public SeparateSection(int floorNum, GameObject tow, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
+  {
+    sectionType = "Separate";
+    TowerFloorNumber = floorNum;
+    tower = tow;
+    MeleeEnemies = meleeEnemies;
+    RangedEnemy = R_enemy;
+    EnemyParent = enemies;
+    PlatformParent = platforms;
+  }
+  public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    //short tower
+    x_transform = 0;
+    y_transform = 0;
+    tower_x = (sectionIndex * sectionWidth) - x_transform;
+    tower_y = (sectionHeight / 3) + y_transform;
+    Instantiate(tower,
+        new Vector2(tower_x, tower_y),
+        Quaternion.identity,
+        PlatformParent
+    );
+  }
+
+  public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    
+    int enemiesSpawned = 1;
+    //spawn a melee enemy no matter what
+    Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x, 2.25f), Quaternion.identity, EnemyParent);
+    GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned); 
+    return;
+  }
+}
+
+public class PentatowerSection : Section
+{
+  private GameObject tower;
+  private GameObject[] MeleeEnemies;
+  private GameObject RangedEnemy;
+
+  private float x_transform;
+  private float y_transform;
+  private float tower_x;
+  private float tower_y;
+
+  public PentatowerSection(int floorNum, GameObject tow, GameObject[] meleeEnemies, GameObject R_enemy, Transform enemies, Transform platforms)
+  {
+    sectionType = "Pentatower";
+    TowerFloorNumber = floorNum;
+    tower = tow;
+    MeleeEnemies = meleeEnemies;
+    RangedEnemy = R_enemy;
+    EnemyParent = enemies;
+    PlatformParent = platforms;
+  }
+  public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+    //short tower
+    x_transform = 0;
+    y_transform = 0;
+    tower_x = (sectionIndex * sectionWidth + sectionWidth/4) - x_transform;
+    tower_y = (sectionHeight / 3) + y_transform;
+    Instantiate(tower,
+        new Vector2(tower_x, tower_y),
+        Quaternion.identity,
+        PlatformParent
+    );
+  }
+
+  public override void SpawnRoomEnemies(int sectionIndex, float sectionWidth, int sectionHeight)
+  {
+
+    int enemiesSpawned = 2;
+    //spawn a melee enemy no matter what
+    Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x, 2.25f), Quaternion.identity, EnemyParent);
+    //spawn a melee enemy no matter what
+    Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x - 3.0f, 2.25f), Quaternion.identity, EnemyParent);
+    // maybe spawn a ranged enemy
+    if (ShouldSpawnEnemy())
+    {
+      Instantiate(RangedEnemy, new Vector2(tower_x - 3.0f, 4.0f), Quaternion.identity, EnemyParent);
+      enemiesSpawned++;
+    }
+    else
+      GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned);
+    return;
+  }
+}
 //public class WatchTowerSection : Section
 //{
 //    [SerializeField]
