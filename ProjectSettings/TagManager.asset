@@ -19,7 +19,7 @@ TagManager:
   - Player
   - Enemies
   - Ground
-  - EOLCollision
+  - SectionCollider
   - 
   - 
   - 

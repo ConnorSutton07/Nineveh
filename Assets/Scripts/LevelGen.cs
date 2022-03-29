@@ -18,7 +18,6 @@ public class LevelGen : MonoBehaviour
     private float ground_left_transform;
 
     public GameObject tower;
-    public GameObject barricade;
     public GameObject double_tower;
     public GameObject tall_tower;
     public GameObject short_tall_tower;
@@ -49,6 +48,8 @@ public class LevelGen : MonoBehaviour
 
     public bool onlyFloor;
     public bool spawnEnemies;
+    public bool isTest;
+    public int testSection;
 
     void Generate()
     {
@@ -56,7 +57,8 @@ public class LevelGen : MonoBehaviour
         {
             Section sec;
             if (i == 0) { sec = new SimpleSection(floorHeight, MeleeEnemies, EnemyParent, false); }
-            else { sec = GetRandomSection(); }
+            else if (isTest) { sec = GetSection(testSection); }
+            else { sec = GetSection(); }
             sections.Add(sec);
 
             var col = Instantiate(SectionCollider, new Vector2((i * sectionWidth) - ground_left_transform, 1), Quaternion.identity);
@@ -119,18 +121,22 @@ public class LevelGen : MonoBehaviour
         }
     }
 
-    Section GetRandomSection(){
-        if (RandomSectionGrabBag.Count() == 0)
+    Section GetSection(int sectionNum = -1){
+        if (sectionNum == -1)
         {
-            foreach (int number in Enumerable.Range(0, n_unique_sections)){
-                RandomSectionGrabBag.Add(number);
+            if (RandomSectionGrabBag.Count() == 0)
+            {
+                foreach (int number in Enumerable.Range(0, n_unique_sections))
+                {
+                    RandomSectionGrabBag.Add(number);
+                }
             }
+            sectionNum = RandomSectionGrabBag[Random.Range(0, RandomSectionGrabBag.Count())];
         }
-
-        int randomSectionNum = RandomSectionGrabBag[Random.Range(0, RandomSectionGrabBag.Count())];
+       
         Section selectedSection = null;
 
-        switch (randomSectionNum)
+        switch (sectionNum)
         {
             case 0:
                 selectedSection = new SimpleSection(TowerFloorNumber, MeleeEnemies, EnemyParent);
@@ -156,9 +162,6 @@ public class LevelGen : MonoBehaviour
             case 7:
                 selectedSection = new PentatowerSection(TowerFloorNumber, pentatower, MeleeEnemies, BowEnemy, EnemyParent, PlatformParent);
                 break;
-            case 8:
-                selectedSection = new BarricadeSection(TowerFloorNumber, barricade, MeleeEnemies, EnemyParent, PlatformParent);
-                break;
       //case 4:
       //     selectedSection = new TallTowerSection(TowerFloorNumber, tall_tower, MeleeEnemies,)
       // case 4:
@@ -166,12 +169,12 @@ public class LevelGen : MonoBehaviour
       // case 5:
       //     selectedSection =  new WatchTowerSection(watchtower);
           default:
-                Debug.Log("Invalid section number generated in GetRandomSection()");
+                Debug.Log("Invalid section number generated in GetSection()");
                 selectedSection = new SimpleSection(TowerFloorNumber, MeleeEnemies, EnemyParent);
                 break;
         }
 
-        RandomSectionGrabBag.Remove(randomSectionNum);
+        RandomSectionGrabBag.Remove(sectionNum);
 
         return selectedSection;
     }
