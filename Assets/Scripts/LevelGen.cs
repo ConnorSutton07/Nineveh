@@ -101,10 +101,11 @@ public class LevelGen : MonoBehaviour
         sectionWidth = 2 * Camera.main.orthographicSize * Camera.main.aspect;
         ground_left_transform = sectionWidth / 2;
         Generate();
-        for (int i = 0; i < sections.Count(); i++)
+        //GameObject.Find("Player").GetComponent<Player>().ResetPosition();
+        /*for (int i = 0; i < sections.Count(); i++)
         {
             Debug.Log("Section " + i + " is of type: " + sections[i].sectionType);
-        }
+        }*/
     }
 
     private void Update()

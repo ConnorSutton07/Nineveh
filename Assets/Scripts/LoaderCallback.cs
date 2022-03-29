@@ -62,7 +62,7 @@ public class LoaderCallback : MonoBehaviour
                                       "Your posture will be broken when the bar beneathy your health fills up.", 
                                       "Breaking your opponents posture leaves them open to a finishing blow.",
                                       "A timed block considerably reduces the opponent's posture.",
-                                      "Harmony decreases overtime.",
+                                      "Harmony diminishes over time.",
                                       "Increasing harmony with Asher gives attack and posture damage buffs.",
                                       "As harmony with Asher increases, the character glow will increase.", 
                                       "Increase harmony by hitting successive hits on an enemy in a short period."};

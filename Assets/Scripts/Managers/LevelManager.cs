@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator StartFloor2(float startTime, float delay)
     {
         while (Time.time < startTime + delay) { yield return null; }
-        Floor1();
+        Floor2();
     }
 
     void Floor2()

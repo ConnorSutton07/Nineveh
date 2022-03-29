@@ -104,7 +104,7 @@ public class GlobalDataPassing : MonoBehaviour
 
     public bool IsFirstLevel()
     {
-        if(!isPlayerDataChanged)
+        if(!isPlayerDataChanged && !(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Loading"))
         {
           isPlayerDataChanged = true;
           return true;
