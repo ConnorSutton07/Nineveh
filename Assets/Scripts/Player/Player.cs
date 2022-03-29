@@ -85,7 +85,8 @@ public class Player : MonoBehaviour
     private bool blockInput = false;
     private bool moveInput = false;
     private bool canAirDash = true;
-    private Light spotlight; 
+    private Light spotlight;
+    private Vector3 freezePosition;
 
     private float menuLoc; //700 is on screen
     private float menuOff;
@@ -147,8 +148,9 @@ public class Player : MonoBehaviour
         harmonyemissionrate = (currentHarmony / maxHarmony) * harmonyEmission;
         HarmonyEmit.rateOverTime = currentHarmony;
 
-        if (currentHealth < 0) Die();
-        if (Suspended()) return;
+        if (currentHealth < 0) { Die(); }
+        if (state == State.FROZEN) { transform.position = new Vector3(freezePosition.x, transform.position.y, transform.position.z); }
+        if (Suspended()) { return; }
 
         float currentBlockFrames = blockStart;
         blockStart = 0;
@@ -585,6 +587,7 @@ public class Player : MonoBehaviour
     public void Freeze(float duration)
     {
         state = State.FROZEN;
+        freezePosition = transform.position;
         animator.SetInteger("AnimState", 1);
         StartCoroutine(EnterFreeze(Time.time, duration));
     }
