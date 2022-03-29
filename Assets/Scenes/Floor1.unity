@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2988422, g: 0.18382767, b: 0.07768692, a: 1}
+  m_IndirectSpecularColor: {r: 0.29841363, g: 0.18394546, b: 0.07774226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -216,9 +216,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerFloorNumber: 1
   n_sections: 8
-  platform: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
+  tower: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
   barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
-  double_platform: {fileID: 370116954743722975, guid: 48376bf1b9a4c6a4bad7c7d8a6afe520, type: 3}
+  double_tower: {fileID: 370116954743722975, guid: 48376bf1b9a4c6a4bad7c7d8a6afe520, type: 3}
+  tall_tower: {fileID: 7131814342718982536, guid: e87111d1a32a0164f8a5f24a8148e883, type: 3}
+  short_tall_tower: {fileID: 8610482102798511617, guid: 02a8d6b02a55f9840a8fc056d0438f00, type: 3}
   MeleeEnemies:
   - {fileID: 1434735538674771885, guid: 3982ebffd353b934cb373ce7b6ea2397, type: 3}
   BowEnemy: {fileID: 7534857871625949265, guid: 9af9545936fb21d4c9fba473685d5587, type: 3}
