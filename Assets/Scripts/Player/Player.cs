@@ -451,7 +451,6 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin.position, direction, raycastLength, enemyLayer);
         if (hit.collider != null)
         {
-            Debug.Log("hit");
             Enemy enemyScript = hit.collider.GetComponent<Enemy>();
             enemyScript.AttemptBlock();
         }

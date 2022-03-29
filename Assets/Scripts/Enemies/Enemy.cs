@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected LayerMask raycastDetectionLayers;
     [SerializeField] protected int flip;
     [SerializeField] protected float deflectChance;
+    [SerializeField] protected LayerMask sectionMask;
+
     protected Transform raycastPoint;
     protected Transform target;
     protected Transform player;
@@ -255,6 +257,12 @@ public class Enemy : MonoBehaviour
     protected void StartAttack()
     {
         animator.SetTrigger("Attack");
+    }
+
+    protected bool InSameSection(float distance)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, player.position - raycastPoint.position, distance, sectionMask);
+        return (hit.collider != null && hit.collider.transform == player);
     }
 
 

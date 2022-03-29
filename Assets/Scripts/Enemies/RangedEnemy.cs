@@ -25,7 +25,7 @@ public class RangedEnemy : Enemy
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        if (distance <= attackDistance && CanAttack())
+        if (distance <= attackDistance && CanAttack() && InSameSection(distance))
         {
             animator.SetInteger("AnimState", 1);
             StartAttack();

@@ -54,20 +54,24 @@ public class MeleeEnemy : Enemy
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        float yDistance = Mathf.Abs(transform.position.y - target.position.y);
-        if (EnemyInBetween() || yDistance >= unreachableHeightDistance)
+        if (InSameSection(distance))
         {
-            AttemptBlock(true, 0.25f);
-        }
-        else if (distance > attackDistance)
-        {
-            Move();
-        }
-        else if (CanAttack())
-        {
-            animator.SetInteger("AnimState", 1);
-            StartAttack();
-            attackCooldown = Time.time + attackRate;
+            Debug.Log(name + " is in the same section");
+            float yDistance = target.position.y - transform.position.y;
+            if (EnemyInBetween() || yDistance >= unreachableHeightDistance)
+            {
+                AttemptBlock(true, 0.25f);
+            }
+            else if (distance > attackDistance)
+            {
+                Move();
+            }
+            else if (CanAttack())
+            {
+                animator.SetInteger("AnimState", 1);
+                StartAttack();
+                attackCooldown = Time.time + attackRate;
+            }
         }
     }
 
