@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
                 Floor1();
                 break;
             case 2:
-                StartCoroutine(StartFloor2(Time.time, 3f));
+                StartCoroutine(StartFloor2(Time.time, 1.5f));
                 break;
             case 3:
                 Floor3();
@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator StartFloor2(float startTime, float delay)
     {
         while (Time.time < startTime + delay) { yield return null; }
-        Floor1();
+        Floor2();
     }
 
     void Floor2()

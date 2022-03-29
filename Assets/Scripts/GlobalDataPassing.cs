@@ -111,7 +111,7 @@ public class GlobalDataPassing : MonoBehaviour
 
     public bool IsFirstLevel()
     {
-        if(!isPlayerDataChanged)
+        if(!isPlayerDataChanged && !(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Loading"))
         {
           isPlayerDataChanged = true;
           return true;
@@ -129,6 +129,7 @@ public class GlobalDataPassing : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Instance = this;
             curLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+            if (curLevel == 0 || curLevel > 6) curLevel = 1;
         }
         else if (Instance != this)
         {

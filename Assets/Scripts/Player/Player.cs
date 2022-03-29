@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [Header ("Stats")]
     public int maxHealth = 100;
     public int postureThreshold = 100;
+    [SerializeField] Vector2 initialPos;
 
     [Header ("Movement")]
     [SerializeField] float moveSpeed = 4.0f;
@@ -122,7 +123,7 @@ public class Player : MonoBehaviour
         spotlight.intensity = 0f;
         spotlight.enabled = false;
         updatePostureBar();
-        
+        ResetPosition();
 
         if (!GlobalDataPassing.Instance.IsFirstLevel())
         {
@@ -503,6 +504,11 @@ public class Player : MonoBehaviour
     public void EnableUI()
     {
         transform.Find("UI").transform.Find("Health").gameObject.SetActive(true);
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = initialPos;
     }
 
     public void SuccessfulDeflect()
