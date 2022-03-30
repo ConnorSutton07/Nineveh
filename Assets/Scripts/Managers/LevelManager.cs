@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 
     [Header ("UI")]
     [SerializeField] public GameObject levelText;
+    [SerializeField] float textFadeRate;
 
     [Header("Dialogue")]
     [SerializeField] Dialogue dialogue;
@@ -18,25 +19,31 @@ public class LevelManager : MonoBehaviour
     [SerializeField] PerlinShake.Params shakeParams;
     [SerializeField] float freezeDuration;
 
-    private int countdown = 600;
     AudioManager audioManager;
     DialogueManager dialogueManager;
+    Text text;
+    int level;
 
     private void Awake()
     {
         audioManager = GetComponent<AudioManager>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        text = levelText.GetComponent<Text>();
     }
 
     void Start()
     {
         string levelString = GlobalDataPassing.Instance.GetLevelString();
+        level = GlobalDataPassing.Instance.GetCurrentLevel();
         levelText.GetComponent<Text>().text = levelString;
-        int level = GlobalDataPassing.Instance.GetCurrentLevel();
+        StartCoroutine(FadeText(Time.time));
+    }
 
+    void LevelEvent()
+    {
         switch (level)
         {
-            case 1: 
+            case 1:
                 Floor1();
                 break;
             case 2:
@@ -58,23 +65,28 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        countdown = countdown - 1;
-        if (countdown < 256 && countdown >= 0)
-        {
-            Color32 temp = levelText.GetComponent<Text>().color;
-            levelText.GetComponent<Text>().color = new Color32((byte)(temp[0]),
-            (byte)(temp[1]), (byte)(temp[2]), (byte)(countdown));
-        }
+    #region Title Text
 
+    IEnumerator FadeText(float startTime)
+    {
+        while (Time.time < startTime + 2.0f) { yield return null; }
+        Color c = text.color;
+        for (float alpha = 1f; alpha >= 0; alpha -= textFadeRate)
+        {
+            c.a = alpha;
+            text.color = c;
+            yield return new WaitForSeconds(0.1f);
+        }
+        LevelEvent();
     }
+
+    #endregion
 
     #region Floor-Dependent Methods
 
     void Floor1()
     {
+        player.DisableUI();
         dialogueManager.StartDialogue(dialogue);
     }
 

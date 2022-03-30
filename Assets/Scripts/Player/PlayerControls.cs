@@ -173,72 +173,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""A & D Keys"",
-                    ""id"": ""c1d9544b-2984-4891-8892-e963178021e3"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""ccf45162-0bc1-422e-ba20-66760076db84"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""A & D Keys"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""1ed71dc3-d9c4-4bf8-aec2-2a5fa3cec0b0"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""A & D Keys"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""D-Pad"",
-                    ""id"": ""f7b4c425-0529-4f67-a26b-741604830fb3"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""d0b18391-9c23-4edd-bc8e-de9945081671"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""5adca001-e0b6-4143-a6e0-b7351e4bf17a"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""cd26a5fe-4495-4b34-8d84-b1639f1d1cb9"",
                     ""path"": ""<Keyboard>/g"",
@@ -267,17 +201,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a0a60f22-9db7-41e2-adab-d7d66f865ca8"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -415,72 +338,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""A & D Keys"",
-                    ""id"": ""a75c2a1e-3a89-4075-bed5-cc7e8dba6b7f"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StopMoving"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""47b6edc0-f7c7-4298-ad12-f80f715dddf8"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""A & D Keys"",
-                    ""action"": ""StopMoving"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""47b6373a-ffa1-4a25-afe2-4b9069125ebd"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""A & D Keys"",
-                    ""action"": ""StopMoving"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""D-Pad"",
-                    ""id"": ""2f622051-f252-4945-a5ff-0fae923efacc"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StopMoving"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""12e68216-e1e3-4bdf-bd89-8b3c881523bc"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""D-Pad"",
-                    ""action"": ""StopMoving"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""4270caa8-76cd-42fe-bdfb-dbd2eb0155ce"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""D-Pad"",
-                    ""action"": ""StopMoving"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""9e1086db-1e06-4bb5-a9b2-66dc80c1d50c"",
                     ""path"": ""<Keyboard>/escape"",
@@ -520,28 +377,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             ""name"": ""Gamepad"",
             ""bindingGroup"": ""Gamepad"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""A & D Keys"",
-            ""bindingGroup"": ""A & D Keys"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""D-Pad"",
-            ""bindingGroup"": ""D-Pad"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Gamepad>"",
@@ -712,24 +547,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
             return asset.controlSchemes[m_GamepadSchemeIndex];
-        }
-    }
-    private int m_ADKeysSchemeIndex = -1;
-    public InputControlScheme ADKeysScheme
-    {
-        get
-        {
-            if (m_ADKeysSchemeIndex == -1) m_ADKeysSchemeIndex = asset.FindControlSchemeIndex("A & D Keys");
-            return asset.controlSchemes[m_ADKeysSchemeIndex];
-        }
-    }
-    private int m_DPadSchemeIndex = -1;
-    public InputControlScheme DPadScheme
-    {
-        get
-        {
-            if (m_DPadSchemeIndex == -1) m_DPadSchemeIndex = asset.FindControlSchemeIndex("D-Pad");
-            return asset.controlSchemes[m_DPadSchemeIndex];
         }
     }
     public interface IGameplayActions

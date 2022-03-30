@@ -4,8 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    public string name;
-
-    [TextArea(1,10)]
-    public string[] messages;
+    [SerializeField] public string[] messages;
+    [SerializeField] public Sprite[] sprites;
+   // public (string, string)[] messages;
 }

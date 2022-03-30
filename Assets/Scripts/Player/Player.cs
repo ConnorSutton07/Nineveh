@@ -436,6 +436,7 @@ public class Player : MonoBehaviour
             {
                 enemyScript.TakeDamage(Mathf.FloorToInt(damage), Mathf.FloorToInt(damage * 0.1f), true);
                 currentHealth = (int)Mathf.Min(maxHealth, currentHealth + harmonyLifestealRate * currentHarmony);
+                updateHealthBar();
                 currentHarmony += harmonyHitGain;
                 lastHarmonyIncreaseTime = Time.time;
                 PlaySound("sword_hit");
