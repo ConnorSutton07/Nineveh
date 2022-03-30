@@ -14,14 +14,14 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        open = new Vector3(300f, 0f, 0f);
-        close = new Vector3(0f, -1000f, 0f);
+        open = new Vector3(0f, -Screen.height / 2, 0f);
+        close = new Vector3(0f, Screen.height * 3, 0f);
         message = new Queue<string>();
     }
     public void StartDialogue (Dialogue dialogue)
     {
 
-        transform.position = open;
+        transform.localPosition = open;
         nameText.text = dialogue.name;
         message.Clear();
         foreach(string sentence in dialogue.messages)

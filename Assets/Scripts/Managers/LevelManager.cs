@@ -11,17 +11,25 @@ public class LevelManager : MonoBehaviour
     [Header ("UI")]
     [SerializeField] public GameObject levelText;
 
+    [Header("Dialogue")]
+    [SerializeField] Dialogue dialogue;
+
     [Header ("Thunder")]
     [SerializeField] PerlinShake.Params shakeParams;
     [SerializeField] float freezeDuration;
 
     private int countdown = 600;
     AudioManager audioManager;
+    DialogueManager dialogueManager;
 
+    private void Awake()
+    {
+        audioManager = GetComponent<AudioManager>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
 
     void Start()
     {
-        audioManager = GetComponent<AudioManager>();
         string levelString = GlobalDataPassing.Instance.GetLevelString();
         levelText.GetComponent<Text>().text = levelString;
         int level = GlobalDataPassing.Instance.GetCurrentLevel();
@@ -67,7 +75,7 @@ public class LevelManager : MonoBehaviour
 
     void Floor1()
     {
-
+        dialogueManager.StartDialogue(dialogue);
     }
 
     IEnumerator StartFloor2(float startTime, float delay)
