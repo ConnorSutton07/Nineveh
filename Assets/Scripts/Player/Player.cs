@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
   #endregion
 
-  #region Initialization
+    #region Initialization
 
     void Start()
     {
