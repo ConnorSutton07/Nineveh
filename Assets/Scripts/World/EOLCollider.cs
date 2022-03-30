@@ -8,7 +8,7 @@ public class EOLCollider : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player playerScpt = GameObject.Find("Player").GetComponent<Player>();
-      if (collision.gameObject.layer == Constants.PLAYER_LAYER)
+      if (collision.name == "Player")
       {
           playerScpt.StorePlayerDataGlobal();
           GlobalDataPassing.Instance.IncreaseLevel();
