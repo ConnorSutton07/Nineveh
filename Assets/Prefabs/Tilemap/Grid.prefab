@@ -134,9 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerFloorNumber: 1
-  n_sections: 3
+  n_sections: 6
   tower: {fileID: 7131814342718982536, guid: 629d01a9f5a0048dd934313b8f0c9d4a, type: 3}
-  barricade: {fileID: 8267395165591055852, guid: 46c7ac55f908a4b98b39c237437ac830, type: 3}
   double_tower: {fileID: 370116954743722975, guid: 48376bf1b9a4c6a4bad7c7d8a6afe520, type: 3}
   tall_tower: {fileID: 7131814342718982536, guid: e87111d1a32a0164f8a5f24a8148e883, type: 3}
   short_tall_tower: {fileID: 8610482102798511617, guid: 02a8d6b02a55f9840a8fc056d0438f00, type: 3}
@@ -156,6 +155,8 @@ MonoBehaviour:
   tileSize: 3
   onlyFloor: 0
   spawnEnemies: 1
+  isTest: 0
+  testSection: 0
 --- !u!19719996 &1854978299311774876
 TilemapCollider2D:
   m_ObjectHideFlags: 0

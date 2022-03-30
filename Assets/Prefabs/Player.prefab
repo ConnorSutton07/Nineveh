@@ -6485,6 +6485,7 @@ MonoBehaviour:
   harmonyHitGain: 5
   harmonyDeflectGain: 10
   maxHarmony: 100
+  harmonyEmission: 0
   harmonyFog: {fileID: 1547687459}
   attackPoint: {fileID: 1183356048232590789}
   healthSlider: {fileID: 1635510570}
@@ -6842,7 +6843,7 @@ MonoBehaviour:
     pitchNoise: 0.1
   - m_name: arrow_deflect
     m_clips:
-    - {fileID: 8300000, guid: 6f841c85c22799d46975b146e02f15d6, type: 3}
+    - {fileID: 8300000, guid: 420fc874b5e391242b300610465f0b68, type: 3}
     volumeNoise: 0.1
     pitchNoise: 0.1
 --- !u!1 &1183356046832619243
