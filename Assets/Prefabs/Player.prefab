@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 1150320418}
   - component: {fileID: 2011459200}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6478,14 +6478,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   harmonyDamageAmplifier: 0.5
-  harmonyLifestealThreshold: 0.75
   harmonyLifestealRate: 0
   harmonyPauseTime: 2
   harmonyDimishRate: 0.12
   harmonyHitGain: 5
   harmonyDeflectGain: 10
   maxHarmony: 100
-  harmonyEmission: 0
+  harmonyEmission: 25
   harmonyFog: {fileID: 1547687459}
   attackPoint: {fileID: 1183356048232590789}
   healthSlider: {fileID: 1635510570}
