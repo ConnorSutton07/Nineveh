@@ -81,6 +81,7 @@ public class MeleeEnemy : Enemy
         {
             animator.SetInteger("AnimState", 2);
             Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
+            Debug.Log("Position: " + transform.position + ", Target: " + targetPosition);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
