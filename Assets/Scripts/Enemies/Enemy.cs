@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(name + ", " + state);
         if (state != State.DEFAULT) return;
         if (FindPlayer()) EnemyLogic();
         else animator.SetInteger("AnimState", 1);
@@ -101,7 +102,7 @@ public class Enemy : MonoBehaviour
         }
         else if (currentPosture >= postureThreshold)
         {
-            animator.SetTrigger("Recover");
+            EnterStun();
             currentPosture = 0;
         }
         else if (breakStance || animator.GetCurrentAnimatorStateInfo(0).IsName("Recover"))
@@ -124,7 +125,7 @@ public class Enemy : MonoBehaviour
 
     public void AttemptBlock(bool forceSucess = false, float duration = -1f)
     {
-        if (forceSucess || (canBlock && Random.Range(0f, 1f) < blockChance))
+        if (!Suspended() && (forceSucess || (canBlock && Random.Range(0f, 1f) < blockChance)))
         {
             Debug.Log("Block");
             animator.SetInteger("AnimState", 1);
@@ -203,6 +204,8 @@ public class Enemy : MonoBehaviour
 
     public void EnterStun()
     {
+        Debug.Log("here 1");
+        animator.SetTrigger("Recover");
         state = State.STUNNED;
     }
 
@@ -212,6 +215,11 @@ public class Enemy : MonoBehaviour
         AttemptBlock(true);
     }
 
+    public bool Suspended()
+    {
+        return state == State.STUNNED || state == State.FROZEN || animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
+    }
+
     public void EnterAttack()
     {
         state = State.ATTACKING;
@@ -219,6 +227,7 @@ public class Enemy : MonoBehaviour
 
     public void ExitState()
     {
+        Debug.Log("here 1.5");
         state = State.DEFAULT;
     }
 
@@ -245,8 +254,7 @@ public class Enemy : MonoBehaviour
 
     protected bool CanAttack()
     {
-        return (!animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt") 
-             && Time.time > attackCooldown);
+        return !Suspended() && Time.time > attackCooldown;
     }
 
     protected void Move()

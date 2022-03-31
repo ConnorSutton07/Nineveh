@@ -85,6 +85,7 @@ public class LevelManager : MonoBehaviour
 
     void StartDialogue()
     {
+        if (!dialogueManager.Used()) { player.EnableUI(); return; }
         SwapInputManagers();
         dialogueManager.StartDialogue(dialogue);
     }

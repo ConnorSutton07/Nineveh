@@ -26,8 +26,8 @@ public class Attack : StateMachineBehaviour
             animator.gameObject.GetComponent<Player>().ExitConditionally();
         else
         {
-            animator.gameObject.GetComponent<Enemy>().ExitState();
-            //Debug.Log("Exit first");
+            Enemy enemy = animator.gameObject.GetComponent<Enemy>();
+            if (!enemy.Suspended()) { enemy.ExitState(); }
         }
     }
 

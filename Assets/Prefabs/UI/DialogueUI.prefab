@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 2299222284553814319}
   dialogueText: {fileID: 2299222284784129683}
+  used: 1
 --- !u!222 &2299222284109569196
 CanvasRenderer:
   m_ObjectHideFlags: 0

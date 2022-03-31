@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<Sprite> sprites;
     Vector3 prevPos;
     bool active;
+    [SerializeField] bool used;
 
     Image character;
 
@@ -39,7 +40,6 @@ public class DialogueManager : MonoBehaviour
 
     void OnAdvanceDialogue(InputValue value)
     {
-        Debug.Log("here");
         if (active) { DisplayNextMessage(); }
     }
 
@@ -67,4 +67,6 @@ public class DialogueManager : MonoBehaviour
         GameObject.Find("Player").GetComponent<Player>().EnableUI();
         transform.GetComponent<PlayerInput>().enabled = false;
     }
+
+    public bool Used() { return used; }
 }

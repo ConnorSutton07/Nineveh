@@ -453,6 +453,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2299222284109569171, guid: 0ebb5b903259ec34ba99a4dadd88d5d5, type: 3}
+      propertyPath: used
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3837822985069926348, guid: 0ebb5b903259ec34ba99a4dadd88d5d5, type: 3}
       propertyPath: m_Name
       value: DialogueUI
@@ -1046,7 +1050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: n_sections
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: EnemyParent
@@ -1054,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 885596029}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: testSection
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: PlatformParent

@@ -56,7 +56,6 @@ public class MeleeEnemy : Enemy
         distance = Vector2.Distance(transform.position, target.position);
         if (InSameSection(distance))
         {
-            Debug.Log(name + " is in the same section");
             float yDistance = target.position.y - transform.position.y;
             if (EnemyInBetween() || yDistance >= unreachableHeightDistance)
             {

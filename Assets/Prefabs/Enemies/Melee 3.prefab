@@ -196,7 +196,7 @@ MonoBehaviour:
   blockChance: 1
   minBlockTime: 0.8
   maxBlockTime: 1.6
-  postureThreshold: 200
+  postureThreshold: 100
   canBlock: 1
   awareDistance: 10
   moveSpeed: 2
@@ -205,7 +205,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   flip: 1
-  deflectChance: 0.4
+  deflectChance: 1
   sectionMask:
     serializedVersion: 2
     m_Bits: 4608
@@ -215,7 +215,7 @@ MonoBehaviour:
     m_Bits: 512
   attackPoint: {fileID: 6707923284739050073}
   attackDamage: 30
-  parryDamagePercentage: 12
+  parryDamagePercentage: 20
   unreachableHeightDistance: 2.5
 --- !u!1 &8348768811320835002
 GameObject:
