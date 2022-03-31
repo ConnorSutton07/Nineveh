@@ -511,9 +511,16 @@ public class TwinTowerSection : Section
     //maybe spawn melee enemy
     if (ShouldSpawnEnemy())
     {
-      Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x + 2.5f, 2.25f), Quaternion.identity, EnemyParent);
+      Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x + 4.0f, 2.25f), Quaternion.identity, EnemyParent);
       enemiesSpawned++;
     }
+    //maybe spawn melee enemy
+    if (ShouldSpawnEnemy())
+    {
+      Instantiate(getRandomDifficulty(MeleeEnemies), new Vector2(tower_x + 5.0f, 2.25f), Quaternion.identity, EnemyParent);
+      enemiesSpawned++;
+    }
+
     GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned);
     return;
   }
