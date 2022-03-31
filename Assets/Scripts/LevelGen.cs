@@ -212,7 +212,6 @@ public class SimpleSection : Section
         MeleeEnemies = meleeEnemies;
         EnemyParent = enemies;
         empty = !addEnemies;
-        if (empty) Debug.Log("empty section");
     }
     public override void GenerateRoomObjects(int sectionIndex, float sectionWidth, int sectionHeight)
     {

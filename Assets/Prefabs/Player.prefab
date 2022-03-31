@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 1150320418}
   - component: {fileID: 2011459200}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1426,7 +1426,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1.87
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1810,7 +1810,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 1, y: 1, z: 0.37}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -6468,7 +6468,7 @@ MonoBehaviour:
   pushbackSpeed: 0
   attackDamage: 20
   attackRange: 0.39
-  attackRate: 0.6
+  attackRate: 0.45
   deflectWindow: 0.25
   shiftDistance: 0.05
   stunnedAmplifier: 1.2
@@ -6478,14 +6478,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   harmonyDamageAmplifier: 0.5
-  harmonyLifestealThreshold: 0.75
   harmonyLifestealRate: 0
   harmonyPauseTime: 2
   harmonyDimishRate: 0.12
   harmonyHitGain: 5
   harmonyDeflectGain: 10
   maxHarmony: 100
-  harmonyEmission: 0
+  harmonyEmission: 25
   harmonyFog: {fileID: 1547687459}
   attackPoint: {fileID: 1183356048232590789}
   healthSlider: {fileID: 1635510570}
