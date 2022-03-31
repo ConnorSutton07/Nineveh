@@ -668,7 +668,7 @@ public class PentatowerSection : Section
     // maybe spawn a ranged enemy
     if (ShouldSpawnEnemy())
     {
-      Instantiate(RangedEnemy, new Vector2(tower_x - 3.0f, 4.0f), Quaternion.identity, EnemyParent);
+      Instantiate(RangedEnemy, new Vector2(tower_x - 3.0f, 6.0f), Quaternion.identity, EnemyParent);
       enemiesSpawned++;
     }
     else
