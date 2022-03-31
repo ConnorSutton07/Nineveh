@@ -76,6 +76,7 @@ public class LevelManager : MonoBehaviour
             default: break;
         }
     }
+
     IEnumerator DelayCallable(float startTime, float delay, Action callable)
     {
         while (Time.time < startTime + delay) { yield return null; }
