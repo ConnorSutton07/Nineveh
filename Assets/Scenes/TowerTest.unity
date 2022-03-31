@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08423804, g: 0.09523567, b: 0.1457061, a: 1}
+  m_IndirectSpecularColor: {r: 0.08329958, g: 0.095230214, b: 0.14548576, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1041,6 +1041,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
+      propertyPath: jump
+      value: 
+      objectReference: {fileID: 3836087035458757546, guid: f29b3dce22c65c446947e8928f872c69, type: 3}
+    - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: isTest
       value: 1
       objectReference: {fileID: 0}
@@ -1054,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 885596029}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: testSection
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: PlatformParent
