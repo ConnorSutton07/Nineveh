@@ -54,7 +54,8 @@ public class DialogueManager : MonoBehaviour
         string sentence = messages.Dequeue();
         Sprite sprite = sprites.Dequeue();
         dialogueText.text = sentence;
-        nameText.text = sprite.name;
+        if (sprite.name == "Shadow") { nameText.text = "???"; }
+        else { nameText.text = sprite.name; }
         character.sprite = sprite;
     }
 
@@ -62,5 +63,8 @@ public class DialogueManager : MonoBehaviour
     {
         active = false;
         transform.position = close;
+        GameObject.Find("LevelManager").GetComponent<LevelManager>().SwapInputManagers();
+        GameObject.Find("Player").GetComponent<Player>().EnableUI();
+        transform.GetComponent<PlayerInput>().enabled = false;
     }
 }

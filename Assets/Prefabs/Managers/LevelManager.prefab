@@ -47,23 +47,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   levelText: {fileID: 0}
+  textFadeRate: 0.05
+  dialogue:
+    messages:
+    - ...!
+    - My aim is known above.
+    sprites:
+    - {fileID: 21300000, guid: 1f10cf04f75bfa94887c979379a7bde7, type: 3}
+    - {fileID: 21300000, guid: 1f10cf04f75bfa94887c979379a7bde7, type: 3}
   shakeParams:
     strength:
-      position: {x: 0, y: 0, z: 0}
-      eulerAngles: {x: 2, y: 2, z: 0.8}
+      position: {x: 200, y: 200, z: 200}
+      eulerAngles: {x: 3.55, y: 4.16, z: 2.66}
     noiseModes:
     - freq: 12
       amplitude: 1
+    - freq: 12
+      amplitude: 1
     envelope:
-      attack: 10
-      sustain: 3
-      decay: 10
-      degree: 3
+      attack: 15.01
+      sustain: 2
+      decay: 1
+      degree: 2
     attenuation:
-      clippingDistance: 10
+      clippingDistance: 19.1
       falloffScale: 50
       falloffDegree: 1
-      axesMultiplier: {x: 0.25, y: 0.25, z: 0.25}
+      axesMultiplier: {x: 1, y: 1, z: 1}
+  thunderDelay: 1
   freezeDuration: 4
 --- !u!114 &2606090913531826848
 MonoBehaviour:

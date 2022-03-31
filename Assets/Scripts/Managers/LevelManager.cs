@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using CameraShake;
+using System;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] Player player;
 
-    [Header ("UI")]
+    [Header("UI")]
     [SerializeField] public GameObject levelText;
     [SerializeField] float textFadeRate;
 
     [Header("Dialogue")]
     [SerializeField] Dialogue dialogue;
 
-    [Header ("Thunder")]
+    [Header("Thunder")]
+
     [SerializeField] PerlinShake.Params shakeParams;
+    [SerializeField] float thunderDelay;
     [SerializeField] float freezeDuration;
 
     AudioManager audioManager;
     DialogueManager dialogueManager;
+    PlayerInput GameplayControls;
+    PlayerInput UIControls;
+
+
     Text text;
     int level;
 
@@ -29,6 +37,9 @@ public class LevelManager : MonoBehaviour
         audioManager = GetComponent<AudioManager>();
         dialogueManager = FindObjectOfType<DialogueManager>();
         text = levelText.GetComponent<Text>();
+        GameplayControls = player.GetComponent<PlayerInput>();
+        UIControls = dialogueManager.GetComponent<PlayerInput>();
+        InitializeInputManagers();
     }
 
     void Start()
@@ -36,6 +47,7 @@ public class LevelManager : MonoBehaviour
         string levelString = GlobalDataPassing.Instance.GetLevelString();
         level = GlobalDataPassing.Instance.GetCurrentLevel();
         levelText.GetComponent<Text>().text = levelString;
+        player.DisableUI();
         StartCoroutine(FadeText(Time.time));
     }
 
@@ -47,7 +59,7 @@ public class LevelManager : MonoBehaviour
                 Floor1();
                 break;
             case 2:
-                StartCoroutine(StartFloor2(Time.time, 1.5f));
+                Floor2();
                 break;
             case 3:
                 Floor3();
@@ -64,6 +76,17 @@ public class LevelManager : MonoBehaviour
             default: break;
         }
     }
+    IEnumerator DelayCallable(float startTime, float delay, Action callable)
+    {
+        while (Time.time < startTime + delay) { yield return null; }
+        callable();
+    }
+
+    void StartDialogue()
+    {
+        SwapInputManagers();
+        dialogueManager.StartDialogue(dialogue);
+    }
 
     #region Title Text
 
@@ -77,6 +100,7 @@ public class LevelManager : MonoBehaviour
             text.color = c;
             yield return new WaitForSeconds(0.1f);
         }
+        text.enabled = false;
         LevelEvent();
     }
 
@@ -86,36 +110,44 @@ public class LevelManager : MonoBehaviour
 
     void Floor1()
     {
-        player.DisableUI();
-        dialogueManager.StartDialogue(dialogue);
+        StartDialogue();
     }
 
-    IEnumerator StartFloor2(float startTime, float delay)
-    {
-        while (Time.time < startTime + delay) { yield return null; }
-        Floor2();
-    }
-
-    void Floor2()
+    void Floor2Events()
     {
         player.Freeze(freezeDuration);
         PlaySound("Thunder");
         PerlinShake();
+        StartCoroutine(DelayCallable(Time.time, freezeDuration, StartDialogue));
+    }
+
+    void Floor2()
+    {
+        StartCoroutine(DelayCallable(Time.time, thunderDelay, Floor2Events));
     }
 
     void Floor3()
     {
-
+        StartDialogue();
     }
 
     void Floor4()
     {
+        player.Freeze(freezeDuration);
+        PlaySound("Big Thunder");
+        PerlinShake();
+        StartCoroutine(DelayCallable(Time.time, 1.5f, SmallThunder));
+        StartCoroutine(DelayCallable(Time.time, freezeDuration, StartDialogue));
+    }
 
+    void SmallThunder()
+    {
+        PlaySound("Thunder");
     }
 
     void Floor5()
     {
-
+        StartDialogue();
     }
 
     void Overworld()
@@ -132,8 +164,6 @@ public class LevelManager : MonoBehaviour
     public void PerlinShake()
     {
         Vector3 sourcePosition = transform.position;
-
-        // Creating new instance of a shake and registering it in the system.
         CameraShaker.Shake(new PerlinShake(shakeParams, sourcePosition: sourcePosition));
     }
 
@@ -144,6 +174,23 @@ public class LevelManager : MonoBehaviour
     public void PlaySound(string text)
     {
         audioManager.PlaySound(text);
+    }
+
+    #endregion
+
+    #region Input Management
+
+    void InitializeInputManagers()
+    {
+        GameplayControls.enabled = true;
+        UIControls.enabled = false;
+    }
+
+    public void SwapInputManagers()
+    {
+        if (GameplayControls.enabled) { player.OnStopMoving(); }
+        GameplayControls.enabled = !GameplayControls.enabled;
+        UIControls.enabled = !UIControls.enabled;
     }
 
     #endregion

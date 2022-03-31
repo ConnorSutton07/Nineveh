@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
         moveInput = true;
     }
 
-    void OnStopMoving()
+    public void OnStopMoving()
     {
         moveInput = false;
     }
