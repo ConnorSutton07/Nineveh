@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1169513622}
   - component: {fileID: 1169513621}
   m_Layer: 10
-  m_Name: FakeMarduk
+  m_Name: Marduk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,9 +171,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: fc46633b0eb321e46838bcb9ff2d4150, type: 3}
+  m_Sprite: {fileID: 4326460890691248341, guid: 3cf03eb35d473a745a6c03e5bbc770bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.8, y: 1.8}
@@ -267,6 +267,9 @@ MonoBehaviour:
     m_Bits: 0
   flip: 1
   deflectChance: 0
+  sectionMask:
+    serializedVersion: 2
+    m_Bits: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -279,6 +282,7 @@ MonoBehaviour:
   distanceForAttackFollowup: 5
   followupPushbackTime: 0.5
   projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
+  rangedCooldownTime: 0
 --- !u!1001 &319030876
 PrefabInstance:
   m_ObjectHideFlags: 0

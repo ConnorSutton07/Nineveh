@@ -62,6 +62,63 @@ TextureImporter:
   - first:
       213: -7193825995329040851
     second: Marduk_19
+  - first:
+      213: -9081903112009246733
+    second: Marduk_20
+  - first:
+      213: -1828407294378700636
+    second: Marduk_21
+  - first:
+      213: -2313409228695830647
+    second: Marduk_22
+  - first:
+      213: 5948672778869951981
+    second: Marduk_23
+  - first:
+      213: 207162382804365454
+    second: Marduk_24
+  - first:
+      213: 5031997066623521506
+    second: Marduk_25
+  - first:
+      213: 4804446040595120177
+    second: Marduk_26
+  - first:
+      213: 8606241794296645590
+    second: Marduk_27
+  - first:
+      213: 6188358845335682024
+    second: Marduk_28
+  - first:
+      213: 4326460890691248341
+    second: Marduk_29
+  - first:
+      213: 4053595112923198520
+    second: Marduk_30
+  - first:
+      213: 6065222440842185510
+    second: Marduk_31
+  - first:
+      213: -781811946404831477
+    second: Marduk_32
+  - first:
+      213: -3518103510053512018
+    second: Marduk_33
+  - first:
+      213: 3860570385899900016
+    second: Marduk_34
+  - first:
+      213: -8321823163504825231
+    second: Marduk_35
+  - first:
+      213: 5570804185076652854
+    second: Marduk_36
+  - first:
+      213: -4794275180178643210
+    second: Marduk_37
+  - first:
+      213: 3248141505210604701
+    second: Marduk_38
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -92,7 +149,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -167,9 +224,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1912.5
-        width: 660
-        height: 637.5
+        y: 3600
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +244,10 @@ TextureImporter:
       name: Marduk_1
       rect:
         serializedVersion: 2
-        x: 660
-        y: 1912.5
-        width: 660
-        height: 637.5
+        x: 650
+        y: 3600
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,10 +265,10 @@ TextureImporter:
       name: Marduk_2
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 1912.5
-        width: 660
-        height: 637.5
+        x: 1300
+        y: 3600
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +286,10 @@ TextureImporter:
       name: Marduk_3
       rect:
         serializedVersion: 2
-        x: 1980
-        y: 1912.5
-        width: 660
-        height: 637.5
+        x: 1950
+        y: 3600
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,10 +307,10 @@ TextureImporter:
       name: Marduk_4
       rect:
         serializedVersion: 2
-        x: 2640
-        y: 1912.5
-        width: 660
-        height: 637.5
+        x: 2600
+        y: 3600
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,10 +328,10 @@ TextureImporter:
       name: Marduk_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1275.5
-        width: 660
-        height: 637.5
+        x: 3250
+        y: 3600
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +349,10 @@ TextureImporter:
       name: Marduk_6
       rect:
         serializedVersion: 2
-        x: 660
-        y: 1275.5
-        width: 660
-        height: 637.5
+        x: 0
+        y: 3000
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,10 +370,10 @@ TextureImporter:
       name: Marduk_7
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 1275.5
-        width: 660
-        height: 637.5
+        x: 650
+        y: 3000
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,10 +391,10 @@ TextureImporter:
       name: Marduk_8
       rect:
         serializedVersion: 2
-        x: 1980
-        y: 1275.5
-        width: 660
-        height: 637.5
+        x: 1300
+        y: 3000
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,10 +412,10 @@ TextureImporter:
       name: Marduk_9
       rect:
         serializedVersion: 2
-        x: 2640
-        y: 1275.5
-        width: 660
-        height: 637.5
+        x: 1950
+        y: 3000
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,10 +433,10 @@ TextureImporter:
       name: Marduk_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 638.5
-        width: 660
-        height: 637.5
+        x: 2600
+        y: 3000
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,10 +454,10 @@ TextureImporter:
       name: Marduk_11
       rect:
         serializedVersion: 2
-        x: 660
-        y: 638.5
-        width: 660
-        height: 637.5
+        x: 3250
+        y: 3000
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,10 +475,10 @@ TextureImporter:
       name: Marduk_12
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 638.5
-        width: 660
-        height: 637.5
+        x: 0
+        y: 2400
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,10 +496,10 @@ TextureImporter:
       name: Marduk_13
       rect:
         serializedVersion: 2
-        x: 1980
-        y: 638.5
-        width: 660
-        height: 637.5
+        x: 650
+        y: 2400
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,10 +517,10 @@ TextureImporter:
       name: Marduk_14
       rect:
         serializedVersion: 2
-        x: 2640
-        y: 638.5
-        width: 660
-        height: 637.5
+        x: 1300
+        y: 2400
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -481,10 +538,10 @@ TextureImporter:
       name: Marduk_15
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1.5
-        width: 660
-        height: 637.5
+        x: 1950
+        y: 2400
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -502,10 +559,10 @@ TextureImporter:
       name: Marduk_16
       rect:
         serializedVersion: 2
-        x: 660
-        y: 1.5
-        width: 660
-        height: 637.5
+        x: 2600
+        y: 2400
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -523,10 +580,10 @@ TextureImporter:
       name: Marduk_17
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 1.5
-        width: 660
-        height: 637.5
+        x: 3250
+        y: 2400
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -544,10 +601,10 @@ TextureImporter:
       name: Marduk_18
       rect:
         serializedVersion: 2
-        x: 1980
-        y: 1.5
-        width: 660
-        height: 637.5
+        x: 0
+        y: 1800
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -565,10 +622,10 @@ TextureImporter:
       name: Marduk_19
       rect:
         serializedVersion: 2
-        x: 2640
-        y: 1.5
-        width: 660
-        height: 637.5
+        x: 650
+        y: 1800
+        width: 650
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -578,6 +635,405 @@ TextureImporter:
       bones: []
       spriteID: d2e017c2f556a2c90800000000000000
       internalID: -7193825995329040851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_20
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f79c24dc3996f180800000000000000
+      internalID: -9081903112009246733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_21
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a013d9c04130a6e0800000000000000
+      internalID: -1828407294378700636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_22
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98f797f309e15efd0800000000000000
+      internalID: -2313409228695830647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_23
+      rect:
+        serializedVersion: 2
+        x: 3250
+        y: 1800
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ded449dff5eed8250800000000000000
+      internalID: 5948672778869951981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e80b0ede61dffd200800000000000000
+      internalID: 207162382804365454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_25
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e217e2ebae35d540800000000000000
+      internalID: 5031997066623521506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_26
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13044380832dca240800000000000000
+      internalID: 4804446040595120177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_27
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d70c2860538f6770800000000000000
+      internalID: 8606241794296645590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_28
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb31ee159771e550800000000000000
+      internalID: 6188358845335682024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_29
+      rect:
+        serializedVersion: 2
+        x: 3250
+        y: 1200
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d0a54ce14daa0c30800000000000000
+      internalID: 4326460890691248341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 834fb014743414830800000000000000
+      internalID: 4053595112923198520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_31
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b402eccaffb2450800000000000000
+      internalID: 6065222440842185510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_32
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0f126d4d227625f0800000000000000
+      internalID: -781811946404831477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_33
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eac94305f7f2d2fc0800000000000000
+      internalID: -3518103510053512018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_34
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07cc4f1df40839530800000000000000
+      internalID: 3860570385899900016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_35
+      rect:
+        serializedVersion: 2
+        x: 3250
+        y: 600
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17c6da77ce1f28c80800000000000000
+      internalID: -8321823163504825231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63bd0c414e87f4d40800000000000000
+      internalID: 5570804185076652854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_37
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f6eaf1ff10577db0800000000000000
+      internalID: -4794275180178643210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_38
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9cd7465d77b31d20800000000000000
+      internalID: 3248141505210604701
       vertices: []
       indices: 
       edges: []
