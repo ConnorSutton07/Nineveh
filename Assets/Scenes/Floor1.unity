@@ -1152,6 +1152,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 885596029}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
+      propertyPath: spawnEnemies
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: PlatformParent
       value: 
       objectReference: {fileID: 1039368640}
