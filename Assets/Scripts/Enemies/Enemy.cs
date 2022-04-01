@@ -72,8 +72,7 @@ public class Enemy : MonoBehaviour
     #region Update 
 
     void Update()
-    {
-        Debug.Log(name + ", " + state);
+    { 
         if (state != State.DEFAULT) return;
         if (FindPlayer()) EnemyLogic();
         else animator.SetInteger("AnimState", 1);
@@ -218,6 +217,11 @@ public class Enemy : MonoBehaviour
     public bool Suspended()
     {
         return state == State.STUNNED || state == State.FROZEN || animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt");
+    }
+
+    public void ExitConditionally()
+    {
+        if (state != State.STUNNED) state = State.DEFAULT;
     }
 
     public void EnterAttack()

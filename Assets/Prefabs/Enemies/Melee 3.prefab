@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca56ea45f14044478659f2c31c97744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 0.92
+  attackDistance: 1.2
   shiftDistance: 0.1
   maxHealth: 120
   attackRate: 1
@@ -205,7 +205,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   flip: 1
-  deflectChance: 1
+  deflectChance: 0.75
   sectionMask:
     serializedVersion: 2
     m_Bits: 4608

@@ -12,7 +12,7 @@ public class Attack : StateMachineBehaviour
             animator.gameObject.GetComponent<Enemy>().EnterAttack();
         }
     }
-    
+
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -22,13 +22,8 @@ public class Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.gameObject.name == "Player")
-            animator.gameObject.GetComponent<Player>().ExitConditionally();
-        else
-        {
-            Enemy enemy = animator.gameObject.GetComponent<Enemy>();
-            if (!enemy.Suspended()) { enemy.ExitState(); }
-        }
+        if (animator.gameObject.name == "Player") { animator.gameObject.GetComponent<Player>().ExitConditionally(); }
+        else { animator.gameObject.GetComponent<Enemy>().ExitConditionally(); }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
