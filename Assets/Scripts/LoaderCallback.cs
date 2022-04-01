@@ -58,7 +58,12 @@ public class LoaderCallback : MonoBehaviour
   
     private void SetCharacterDisplay()
     {
-        int randomCharacter = 4; //Random.Range(0, sprites.Length);
+        int randomCharacter = Random.Range(0, sprites.Length); ; //Random.Range(0, sprites.Length);
+        if (randomCharacter == 0 || randomCharacter == 5)//jake either as hawaiian shirt or not
+        {
+          if (System.DateTime.Now.DayOfWeek == System.DayOfWeek.Wednesday) randomCharacter = 5;
+          else randomCharacter = 0;
+        }
         tipCharacter.GetComponent<Image>().sprite = sprites[randomCharacter];
         tipCharName.GetComponent<Text>().text = sprites[randomCharacter].name;
         // if (sprites[randomCharacter].name == "Dr. Johnson") tipText.GetComponent<Text>().fontSize = 45;
