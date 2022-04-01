@@ -99,6 +99,7 @@ public class GlobalDataPassing : MonoBehaviour
 
     public void DecrementEnemiesInCurrentSection()
     {
+        Debug.Log(playerSection);
         AliveEnemiesInSections[playerSection]--;
     }
 

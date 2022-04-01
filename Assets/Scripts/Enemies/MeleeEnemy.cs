@@ -57,8 +57,6 @@ public class MeleeEnemy : Enemy
         if (InSameSection(distance))
         {
             float yDistance = target.position.y - transform.position.y;
-            Debug.Log(yDistance);
-            Debug.Log(distance);
             if (EnemyInBetween() || yDistance >= unreachableHeightDistance)
             {
                 AttemptBlock(true, 0.25f);

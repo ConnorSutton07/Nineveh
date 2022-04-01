@@ -106,7 +106,6 @@ public class Enemy : MonoBehaviour
         }
         else if (breakStance || animator.GetCurrentAnimatorStateInfo(0).IsName("Recover"))
         {
-            Debug.Log("break stance");
             animator.SetTrigger("Hurt");
             attackCooldown = 0;
         }
@@ -126,7 +125,6 @@ public class Enemy : MonoBehaviour
     {
         if (!Suspended() && (forceSucess || (canBlock && Random.Range(0f, 1f) < blockChance)))
         {
-            Debug.Log("Block");
             animator.SetInteger("AnimState", 1);
             state = State.BLOCKING;
             if (duration == -1) duration = Random.Range(minBlockTime, maxBlockTime);
@@ -203,7 +201,6 @@ public class Enemy : MonoBehaviour
 
     public void EnterStun()
     {
-        Debug.Log("here 1");
         animator.SetTrigger("Recover");
         state = State.STUNNED;
     }
@@ -248,7 +245,6 @@ public class Enemy : MonoBehaviour
     */
     protected void Die()
     {
-        Debug.Log(gameObject.name + " died");
         animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = Constants.DEAD_LAYER;
