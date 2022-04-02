@@ -32,6 +32,7 @@ public class Marduk : Enemy
     float rangedCooldown;
     Transform projectileOrigin;
     SpriteRenderer renderer;
+    bool deflected;
 
     protected override void Start()
     {
@@ -48,6 +49,7 @@ public class Marduk : Enemy
     {
         int postureDamage = 0;
         string attackSound = "";
+        deflected = false;
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint1.position, attackRange1, enemyLayer);
 
@@ -62,6 +64,7 @@ public class Marduk : Enemy
                     playerScript.SuccessfulDeflect();
                     playerScript.EmitDeflectParticles();
                     postureDamage = deflectPostureDamage;
+                    deflected = true;
                 }
                 else
                 {
@@ -85,8 +88,14 @@ public class Marduk : Enemy
 
     public void CheckForFollowup()
     {
+        if (deflected) return;
         distance = Vector2.Distance(transform.position, target.position);
-        if (distance <= attackDistance) { animator.SetTrigger("Attack2"); }
+        if (distance <= attackDistance)
+        {
+            int direction = flip * ((transform.position.x > player.position.x) ? 1 : -1);
+            transform.localScale = new Vector3(direction, 1.0f, 1.0f);
+            animator.SetTrigger("Attack2");
+        }
     }
 
     public void FollowupMeleeAttack()
@@ -122,7 +131,7 @@ public class Marduk : Enemy
             else
             {
                 attackSound = "sword_hit";
-                playerScript.TakeDamage(attackDamage, Mathf.FloorToInt(attackDamage * 0.1f), true);
+                playerScript.TakeDamage(attackDamage / 5, Mathf.FloorToInt(attackDamage * 0.1f), true);
             }
         }
         else attackSound = "sword_miss";
