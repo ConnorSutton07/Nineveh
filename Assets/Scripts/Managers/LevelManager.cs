@@ -156,10 +156,16 @@ public class LevelManager : MonoBehaviour
     {
         player.DisableUI();
         GameObject marduk = GameObject.Find("Marduk");
-        // marduk.SetActive(false);
         // GameObject.Find("Overworld Sky").GetComponent<Stars>().BeginSequence();
         player.ActivateLight();
         player.EnableUI();
+        StartCoroutine(ActivateMarduk(Time.time, 3f, marduk));
+    }
+
+    IEnumerator ActivateMarduk(float startTime, float delay, GameObject marduk)
+    {
+        while (Time.time < startTime + delay) { yield return null; }
+        marduk.GetComponent<Marduk>().Unfreeze();
     }
 
     #endregion

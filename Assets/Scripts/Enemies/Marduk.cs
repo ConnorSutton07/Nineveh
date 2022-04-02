@@ -41,6 +41,7 @@ public class Marduk : Enemy
         rangedCooldown = 0;
         renderer = GetComponent<SpriteRenderer>();
         renderer.material = regularMaterial;
+        state = State.FROZEN;
     }
 
     #region Attacks
@@ -257,5 +258,10 @@ public class Marduk : Enemy
     {
         Gizmos.DrawWireSphere(attackPoint1.position, attackRange1);
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange2);
+    }
+
+    public void Unfreeze()
+    {
+        state = State.DEFAULT;
     }
 }
