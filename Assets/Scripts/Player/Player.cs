@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
   //currentPosture = Mathf.Clamp(currentPosture, 0f, 100f);
     [Header("Posture")]
     [SerializeField] float posturePauseTime;
-    [SerializeField] int postureDimishRate;
+    [SerializeField] float postureDimishRate;
 
     [Header ("Objects")]
     [SerializeField] Transform attackPoint;
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
     float raycastLength = 2f;
 
     public int currentHealth;
-    public int currentPosture;
+    public float currentPosture;
     
     float lastHarmonyIncreaseTime;
     float lastPostureIncreaseTime;
@@ -157,9 +157,14 @@ public class Player : MonoBehaviour
         HarmonyEmit.rateOverTime = currentHarmony;
 
         //Debug.Log("LastPostureIncreaseTime: " + lastPostureIncreaseTime);
-        if (Time.time > lastPostureIncreaseTime + posturePauseTime) currentPosture -= postureDimishRate;
-        if (currentPosture < 0) currentPosture = 0;
-        //currentPosture = Mathf.Clamp(currentPosture, 0, 100);
+        if (Time.time > lastPostureIncreaseTime + posturePauseTime)
+        {
+          Debug.Log("current Posture: " + currentPosture);
+          currentPosture -= postureDimishRate;
+          updatePostureBar();
+          }
+        //if (currentPosture < 0) currentPosture = 0.0;
+        currentPosture = Mathf.Clamp(currentPosture, 0f, 100f);
 
         if (currentHealth < 0) { Die(); }
         if (state == State.FROZEN) { transform.position = new Vector3(freezePosition.x, transform.position.y, transform.position.z); }
@@ -477,7 +482,7 @@ public class Player : MonoBehaviour
     {
         if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
         currentHealth  -= healthDamage;
-        currentPosture += postureDamage;
+        currentPosture += (float)postureDamage;
         lastPostureIncreaseTime = Time.time;
 
         updateHealthBar();
@@ -499,7 +504,7 @@ public class Player : MonoBehaviour
         else if (currentPosture >= postureThreshold)
         {
             animator.SetTrigger("Recover");
-            currentPosture = 0;
+            currentPosture = 0f;
         }
     }
 

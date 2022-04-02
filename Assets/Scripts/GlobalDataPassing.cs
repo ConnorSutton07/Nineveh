@@ -8,7 +8,7 @@ public class GlobalDataPassing : MonoBehaviour
     private bool isPlayerDataChanged = false;
     int playerHealth;
     float playerHarmony;
-    int playerPosture;
+    float playerPosture;
     int curLevel = 1;
     List<int> AliveEnemiesInSections;
     int playerSection;
@@ -29,7 +29,7 @@ public class GlobalDataPassing : MonoBehaviour
         return playerHarmony;
     }
 
-    public int GetPlayerPosture()
+    public float GetPlayerPosture()
     {
         return playerPosture;
     }
@@ -77,7 +77,7 @@ public class GlobalDataPassing : MonoBehaviour
         playerHarmony = harmony;
     }
 
-    public void SetPlayerPosture(int posture)
+    public void SetPlayerPosture(float posture)
     {
         playerPosture = posture;
     }
@@ -103,7 +103,7 @@ public class GlobalDataPassing : MonoBehaviour
         AliveEnemiesInSections[playerSection]--;
     }
 
-    public void SetPlayerData(int health, float harmony, int posture)
+    public void SetPlayerData(int health, float harmony, float posture)
     {
         SetPlayerHealth(health);
         SetPlayerHarmony(harmony);

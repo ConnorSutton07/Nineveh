@@ -550,11 +550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: posturePauseTime
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: postureDimishRate
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: harmonyLifestealRate
