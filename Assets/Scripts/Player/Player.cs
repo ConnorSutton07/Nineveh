@@ -43,6 +43,12 @@ public class Player : MonoBehaviour
     [SerializeField] float harmonyEmission;
     [SerializeField] ParticleSystem harmonyFog;
 
+  //if (Time.time > lastPostureIncreaseTime + posturePauseTime) currentPosture -= postureDimishRate;
+  //currentPosture = Mathf.Clamp(currentPosture, 0f, 100f);
+    [Header("Posture")]
+    [SerializeField] float posturePauseTime;
+    [SerializeField] int postureDimishRate;
+
     [Header ("Objects")]
     [SerializeField] Transform attackPoint;
     [SerializeField] GameObject healthSlider;
@@ -71,6 +77,7 @@ public class Player : MonoBehaviour
     public int currentPosture;
     
     float lastHarmonyIncreaseTime;
+    float lastPostureIncreaseTime;
     float currentHarmony;
     float attackCooldown = 0f;
     Transform raycastOrigin;
@@ -143,10 +150,16 @@ public class Player : MonoBehaviour
         if (healthYellow.transform.localScale.x > healthSlider.transform.localScale.x) // update healthbar
             healthYellow.transform.localScale = new Vector3((healthYellow.transform.localScale.x) - .01f, 1f, 1f);
 
+        //Debug.Log("LastHarmonyIncreaseTime: " + lastHarmonyIncreaseTime);
         if (Time.time > lastHarmonyIncreaseTime + harmonyPauseTime) currentHarmony -= harmonyDimishRate;
         currentHarmony = Mathf.Clamp(currentHarmony, 0f, 100f);
         harmonyemissionrate = (currentHarmony / maxHarmony) * harmonyEmission;
         HarmonyEmit.rateOverTime = currentHarmony;
+
+        //Debug.Log("LastPostureIncreaseTime: " + lastPostureIncreaseTime);
+        if (Time.time > lastPostureIncreaseTime + posturePauseTime) currentPosture -= postureDimishRate;
+        if (currentPosture < 0) currentPosture = 0;
+        //currentPosture = Mathf.Clamp(currentPosture, 0, 100);
 
         if (currentHealth < 0) { Die(); }
         if (state == State.FROZEN) { transform.position = new Vector3(freezePosition.x, transform.position.y, transform.position.z); }
@@ -435,8 +448,11 @@ public class Player : MonoBehaviour
             else
             {
                 enemyScript.TakeDamage(Mathf.FloorToInt(damage), Mathf.FloorToInt(damage * 0.1f), true);
+                //Debug.Log("Health: " + currentHealth + ", Harmony: " + currentHarmony + ", Exp health: " + currentHealth + harmonyLifestealRate * currentHarmony);
+                //Debug.Log("LifeStealRate: " + harmonyLifestealRate);
                 currentHealth = (int)Mathf.Min(maxHealth, currentHealth + harmonyLifestealRate * currentHarmony);
                 updateHealthBar();
+                //Debug.Log("Act Health: " + currentHealth);
                 currentHarmony += harmonyHitGain;
                 lastHarmonyIncreaseTime = Time.time;
                 PlaySound("sword_hit");
@@ -462,6 +478,7 @@ public class Player : MonoBehaviour
         if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
         currentHealth  -= healthDamage;
         currentPosture += postureDamage;
+        lastPostureIncreaseTime = Time.time;
 
         updateHealthBar();
         updatePostureBar();
