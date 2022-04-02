@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556020121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.02, y: 1.52, z: 0}
+  m_LocalPosition: {x: -1.66, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8387150193119032138}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852562782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.75, y: -0.33, z: 0}
+  m_LocalPosition: {x: -1.22, y: -1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8387150193119032138}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920487928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2, y: -0.7, z: 0}
+  m_LocalPosition: {x: -1.5, y: -1.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8387150193119032138}
@@ -235,8 +235,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.33639073, y: -0.12638903}
-  m_Size: {x: 1.956691, y: 2.863223}
+  m_Offset: {x: -0.094919086, y: -0.33859134}
+  m_Size: {x: 1.0347085, y: 3.2876277}
   m_Direction: 0
 --- !u!114 &1169513621
 MonoBehaviour:
@@ -250,17 +250,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b12b8b2796d644b9befc8220224ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 4.21
-  shiftDistance: 0.1
+  attackDistance: 1.5
+  shiftDistance: 0
   maxHealth: 500
-  attackRate: 1.2
+  attackRate: 3
   blockChance: 0
   minBlockTime: 0
   maxBlockTime: 0
   postureThreshold: 125
   canBlock: 0
   awareDistance: 1000
-  moveSpeed: 2.5
+  moveSpeed: 2
   gap: 0
   raycastDetectionLayers:
     serializedVersion: 2
@@ -275,14 +275,14 @@ MonoBehaviour:
     m_Bits: 512
   attackDamage: 30
   attackPoint1: {fileID: 1852562783}
-  attackRange1: 0.5
+  attackRange1: 0.66
   attackPoint2: {fileID: 1920487929}
-  attackRange2: 0.96
+  attackRange2: 0.56
   deflectPostureDamage: 25
   distanceForAttackFollowup: 5
   followupPushbackTime: 0.5
   projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
-  rangedCooldownTime: 0
+  rangedCooldownTime: 5
 --- !u!1001 &319030876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -365,8 +365,16 @@ PrefabInstance:
       value: 2.9380512
       objectReference: {fileID: 0}
     - target: {fileID: 7863823144561143233, guid: 56a103ec2c2947541ba805a8cf3170e5, type: 3}
+      propertyPath: m_Size.y
+      value: 0.07395387
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863823144561143233, guid: 56a103ec2c2947541ba805a8cf3170e5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.4160003
+      value: -0.41600037
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863823144561143233, guid: 56a103ec2c2947541ba805a8cf3170e5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.34010386
       objectReference: {fileID: 0}
     - target: {fileID: 7923174893737868181, guid: 56a103ec2c2947541ba805a8cf3170e5, type: 3}
       propertyPath: m_RootOrder

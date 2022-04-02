@@ -5681,19 +5681,47 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: attackDistance
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: lightningObject
+      value: 
+      objectReference: {fileID: 7198533425515925291, guid: ebe58274e6150bc429cedd337f3bf7a4, type: 3}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: lightningDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: rangedCooldownTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: lightningEndPoints.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: lightningEndPoints.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_sounds.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_sounds.Array.data[7].m_name
       value: marduk_deflect
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_sounds.Array.data[8].m_name
+      value: lightning
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_sounds.Array.data[7].pitchNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_sounds.Array.data[8].pitchNoise
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
@@ -5701,13 +5729,25 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_sounds.Array.data[8].volumeNoise
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_sounds.Array.data[7].m_clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_sounds.Array.data[8].m_clips.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_sounds.Array.data[7].m_clips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 9ed9cd0d739e0224f80ea13ece04e3cf, type: 3}
+    - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_sounds.Array.data[8].m_clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 34dcf452ca0c9034da0d825ab82d11db, type: 3}
     - target: {fileID: 8387150193119032137, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_Name
       value: Marduk
@@ -6330,7 +6370,7 @@ GameObject:
   - component: {fileID: 1341956130}
   - component: {fileID: 1341956134}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Overworld SKy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

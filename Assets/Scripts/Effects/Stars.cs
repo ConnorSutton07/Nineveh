@@ -115,7 +115,7 @@ public class Stars : MonoBehaviour
             starData[i] = new Star(expandRate[i % 2], expandDrop[i % 2], stars[i].transform.localPosition, stars[i].transform.localScale);
         }
 
-        BeginSequence();
+        // BeginSequence();
     }
 
     public void BeginSequence()

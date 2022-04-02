@@ -20,6 +20,10 @@ public class Marduk : Enemy
     [Header("Ranged")]
     [SerializeField] GameObject projectile;
     [SerializeField] float rangedCooldownTime;
+    [SerializeField] GameObject lightningObject;
+    [SerializeField] Vector2 lightningEndPoints;
+    [SerializeField] float lightningDuration;
+
     float rangedCooldown;
     Transform projectileOrigin;
 
@@ -67,13 +71,14 @@ public class Marduk : Enemy
             }
         }
         else attackSound = "sword_miss";
-        distance = Vector2.Distance(transform.position, target.position);
-        if (distance <= attackDistance)
-        {
-            animator.SetTrigger("Attack2");
-        }
         PlaySound(attackSound);
         TakeDamage(0, postureDamage);
+    }
+
+    public void CheckForFollowup()
+    {
+        distance = Vector2.Distance(transform.position, target.position);
+        if (distance <= attackDistance) { animator.SetTrigger("Attack2"); }
     }
 
     public void FollowupMeleeAttack()
@@ -124,11 +129,28 @@ public class Marduk : Enemy
         int direction = (int)transform.localScale.x;
         Quaternion arrowRotation = Quaternion.Euler(0f, 0f, direction * Vector2.Angle(targetVector, Vector2.up));
         GameObject arrow = Instantiate(projectile, projectileOrigin.position, arrowRotation);
+        LightningAttack();
     }
 
     void BeginRangedAttack()
     {
         animator.SetTrigger("Ranged");
+    }
+
+    public void LightningAttack()
+    {
+        GameObject lightning = Instantiate(lightningObject);
+        float xPos = player.transform.position.x;
+        lightning.GetComponent<LightningBolt2D>().startPoint = new Vector3(xPos, lightningEndPoints.x, 0);
+        lightning.GetComponent<LightningBolt2D>().endPoint = new Vector3(xPos, lightningEndPoints.y, 0);
+        StartCoroutine(DestroyLightning(lightning, Time.time, lightningDuration));
+        PlaySound("lightning");
+    }
+
+    IEnumerator DestroyLightning(GameObject lightning, float startTime, float delay)
+    {
+        while (Time.time < startTime + delay) { yield return null; }
+        Destroy(lightning);
     }
 
     #endregion
@@ -159,6 +181,7 @@ public class Marduk : Enemy
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
+        Debug.Log(distance);
         if (distance > attackDistance)
         {
             if (Time.time > rangedCooldown) { BeginRangedAttack(); }

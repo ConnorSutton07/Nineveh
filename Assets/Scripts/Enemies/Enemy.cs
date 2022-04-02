@@ -228,7 +228,6 @@ public class Enemy : MonoBehaviour
 
     public void ExitState()
     {
-        Debug.Log("here 1.5");
         state = State.DEFAULT;
     }
 

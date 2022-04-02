@@ -156,7 +156,9 @@ public class LevelManager : MonoBehaviour
     {
         player.DisableUI();
         GameObject marduk = GameObject.Find("Marduk");
-        marduk.SetActive(false);
+        // marduk.SetActive(false);
+        // GameObject.Find("Overworld Sky").GetComponent<Stars>().BeginSequence();
+        player.ActivateLight();
     }
 
     #endregion
