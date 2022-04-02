@@ -682,8 +682,7 @@ public class PentatowerSection : Section
       Instantiate(RangedEnemy, new Vector2(tower_x - 3.0f, 6.0f), Quaternion.identity, EnemyParent);
       enemiesSpawned++;
     }
-    else
-      GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned);
+    GlobalDataPassing.Instance.AppendAliveEnemiesInSections(enemiesSpawned);
     return;
   }
 }

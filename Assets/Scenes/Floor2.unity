@@ -505,6 +505,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: posturePauseTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: postureDimishRate
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: harmonyLifestealRate
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acea72d430d65314b9c510667a653e44, type: 3}
 --- !u!114 &783058427 stripped
