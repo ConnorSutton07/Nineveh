@@ -159,6 +159,7 @@ public class LevelManager : MonoBehaviour
         // marduk.SetActive(false);
         // GameObject.Find("Overworld Sky").GetComponent<Stars>().BeginSequence();
         player.ActivateLight();
+        player.EnableUI();
     }
 
     #endregion

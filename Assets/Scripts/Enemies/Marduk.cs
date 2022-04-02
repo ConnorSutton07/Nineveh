@@ -24,14 +24,22 @@ public class Marduk : Enemy
     [SerializeField] Vector2 lightningEndPoints;
     [SerializeField] float lightningDuration;
 
+    [Header("Sprite Materials")]
+    [SerializeField] Material regularMaterial;
+    [SerializeField] Material hurtMaterial;
+    [SerializeField] float changeDelay;
+
     float rangedCooldown;
     Transform projectileOrigin;
+    SpriteRenderer renderer;
 
     protected override void Start()
     {
         base.Start();
         projectileOrigin = transform.Find("ProjectileOrigin");
         rangedCooldown = 0;
+        renderer = GetComponent<SpriteRenderer>();
+        renderer.material = regularMaterial;
     }
 
     #region Attacks
@@ -124,17 +132,20 @@ public class Marduk : Enemy
 
     public void RangedAttack()
     {
-        rangedCooldown = Time.time + rangedCooldownTime;
         Vector2 targetVector = target.position - projectileOrigin.position;
         int direction = (int)transform.localScale.x;
         Quaternion arrowRotation = Quaternion.Euler(0f, 0f, direction * Vector2.Angle(targetVector, Vector2.up));
         GameObject arrow = Instantiate(projectile, projectileOrigin.position, arrowRotation);
-        LightningAttack();
     }
 
     void BeginRangedAttack()
     {
         animator.SetTrigger("Ranged");
+    }
+
+    void BeginLightningAttack()
+    {
+        animator.SetTrigger("Lightning");
     }
 
     public void LightningAttack()
@@ -166,7 +177,11 @@ public class Marduk : Enemy
     {
         currentHealth -= healthDamage;
         currentPosture += postureDamage;
-
+        if (healthDamage > 0)
+        {
+            renderer.material = hurtMaterial;
+            StartCoroutine(ChangeMaterial(Time.time, regularMaterial));
+        }
         if (currentHealth <= 0 || state == State.STUNNED)
         {
             Die();
@@ -178,13 +193,36 @@ public class Marduk : Enemy
         }
     }
 
+    protected override void Die()
+    {
+        animator.SetTrigger("Death");
+        state = State.DEAD;
+        gameObject.layer = Constants.DEAD_LAYER;
+    }
+
+    public void Disable()
+    {
+        this.enabled = false;
+    }
+
+    IEnumerator ChangeMaterial(float startTime, Material material)
+    {
+        while (Time.time < startTime + changeDelay) { yield return null; }
+        renderer.material = material;
+    }
+
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        Debug.Log(distance);
         if (distance > attackDistance)
         {
-            if (Time.time > rangedCooldown) { BeginRangedAttack(); }
+            if (Time.time > rangedCooldown)
+            {
+                rangedCooldown = Time.time + rangedCooldownTime;
+                float rval = Random.Range(0f, 1f);
+                if (rval < 0.5) { BeginLightningAttack(); }
+                else { BeginRangedAttack(); }
+            }
             else { Move(); }
         }
         else if (CanAttack())
@@ -193,6 +231,7 @@ public class Marduk : Enemy
             StartAttack();
             attackCooldown = Time.time + attackRate;
         }
+        else { animator.SetInteger("AnimState", 1); }
     }
 
     public override void MoveTowardsPlayer(ref Animator animator, ref Transform player)

@@ -242,7 +242,7 @@ public class Enemy : MonoBehaviour
         return inRange;
     }
     */
-    protected void Die()
+    protected virtual void Die()
     {
         animator.SetTrigger("Death");
         state = State.DEAD;
