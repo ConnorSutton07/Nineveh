@@ -510,7 +510,6 @@ public class Player : MonoBehaviour
     public void ActivateLight()
     {
         spotlight.enabled = true;
-        Debug.Log("here");
         StartCoroutine(IncreaseLight());
     }
 
@@ -611,6 +610,16 @@ public class Player : MonoBehaviour
         freezePosition = transform.position;
         animator.SetInteger("AnimState", 1);
         StartCoroutine(EnterFreeze(Time.time, duration));
+    }
+
+    public void PermaFreeze()
+    {
+        state = State.FROZEN;
+    }
+
+    public void Unfreeze()
+    {
+        state = State.DEFAULT;
     }
 
     public void EmitDeflectedParticles()

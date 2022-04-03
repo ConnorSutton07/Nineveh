@@ -229,7 +229,7 @@ public class Stars : MonoBehaviour
             light.intensity -= intensityIncrease * (expandTime / fadeTime);
             yield return null;
         }
-        player.ActivateLight();
+        //player.ActivateLight();
     }
 
 

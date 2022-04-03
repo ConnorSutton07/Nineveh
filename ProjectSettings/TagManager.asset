@@ -20,7 +20,7 @@ TagManager:
   - Enemies
   - Ground
   - SectionCollider
-  - 
+  - SectionColliderFaded
   - 
   - 
   - 

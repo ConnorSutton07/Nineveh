@@ -116,7 +116,14 @@ public class LevelGen : MonoBehaviour
         if (GlobalDataPassing.Instance.EnemiesCleared())
         {
             if (GlobalDataPassing.Instance.GetPlayerSection() + 1 < SectionColliders.Count)
-                Destroy(SectionColliders[GlobalDataPassing.Instance.GetPlayerSection() + 1].gameObject);
+            {
+                GameObject collider = SectionColliders[GlobalDataPassing.Instance.GetPlayerSection() + 1].gameObject;
+                collider.layer = 13;
+                Color color = collider.GetComponent<SpriteRenderer>().color;
+                color.a = 0;
+                collider.GetComponent<SpriteRenderer>().color = color;
+                //Destroy(SectionColliders[GlobalDataPassing.Instance.GetPlayerSection() + 1].gameObject);
+            }
             GlobalDataPassing.Instance.IncrementPlayerSection();
             //GlobalDataPassing.Instance.IncrementPlayerSection(n_sections); //thought it maybe wasnt resetting to zero
         }

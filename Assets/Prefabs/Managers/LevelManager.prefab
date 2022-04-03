@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   levelText: {fileID: 0}
-  textFadeRate: 0.05
+  textFadeRate: 0.1
   dialogue:
     messages:
     - ...!

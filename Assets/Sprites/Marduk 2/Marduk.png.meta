@@ -122,6 +122,9 @@ TextureImporter:
   - first:
       213: -6530808616287484050
     second: Marduk_39
+  - first:
+      213: 1003161843168472646
+    second: Marduk_40
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1058,6 +1061,27 @@ TextureImporter:
       bones: []
       spriteID: e67cf1a4a28ed55a0800000000000000
       internalID: -6530808616287484050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marduk_40
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 650
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64e6842a162fbed00800000000000000
+      internalID: 1003161843168472646
       vertices: []
       indices: 
       edges: []

@@ -33,6 +33,7 @@ public class Marduk : Enemy
     [SerializeField] Material hurtMaterial;
     [SerializeField] float changeDelay;
 
+    [SerializeField] GameObject entryCollider;
     float rangedCooldown;
     Transform projectileOrigin;
     SpriteRenderer renderer;
@@ -46,6 +47,7 @@ public class Marduk : Enemy
         renderer = GetComponent<SpriteRenderer>();
         renderer.material = regularMaterial;
         state = State.FROZEN;
+        animator.SetTrigger("Beckon");
     }
 
     #region Attacks
@@ -232,6 +234,8 @@ public class Marduk : Enemy
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
+        if (player.transform.position.x < entryCollider.transform.position.x) return;
+        if (entryCollider.layer == 13) entryCollider.layer = 12;
         if (distance > attackDistance)
         {
             if (Time.time > rangedCooldown)
@@ -282,6 +286,7 @@ public class Marduk : Enemy
         gameObject.layer = Constants.ENEMY_LAYER;
         state = State.DEFAULT;
         animator.SetBool("Dash", false);
+        animator.SetInteger("AnimState", 0);
     }
 
     private void OnDrawGizmosSelected()
@@ -293,5 +298,16 @@ public class Marduk : Enemy
     public void Unfreeze()
     {
         state = State.DEFAULT;
+        animator.SetInteger("AnimState", 0);
+    }
+
+    public void Reject()
+    {
+        animator.SetTrigger("Reject");
+    }
+
+    public void Relocate()
+    {
+        transform.position = new Vector3(26f, transform.position.y, transform.position.z);
     }
 }
