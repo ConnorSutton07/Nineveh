@@ -238,7 +238,7 @@ MonoBehaviour:
   deflectChance: 0
   sectionMask:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 12800
   projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
 --- !u!1001 &2794875830501937610
 PrefabInstance:

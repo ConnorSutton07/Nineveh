@@ -208,7 +208,7 @@ MonoBehaviour:
   deflectChance: 0.75
   sectionMask:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 12800
   attackRange: 0.41
   enemyLayer:
     serializedVersion: 2
