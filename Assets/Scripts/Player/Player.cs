@@ -138,6 +138,7 @@ public class Player : MonoBehaviour
           //pass over player stats from previous level
           LoadPlayerData();
         }
+        Time.timeScale = 1;
     }
 
     #endregion
