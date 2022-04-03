@@ -39,4 +39,11 @@ public class EOLCollider : MonoBehaviour
               return SceneManager.Scene.Start;
         }
      }
+
+    public void LoadScene(int levelNum)
+    {
+        GlobalDataPassing.Instance.SetCurrentLevel(levelNum);
+        SceneManager.Scene scene = GetScene(levelNum);
+        SceneManager.LoadImmediate(scene);
+    }
 }

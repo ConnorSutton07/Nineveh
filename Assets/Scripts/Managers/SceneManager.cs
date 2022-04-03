@@ -33,6 +33,11 @@ public static class SceneManager
     LoadScreenDelay();
   }
 
+    public static void LoadImmediate(Scene scene)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene.ToString());
+    }
+
   private static void LoadScreenDelay()
   {
     //generated so that invoke can be called to delay time 

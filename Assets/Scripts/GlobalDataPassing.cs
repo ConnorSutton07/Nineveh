@@ -83,6 +83,11 @@ public class GlobalDataPassing : MonoBehaviour
         playerPosture = posture;
     }
     
+    public void SetCurrentLevel(int levelNum)
+    {
+        curLevel = levelNum;
+    }
+
     public void IncreaseLevel()
     {
         curLevel += 1;

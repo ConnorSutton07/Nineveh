@@ -243,6 +243,13 @@ public class Player : MonoBehaviour
         moveInput = true;
     }
 
+    void OnHeal()
+    {
+        Debug.Log("here");
+        currentHealth = maxHealth;
+        updateHealthBar();
+    }
+
     public void OnStopMoving()
     {
         moveInput = false;
@@ -274,6 +281,13 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Death");
         state = State.DEAD;
         gameObject.layer = 0;
+        StartCoroutine(LoadStart(Time.time, 3f));
+    }
+
+    IEnumerator LoadStart(float startTime, float delay)
+    {
+        while (Time.time < startTime + delay) { yield return null; }
+        SceneManager.LoadImmediate(0);
     }
 
     void OnDash()
