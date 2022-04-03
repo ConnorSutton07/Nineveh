@@ -1,0 +1,28 @@
+Intro: Aidan's video (20 seconds)
+
+Part 1: Project Description (<1 minute)
+ - Roguelike videogame
+
+ - Why: Interdisciplinary project
+	that gives us freedom	
+	to express creativity
+
+ - Opportunity:
+	Make something fun,
+	combine variety of 
+	skills	
+
+Part 2: Gameplay (2 - 2.5 minutes)
+  - Movement / Actions - Jake
+  - Deflect / Posture / Harmony - Jake
+  - Enemies - Melee (1-3) / Ranged - Daniel
+  - Floors -> get darker,  - Daniel
+	      more difficult enemies
+  - Tower configurations / generation - Daniel
+
+Part 3: Bossfight (2 minutes)
+  - Intro
+  - Attacks / Strategy
+  
+
+Part 4: Story (2 - 3 minutes)

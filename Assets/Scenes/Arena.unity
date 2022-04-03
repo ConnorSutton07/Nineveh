@@ -5915,7 +5915,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 88994b9eb1603f94fa55017f9bae324a, type: 2}
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: lightningDuration
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: rangedCooldownTime
@@ -5927,7 +5927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: lightningEndPoints.y
-      value: -1.25
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1169513622, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_Size.y
@@ -6028,6 +6028,18 @@ PrefabInstance:
     - target: {fileID: 8387150193119032138, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387150193119032139, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387150193119032139, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387150193119032139, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8387150193119032139, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6871,26 +6883,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 1979633757}
-  intensityIncrease: 0.000165
+  intensityIncrease: 0.000675
   star: {fileID: 1344535524578929297, guid: 7f14bfd40254d0a4d97624e6195de685, type: 3}
-  numStars: 700
+  numStars: 800
   topLeft: {x: -1000, y: -500}
   bottomRight: {x: 1000, y: 500}
   maxRadius: 1000
   maxBrightness: 0.22
   expandTime: 15
   expandScale:
-  - 0.0002
-  - 0.0001
+  - 0.0004
+  - 0.0003
   expandRate:
-  - 0.0008
-  - 0.0006
+  - 0.0048
+  - 0.0035
   expandDrop:
   - 0.0001
   - -0.0001
   expandRotationRate:
-  - 0.012
-  - 0.008
+  - 0.03
+  - 0.02
   spinTime: 19
   fadeRate: 0.0001
   fadeTime: 3
@@ -7263,15 +7275,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2606090913531826850, guid: 5eb18f32d58c539488f76f5921479c96, type: 3}
       propertyPath: dialogueDelays.Array.data[0]
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2606090913531826850, guid: 5eb18f32d58c539488f76f5921479c96, type: 3}
       propertyPath: dialogueDelays.Array.data[1]
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2606090913531826850, guid: 5eb18f32d58c539488f76f5921479c96, type: 3}
       propertyPath: dialogueDelays.Array.data[2]
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2606090913531826850, guid: 5eb18f32d58c539488f76f5921479c96, type: 3}
       propertyPath: dialogueDelays.Array.data[3]
@@ -7750,7 +7762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8533368, b: 0.6556604, a: 1}
+  m_Color: {r: 0.9716981, g: 0.8686653, b: 0.4644594, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7902,6 +7914,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7388399842426930641, guid: a8897aaacfb758446b671112b4d6256f, type: 3}
+    - target: {fileID: 1341894575454099772, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 88994b9eb1603f94fa55017f9bae324a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acea72d430d65314b9c510667a653e44, type: 3}
 --- !u!4 &1183356046884593268 stripped

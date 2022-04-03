@@ -175,6 +175,7 @@ public class LevelManager : MonoBehaviour
 
     void Overworld()
     {
+        BlackoutSprites();
         player.PermaFreeze();
         currentDialogue = 0;
         dialogueText = GameObject.Find("TextCanvas").transform.Find("Text").GetComponent<Text>();
@@ -182,7 +183,19 @@ public class LevelManager : MonoBehaviour
         GameObject marduk = GameObject.Find("Marduk");
         Action BeginSequence = GameObject.Find("Overworld Sky").GetComponent<Stars>().BeginSequence;
         StartCoroutine(ChangeText(Time.time, Pass));
-        StartCoroutine(DelayCallable(Time.time, 4f, BeginSequence));
+        StartCoroutine(DelayCallable(Time.time, 6f, BeginSequence));
+    }
+
+    void BlackoutSprites()
+    {
+        player.GetComponent<SpriteRenderer>().color = Color.black; //new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+        GameObject.Find("Marduk").GetComponent<Marduk>().GetComponent<SpriteRenderer>().color = Color.black; // new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+    }
+
+    void WhiteoutSprites()
+    {
+        player.GetComponent<SpriteRenderer>().color = Color.white;//new Color32(0x00, 0xFF, 0xFF, 0xFF);
+        GameObject.Find("Marduk").GetComponent<Marduk>().GetComponent<SpriteRenderer>().color = Color.white; // new Color32(0xFF, 0xFF, 0xFF, 0xFF);
     }
 
     IEnumerator ChangeText(float startTime, Action callable)
@@ -193,8 +206,9 @@ public class LevelManager : MonoBehaviour
         Action action = Pass;
         currentDialogue++;
         if (currentDialogue == 4) action = GameObject.Find("Marduk").GetComponent<Marduk>().Reject;
-        else if (currentDialogue == 5) action = GameObject.Find("Marduk").GetComponent<Marduk>().Relocate;
-        else if (currentDialogue == 10) action = player.ActivateLight;
+        else if (currentDialogue == 5) { action = GameObject.Find("Marduk").GetComponent<Marduk>().Relocate; }
+        else if (currentDialogue == 6) { dialogueText.color = new Color32(0x78, 0xE0, 0xFA, 0xFF); }
+        else if (currentDialogue == 10) { WhiteoutSprites(); action = player.ActivateLight; }
         if (currentDialogue < overworldDialogue.Length)
         {
             StartCoroutine(ChangeText(Time.time, action));

@@ -7,8 +7,9 @@ public class StartUI : MonoBehaviour
 {
   public void StartGame()
   {
-    //load first level of game
-    SceneManager.Load(SceneManager.Scene.Floor1);
+        //load first level of game
+        //SceneManager.Load(SceneManager.Scene.Floor1);
+        SceneManager.LoadImmediate(SceneManager.Scene.Floor1);
   }
 
   public void Exit()
