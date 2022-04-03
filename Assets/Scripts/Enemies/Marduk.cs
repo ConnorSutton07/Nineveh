@@ -24,6 +24,10 @@ public class Marduk : Enemy
     [SerializeField] Vector2 lightningEndPoints;
     [SerializeField] float lightningDuration;
 
+    [Header("Dash")]
+    [SerializeField] float dashTime;
+    [SerializeField] float dashSpeed;
+
     [Header("Sprite Materials")]
     [SerializeField] Material regularMaterial;
     [SerializeField] Material hurtMaterial;
@@ -66,6 +70,8 @@ public class Marduk : Enemy
                     playerScript.EmitDeflectParticles();
                     postureDamage = deflectPostureDamage;
                     deflected = true;
+                    // animator.SetTrigger("Recover");
+                    EnterStun();
                 }
                 else
                 {
@@ -89,7 +95,7 @@ public class Marduk : Enemy
 
     public void CheckForFollowup()
     {
-        if (deflected) return;
+        if (deflected || !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")) return;
         distance = Vector2.Distance(transform.position, target.position);
         if (distance <= attackDistance)
         {
@@ -180,7 +186,8 @@ public class Marduk : Enemy
     {
         return animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") 
             || animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2")
-            || animator.GetCurrentAnimatorStateInfo(0).IsName("Ranged");
+            || animator.GetCurrentAnimatorStateInfo(0).IsName("Ranged")
+            || animator.GetCurrentAnimatorStateInfo(0).IsName("Lightning");
     }
 
     public override void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false)
@@ -192,13 +199,14 @@ public class Marduk : Enemy
             renderer.material = hurtMaterial;
             StartCoroutine(ChangeMaterial(Time.time, regularMaterial));
         }
-        if (currentHealth <= 0 || state == State.STUNNED)
+        if (currentHealth <= 0)
         {
             Die();
         }
         else if (currentPosture >= postureThreshold)
         {
-            animator.SetTrigger("Recover");
+            //animator.SetTrigger("Recover");
+            EnterStun();
             currentPosture = 0;
         }
     }
@@ -252,6 +260,28 @@ public class Marduk : Enemy
             Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
+    }
+
+    public void Dash()
+    {
+        int direction = -(int)transform.localScale.x;
+        float initialY = transform.position.y;
+        state = State.DASHING;
+        animator.SetBool("Dash", true);
+        gameObject.layer = Constants.GHOST_LAYER;
+        StartCoroutine(EnterDash(Time.time, direction, initialY));
+    }
+
+    IEnumerator EnterDash(float startTime, int direction, float initialY)
+    {
+        while (Time.time - startTime < dashTime)
+        {
+            transform.position = new Vector3(transform.position.x + dashSpeed * direction * Time.deltaTime, initialY);
+            yield return null;
+        }
+        gameObject.layer = Constants.ENEMY_LAYER;
+        state = State.DEFAULT;
+        animator.SetBool("Dash", false);
     }
 
     private void OnDrawGizmosSelected()

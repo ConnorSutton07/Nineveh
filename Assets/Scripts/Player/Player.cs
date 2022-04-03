@@ -159,7 +159,6 @@ public class Player : MonoBehaviour
         //Debug.Log("LastPostureIncreaseTime: " + lastPostureIncreaseTime);
         if (Time.time > lastPostureIncreaseTime + posturePauseTime)
         {
-          Debug.Log("current Posture: " + currentPosture);
           currentPosture -= postureDimishRate;
           updatePostureBar();
           }

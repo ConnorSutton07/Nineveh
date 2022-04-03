@@ -5321,6 +5321,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1001 &567986205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8717973494949463809, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_Name
+      value: Music Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.845744
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -19.324217
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.434088
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717973494949463823, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4c8b80eeb0d18b4fb44cff171ff3a4d, type: 3}
 --- !u!1001 &700716789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5738,6 +5795,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: dashTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: dashSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: moveSpeed
       value: 1.5
       objectReference: {fileID: 0}
@@ -5776,6 +5841,14 @@ PrefabInstance:
     - target: {fileID: 1169513621, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: lightningEndPoints.y
       value: -1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513622, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_Size.y
+      value: 3.0883708
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169513622, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.23896289
       objectReference: {fileID: 0}
     - target: {fileID: 3161071639320820887, guid: c9e9d4f0a664d514889842b0332e80eb, type: 3}
       propertyPath: m_sounds.Array.size
@@ -6607,7 +6680,7 @@ GameObject:
   - component: {fileID: 1341956130}
   - component: {fileID: 1341956134}
   m_Layer: 5
-  m_Name: Overworld SKy
+  m_Name: Overworld Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7361,6 +7434,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 525880087, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard & Mouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 525880087, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1150320417, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_Name
       value: UI
@@ -7402,12 +7483,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.09
       objectReference: {fileID: 0}
     - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_LocalPosition.z

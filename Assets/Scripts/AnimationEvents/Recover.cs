@@ -21,6 +21,13 @@ public class Recover : StateMachineBehaviour
     {
         if (animator.gameObject.name == "Player")
             animator.gameObject.GetComponent<Player>().ExitStun();
+        else if (animator.gameObject.name == "Marduk")
+        {
+            Debug.Log("exit stun 1");
+            animator.gameObject.GetComponent<Enemy>().ExitStun();
+            animator.gameObject.GetComponent<Marduk>().Dash();
+            Debug.Log("exit stun 2");
+        }
         else
             animator.gameObject.GetComponent<Enemy>().ExitStun();
     }
