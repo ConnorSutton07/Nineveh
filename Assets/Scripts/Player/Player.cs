@@ -480,7 +480,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int healthDamage, int postureDamage, bool breakStance = false, float pushBackTime = 0)
     {
         if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
-        currentHealth  -= healthDamage;
+        currentHealth = Mathf.Max(0, currentHealth - healthDamage);
         currentPosture += (float)postureDamage;
         lastPostureIncreaseTime = Time.time;
 
@@ -620,6 +620,11 @@ public class Player : MonoBehaviour
     public void Unfreeze()
     {
         state = State.DEFAULT;
+    }
+
+    public void ResetHarmony()
+    {
+        currentHarmony = 0;
     }
 
     public void EmitDeflectedParticles()

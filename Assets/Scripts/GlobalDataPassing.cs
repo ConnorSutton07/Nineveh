@@ -26,6 +26,7 @@ public class GlobalDataPassing : MonoBehaviour
 
     public float GetPlayerHarmony()
     {
+        if (curLevel == 6) return 0;
         return playerHarmony;
     }
 
@@ -99,7 +100,6 @@ public class GlobalDataPassing : MonoBehaviour
 
     public void DecrementEnemiesInCurrentSection()
     {
-        Debug.Log(playerSection);
         AliveEnemiesInSections[playerSection]--;
     }
 

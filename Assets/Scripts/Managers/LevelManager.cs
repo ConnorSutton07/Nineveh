@@ -175,7 +175,6 @@ public class LevelManager : MonoBehaviour
 
     void Overworld()
     {
-        player.ResetPosition();
         player.PermaFreeze();
         currentDialogue = 0;
         dialogueText = GameObject.Find("TextCanvas").transform.Find("Text").GetComponent<Text>();

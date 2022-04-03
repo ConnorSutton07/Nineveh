@@ -298,7 +298,7 @@ public class Marduk : Enemy
     public void Unfreeze()
     {
         state = State.DEFAULT;
-        animator.SetInteger("AnimState", 0);
+        animator.SetTrigger("Jump");
     }
 
     public void Reject()

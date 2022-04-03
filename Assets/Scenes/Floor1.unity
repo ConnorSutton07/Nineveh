@@ -1160,6 +1160,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3836087035458757546, guid: f29b3dce22c65c446947e8928f872c69, type: 3}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
+      propertyPath: tileSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
+      propertyPath: floorTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 24bf557126a87d34b81c30a1521365e0, type: 2}
+    - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: n_sections
       value: 8
       objectReference: {fileID: 0}
@@ -1167,6 +1175,10 @@ PrefabInstance:
       propertyPath: EnemyParent
       value: 
       objectReference: {fileID: 885596029}
+    - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
+      propertyPath: floorHeight
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1854978299311774849, guid: b8dd8c8e3514ee14094eb0ad2b6bd63a, type: 3}
       propertyPath: spawnEnemies
       value: 1
