@@ -9,7 +9,7 @@ public class StartUI : MonoBehaviour
   {
         //load first level of game
         //SceneManager.Load(SceneManager.Scene.Floor1);
-        SceneManager.LoadImmediate(SceneManager.Scene.Floor1);
+        SceneManager.Load(SceneManager.Scene.Floor1);
   }
 
   public void Exit()

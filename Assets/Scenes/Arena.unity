@@ -7347,7 +7347,7 @@ PrefabInstance:
       objectReference: {fileID: 68724087}
     - target: {fileID: 2606090913531826850, guid: 5eb18f32d58c539488f76f5921479c96, type: 3}
       propertyPath: skipIntro
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2606090913531826850, guid: 5eb18f32d58c539488f76f5921479c96, type: 3}
       propertyPath: dialogueDelays.Array.size
@@ -7878,6 +7878,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 420700259, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Text
+      value: 'Resume
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 451881437, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Name
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 525880087, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_DefaultControlScheme
       value: Keyboard & Mouse
@@ -8022,6 +8032,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 88994b9eb1603f94fa55017f9bae324a, type: 2}
+    - target: {fileID: 1881666911057705100, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Text
+      value: 'Exit
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287925159364228621, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_Name
+      value: Exit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acea72d430d65314b9c510667a653e44, type: 3}
 --- !u!4 &1183356046884593268 stripped

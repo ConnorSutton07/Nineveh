@@ -246,9 +246,7 @@ public class Player : MonoBehaviour
 
     void OnHeal()
     {
-        Debug.Log("here");
-        currentHealth = maxHealth;
-        updateHealthBar();
+        return;
     }
 
     public void OnStopMoving()
@@ -342,7 +340,7 @@ public class Player : MonoBehaviour
         body.velocity = new Vector2(0f, body.velocity.y);
     }
 
-    void OnPause()
+    public void OnPause()
     {
         if (Time.timeScale == 0)
         {

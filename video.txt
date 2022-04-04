@@ -19,10 +19,11 @@ Part 2: Gameplay (2 - 2.5 minutes)
   - Floors -> get darker,  - Daniel
 	      more difficult enemies
   - Tower configurations / generation - Daniel
+  - Loading screens / tips - Aidan
 
 Part 3: Bossfight (2 minutes)
   - Intro
   - Attacks / Strategy
   
 
-Part 4: Story (2 - 3 minutes)
+Part 4: Story & Art (2 - 3 minutes)

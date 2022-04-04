@@ -9,13 +9,12 @@ public static class SceneManager
   public enum Scene
   {
     Start,
-    Arena,
     Floor1,
     Floor2,
     Floor3,
     Floor4,
     Floor5,
-    Floor6,
+    Arena,
     Loading
   }
 
@@ -26,7 +25,7 @@ public static class SceneManager
     //set lodaer callback action to load target scene
     onLoaderCallback = () =>
     {
-      UnityEngine.SceneManagement.SceneManager.LoadScene(scene.ToString());
+      UnityEngine.SceneManagement.SceneManager.LoadScene((int)scene);
     };
 
     //loads loading screen
@@ -35,7 +34,7 @@ public static class SceneManager
 
     public static void LoadImmediate(Scene scene)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scene.ToString());
+        UnityEngine.SceneManagement.SceneManager.LoadScene((int)scene);
     }
 
   private static void LoadScreenDelay()

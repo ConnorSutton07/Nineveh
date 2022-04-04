@@ -22,6 +22,8 @@ public class EOLCollider : MonoBehaviour
      {
         switch (levelNum)
         {
+            case 0:
+                return SceneManager.Scene.Start;
             case 1:
               return SceneManager.Scene.Floor1;
             case 2:

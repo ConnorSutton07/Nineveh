@@ -29,7 +29,6 @@ public class Recover : StateMachineBehaviour
                 animator.gameObject.GetComponent<Enemy>().ExitStun();
                 animator.gameObject.GetComponent<Marduk>().Dash();
             }
-            else { Debug.Log("marduk is dead"); }
         }
         else
             animator.gameObject.GetComponent<Enemy>().ExitStun();
