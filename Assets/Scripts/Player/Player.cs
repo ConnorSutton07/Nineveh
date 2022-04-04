@@ -496,7 +496,7 @@ public class Player : MonoBehaviour
     {
         if (state == State.STUNNED) healthDamage = Mathf.FloorToInt(healthDamage * stunnedAmplifier); // extra damage if stunned
         currentHealth = Mathf.Max(0, currentHealth - healthDamage);
-        currentPosture += (float)postureDamage;
+        currentPosture = Mathf.Min(postureThreshold, currentPosture + postureDamage);
         lastPostureIncreaseTime = Time.time;
 
         updateHealthBar();

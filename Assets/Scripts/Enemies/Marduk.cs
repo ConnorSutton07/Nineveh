@@ -33,11 +33,15 @@ public class Marduk : Enemy
     [SerializeField] Material hurtMaterial;
     [SerializeField] float changeDelay;
 
+    [Header("Shake")]
+    [SerializeField] CameraShake.PerlinShake.Params shakeParams;
+
     [SerializeField] GameObject entryCollider;
     float rangedCooldown;
     Transform projectileOrigin;
     SpriteRenderer renderer;
     bool deflected;
+    bool testRun;
 
     protected override void Start()
     {
@@ -48,6 +52,7 @@ public class Marduk : Enemy
         renderer.material = regularMaterial;
         state = State.FROZEN;
         animator.SetTrigger("Beckon");
+        testRun = false;
     }
 
     #region Attacks
@@ -79,8 +84,8 @@ public class Marduk : Enemy
                 {
                     int direction = (transform.position.x > player.position.x) ? -1 : 1;
                     playerScript.Shift(direction);
-                    playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage);
-                    attackSound = "block"; // should play block noise
+                    playerScript.TakeDamage(Mathf.FloorToInt(attackDamage * 0.1f), attackDamage * 1000);
+                    attackSound = "Smash"; // should play block noise
                     playerScript.EmitBlockParticles();
                 }
             }
@@ -99,7 +104,7 @@ public class Marduk : Enemy
     {
         if (deflected || !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")) return;
         distance = Vector2.Distance(transform.position, target.position);
-        if (distance <= attackDistance)
+        if (distance <= attackDistance + 2f)
         {
             int direction = flip * ((transform.position.x > player.position.x) ? 1 : -1);
             transform.localScale = new Vector3(direction, 1.0f, 1.0f);
@@ -174,6 +179,7 @@ public class Marduk : Enemy
         lightning.GetComponent<LightningBolt2D>().endPoint = new Vector3(xPos, lightningEndPoints.y, 0);
         StartCoroutine(DestroyLightning(lightning, Time.time, lightningDuration));
         PlaySound("lightning");
+        PerlinShake();
     }
 
     IEnumerator DestroyLightning(GameObject lightning, float startTime, float delay)
@@ -234,7 +240,7 @@ public class Marduk : Enemy
     protected override void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        if (player.transform.position.x < entryCollider.transform.position.x) return;
+        if (player.transform.position.x < entryCollider.transform.position.x && !testRun) return;
         if (entryCollider.layer == 13) entryCollider.layer = 12;
         if (distance > attackDistance)
         {
@@ -268,6 +274,11 @@ public class Marduk : Enemy
 
     public void Dash()
     {
+        if (currentHealth < 0)
+        {
+            Die();
+            return;
+        }
         int direction = -(int)transform.localScale.x;
         float initialY = transform.position.y;
         state = State.DASHING;
@@ -295,8 +306,9 @@ public class Marduk : Enemy
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange2);
     }
 
-    public void Unfreeze()
+    public void Unfreeze(bool test = false)
     {
+        testRun = test;
         state = State.DEFAULT;
         animator.SetTrigger("Jump");
     }
@@ -309,5 +321,11 @@ public class Marduk : Enemy
     public void Relocate()
     {
         transform.position = new Vector3(26f, transform.position.y, transform.position.z);
+    }
+
+    public void PerlinShake()
+    {
+        Vector3 sourcePosition = transform.position;
+        CameraShake.CameraShaker.Shake(new CameraShake.PerlinShake(shakeParams, sourcePosition: sourcePosition));
     }
 }

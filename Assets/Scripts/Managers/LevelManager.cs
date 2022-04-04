@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     PlayerInput GameplayControls;
     PlayerInput UIControls;
     int currentDialogue;
+    [SerializeField] bool skipIntro;
 
     string[] overworldDialogue =
     {
@@ -175,12 +176,20 @@ public class LevelManager : MonoBehaviour
 
     void Overworld()
     {
+        GameObject marduk = GameObject.Find("Marduk");
+        if (skipIntro)
+        {
+            player.ActivateLight();
+            marduk.GetComponent<Marduk>().Reject();
+            marduk.GetComponent<Marduk>().Unfreeze(test : true);
+            player.EnableUI();
+            return;
+        }
         BlackoutSprites();
         player.PermaFreeze();
         currentDialogue = 0;
         dialogueText = GameObject.Find("TextCanvas").transform.Find("Text").GetComponent<Text>();
         player.DisableUI();
-        GameObject marduk = GameObject.Find("Marduk");
         Action BeginSequence = GameObject.Find("Overworld Sky").GetComponent<Stars>().BeginSequence;
         StartCoroutine(ChangeText(Time.time, Pass));
         StartCoroutine(DelayCallable(Time.time, 6f, BeginSequence));
