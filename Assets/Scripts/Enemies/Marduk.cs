@@ -159,6 +159,7 @@ public class Marduk : Enemy
         int direction = (int)transform.localScale.x;
         Quaternion arrowRotation = Quaternion.Euler(0f, 0f, direction * Vector2.Angle(targetVector, Vector2.up));
         GameObject arrow = Instantiate(projectile, projectileOrigin.position, arrowRotation);
+        PlaySound("arrow");
     }
 
     void BeginRangedAttack()

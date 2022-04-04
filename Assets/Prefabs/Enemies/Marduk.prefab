@@ -283,6 +283,32 @@ MonoBehaviour:
   followupPushbackTime: 0.5
   projectile: {fileID: 8988200510722177731, guid: 7ebaf72888b728047a88e7eef9595421, type: 3}
   rangedCooldownTime: 5
+  lightningObject: {fileID: 0}
+  lightningEndPoints: {x: 0, y: 0}
+  lightningDuration: 0
+  dashTime: 0
+  dashSpeed: 0
+  regularMaterial: {fileID: 0}
+  hurtMaterial: {fileID: 0}
+  changeDelay: 0
+  shakeParams:
+    strength:
+      position: {x: 0, y: 0, z: 0}
+      eulerAngles: {x: 2, y: 2, z: 0.8}
+    noiseModes:
+    - freq: 12
+      amplitude: 1
+    envelope:
+      attack: 10
+      sustain: 0
+      decay: 1
+      degree: 2
+    attenuation:
+      clippingDistance: 10
+      falloffScale: 50
+      falloffDegree: 1
+      axesMultiplier: {x: 1, y: 1, z: 1}
+  entryCollider: {fileID: 0}
 --- !u!1001 &319030876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -290,6 +316,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8387150193119032138}
     m_Modifications:
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.data[7].m_name
+      value: arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.data[7].pitchNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.data[7].volumeNoise
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.data[7].m_clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161071639538662091, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
+      propertyPath: m_sounds.Array.data[7].m_clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d139d8a883623542acda6265aef98a0, type: 3}
     - target: {fileID: 3161071639538662092, guid: 46d09c7364df6964a96a766b1e85cd9d, type: 3}
       propertyPath: m_RootOrder
       value: 3

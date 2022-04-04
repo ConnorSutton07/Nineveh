@@ -7872,14 +7872,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_sounds.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_sounds.Array.data[8].m_name
       value: marduk_deflect
       objectReference: {fileID: 0}
     - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[9].m_name
+      value: arrow_deflect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_sounds.Array.data[8].pitchNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[9].pitchNoise
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
@@ -7887,13 +7895,25 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[9].volumeNoise
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_sounds.Array.data[8].m_clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[9].m_clips.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_sounds.Array.data[8].m_clips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 9ed9cd0d739e0224f80ea13ece04e3cf, type: 3}
+    - target: {fileID: 1183356046770183140, guid: acea72d430d65314b9c510667a653e44, type: 3}
+      propertyPath: m_sounds.Array.data[9].m_clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 420fc874b5e391242b300610465f0b68, type: 3}
     - target: {fileID: 1187944877837291928, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -7964,7 +7984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1293852122801067332, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: harmonyLifestealRate
-      value: 5
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1341894575454099772, guid: acea72d430d65314b9c510667a653e44, type: 3}
       propertyPath: m_Sprite
