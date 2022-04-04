@@ -23,10 +23,13 @@ public class Recover : StateMachineBehaviour
             animator.gameObject.GetComponent<Player>().ExitStun();
         else if (animator.gameObject.name == "Marduk")
         {
-            Debug.Log("exit stun 1");
-            animator.gameObject.GetComponent<Enemy>().ExitStun();
-            animator.gameObject.GetComponent<Marduk>().Dash();
-            Debug.Log("exit stun 2");
+            Marduk marduk = animator.GetComponent<Marduk>();
+            if (!marduk.isDead())
+            {
+                animator.gameObject.GetComponent<Enemy>().ExitStun();
+                animator.gameObject.GetComponent<Marduk>().Dash();
+            }
+            else { Debug.Log("marduk is dead"); }
         }
         else
             animator.gameObject.GetComponent<Enemy>().ExitStun();

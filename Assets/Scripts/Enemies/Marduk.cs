@@ -222,9 +222,14 @@ public class Marduk : Enemy
 
     protected override void Die()
     {
-        animator.SetTrigger("Death");
         state = State.DEAD;
+        animator.SetTrigger("Death");
         gameObject.layer = Constants.DEAD_LAYER;
+    }
+
+    public bool isDead()
+    {
+        return state == State.DEAD;
     }
 
     public void Disable()
@@ -277,7 +282,7 @@ public class Marduk : Enemy
     {
         if (currentHealth < 0)
         {
-            Die();
+            //Die();
             return;
         }
         int direction = -(int)transform.localScale.x;
